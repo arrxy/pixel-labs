@@ -138,6 +138,47 @@ a:hover {
   margin: 0;
 }
 
+.lesson-bridge {
+  scroll-margin-top: 24px;
+  margin: 72px 0 56px;
+  padding: 56px 0 8px;
+  border-top: 1px solid var(--border);
+}
+
+.lesson-bridge h2 {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0 0 12px;
+  line-height: 1.2;
+}
+
+.lesson-bridge p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 56ch;
+  margin: 0;
+}
+
+.scene3d {
+  flex-shrink: 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.scene3d-canvas {
+  display: block;
+  cursor: grab;
+}
+
+.scene3d-canvas:active {
+  cursor: grabbing;
+}
+
 .lesson-section {
   scroll-margin-top: 24px;
   padding-bottom: 56px;
@@ -363,6 +404,10 @@ a:hover {
 
 .matrix-grid.two {
   grid-template-columns: repeat(2, 4.5ch);
+}
+
+.matrix-grid.four {
+  grid-template-columns: repeat(4, 4.5ch);
 }
 
 .order-toggle {

@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { ArrowMarkers } from './components/ArrowMarkers'
 import { Nav } from './components/Nav'
 import { Addition } from './sections/Addition'
@@ -16,6 +17,10 @@ import { Shear } from './sections/Shear'
 import { Translation } from './sections/Translation'
 import { Vectors } from './sections/Vectors'
 
+const Track3D = lazy(() =>
+  import('./sections/3d/Track3D').then((m) => ({ default: m.Track3D })),
+)
+
 export default function App() {
   return (
     <div className="page">
@@ -26,7 +31,8 @@ export default function App() {
           <header className="lesson-header">
             <h1>Linear Algebra for Graphics</h1>
             <p>
-              A hands-on introduction to the vectors and matrices behind computer graphics. Play with the arrows and sliders.
+              A hands-on introduction to the vectors and matrices behind computer graphics. Play with the arrows and
+              sliders.
             </p>
           </header>
           <Vectors />
@@ -44,6 +50,10 @@ export default function App() {
           <Inverse />
           <Determinant />
           <PuttingTogether />
+
+          <Suspense fallback={<p className="hint-text">Loading 3D sections…</p>}>
+            <Track3D />
+          </Suspense>
         </main>
       </div>
     </div>
