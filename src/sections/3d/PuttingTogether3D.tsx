@@ -61,11 +61,8 @@ export function PuttingTogether3D() {
             ))}
           </div>
         </div>
-        <div className="mono-block vertex-result">
-          <div className="muted-label">vertex (1,1,1)</div>
-          <div>
-            → <span className="secondary">({fmt(tp.x)}, {fmt(tp.y)}, {fmt(tp.z)})</span>
-          </div>
+        <div className="mono-block muted vertex-result">
+          vertex (1,1,1) → <span className="secondary">({fmt(tp.x)}, {fmt(tp.y)}, {fmt(tp.z)})</span>
         </div>
       </div>
     </Section>
