@@ -1,0 +1,394 @@
+:root {
+  --bg: #faf9f6;
+  --ink: #1a1a1a;
+  --muted: #4a4841;
+  --muted-soft: #8c897d;
+  --accent: #0f6e63;
+  --accent-hover: #0a4f47;
+  --secondary: #d9622b;
+  --border: #e4e2da;
+  --border-strong: #d8d5c9;
+  --diagram-bg: #fbfaf7;
+  --axis: #cfccc0;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+.katex {
+  font-size: 1.05em;
+}
+
+.arrow-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  display: flex;
+  justify-content: center;
+}
+
+.page-inner {
+  display: flex;
+  max-width: 1100px;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.lesson-nav {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 220px;
+  flex-shrink: 0;
+  padding: 40px 20px 40px 32px;
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+}
+
+.nav-brand {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.3;
+  margin-bottom: 24px;
+}
+
+.nav-group-label {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-soft);
+  margin-bottom: 10px;
+}
+
+.nav-list {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-list a {
+  font-size: 14px;
+}
+
+.lesson-main {
+  flex: 1;
+  min-width: 0;
+  padding: 56px 48px 120px;
+  max-width: 760px;
+}
+
+.lesson-header {
+  margin-bottom: 56px;
+}
+
+.lesson-header h1 {
+  font-family: var(--font-serif);
+  font-size: 40px;
+  font-weight: 600;
+  margin: 0 0 14px;
+  line-height: 1.15;
+}
+
+.lesson-header p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 60ch;
+  margin: 0;
+}
+
+.lesson-section {
+  scroll-margin-top: 24px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 56px;
+}
+
+.lesson-section.bordered-top {
+  padding-top: 56px;
+  border-top: 1px solid var(--border);
+  margin-top: 56px;
+}
+
+.lesson-section.no-border {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 56px;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+
+.body-text {
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0 0 12px;
+}
+
+.math-block {
+  font-size: 16px;
+  line-height: 1.7;
+  text-align: center;
+  margin: 20px 0;
+  overflow-x: auto;
+}
+
+.label-caps {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted-soft);
+  margin: 24px 0 10px;
+}
+
+.playground-label {
+  margin-top: 28px;
+}
+
+.diagram-box {
+  background: var(--diagram-bg);
+  border: 1px dashed var(--border-strong);
+  border-radius: 6px;
+  padding: 16px;
+  display: inline-block;
+}
+
+.diagram-svg {
+  width: 220px;
+  height: 180px;
+  display: block;
+}
+
+.playground {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.vector-canvas {
+  background: #fff;
+  display: block;
+}
+
+.vector-canvas.interactive {
+  cursor: grab;
+  touch-action: none;
+}
+
+.vector-canvas.interactive:active {
+  cursor: grabbing;
+}
+
+.controls-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.controls-col.wide {
+  gap: 14px;
+  min-width: 220px;
+}
+
+.vec-pair {
+  display: flex;
+  gap: 14px;
+}
+
+.num-label {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.num-input {
+  width: 64px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 4px 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  background: var(--diagram-bg);
+  color: var(--ink);
+}
+
+.slider-label {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.slider-row input[type='range'] {
+  accent-color: var(--accent);
+  flex: 1;
+}
+
+.btn-row {
+  display: flex;
+  gap: 8px;
+}
+
+.mode-btn {
+  padding: 7px 14px;
+  font-size: 13px;
+  font-family: var(--font-mono);
+  border-radius: 4px;
+  border: 1px solid var(--border-strong);
+  background: #fff;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.mode-btn.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.mono-stat {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.mono-block {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+.mono-block.muted {
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+.mono-block .ink {
+  color: var(--ink);
+}
+
+.mono-block .secondary {
+  color: var(--secondary);
+}
+
+.muted-label {
+  color: var(--muted-soft);
+  margin-bottom: 4px;
+}
+
+.hint-text {
+  font-size: 14px;
+  color: var(--muted-soft);
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+
+.matrix-readout {
+  margin-top: 20px;
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 4.5ch);
+  column-gap: 1.25rem;
+  row-gap: 0;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.vertex-result {
+  padding-top: 1.5em;
+  white-space: nowrap;
+}
+
+.vertex-result .secondary {
+  margin-left: 0.35em;
+}
+
+@media (max-width: 800px) {
+  .page-inner {
+    flex-direction: column;
+  }
+
+  .lesson-nav {
+    position: relative;
+    height: auto;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 24px 20px;
+  }
+
+  .lesson-main {
+    padding: 36px 20px 80px;
+  }
+
+  .lesson-header h1 {
+    font-size: 32px;
+  }
+}
