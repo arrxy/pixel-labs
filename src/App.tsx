@@ -26,8 +26,7 @@ export default function App() {
           <header className="lesson-header">
             <h1>Linear Algebra for Graphics</h1>
             <p>
-              A hands-on introduction to the vectors and matrices behind computer graphics. Drag the arrows and move the
-              sliders. The math responds live.
+              A hands-on introduction to the vectors and matrices behind computer graphics. Play with the arrows and sliders.
             </p>
           </header>
           <Vectors />
