@@ -41,6 +41,9 @@ const LINKS_3D = [
 export function Nav() {
   return (
     <nav className="lesson-nav">
+      <a className="nav-back" href="/">
+        ← Processing Labs
+      </a>
       <div className="nav-brand">
         Linear Algebra
         <br />
