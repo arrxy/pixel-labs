@@ -1,61 +1,19 @@
 import { lazy, Suspense } from 'react'
-import { ArrowMarkers } from './components/ArrowMarkers'
-import { Nav } from './components/Nav'
-import { Addition } from './sections/Addition'
-import { CrossProduct } from './sections/CrossProduct'
-import { Determinant } from './sections/Determinant'
-import { DotProduct } from './sections/DotProduct'
-import { Homogeneous } from './sections/Homogeneous'
-import { Inverse } from './sections/Inverse'
-import { Matrices } from './sections/Matrices'
-import { Normalize } from './sections/Normalize'
-import { Projection } from './sections/Projection'
-import { PuttingTogether } from './sections/PuttingTogether'
-import { Rotation } from './sections/Rotation'
-import { Scale } from './sections/Scale'
-import { Shear } from './sections/Shear'
-import { Translation } from './sections/Translation'
-import { Vectors } from './sections/Vectors'
+import { Home } from './Home'
 
-const Track3D = lazy(() =>
-  import('./sections/3d/Track3D').then((m) => ({ default: m.Track3D })),
+const LinearAlgebra = lazy(() =>
+  import('./modules/linear-algebra/LinearAlgebra').then((m) => ({ default: m.LinearAlgebra })),
 )
 
-export default function App() {
-  return (
-    <div className="page">
-      <ArrowMarkers />
-      <div className="page-inner">
-        <Nav />
-        <main className="lesson-main">
-          <header className="lesson-header">
-            <h1>Linear Algebra for Graphics</h1>
-            <p>
-              A hands-on introduction to the vectors and matrices behind computer graphics. Play with the arrows and
-              sliders.
-            </p>
-          </header>
-          <Vectors />
-          <Normalize />
-          <Addition />
-          <DotProduct />
-          <Projection />
-          <CrossProduct />
-          <Matrices />
-          <Rotation />
-          <Scale />
-          <Shear />
-          <Translation />
-          <Homogeneous />
-          <Inverse />
-          <Determinant />
-          <PuttingTogether />
+const route = window.location.pathname.replace(/\/$/, '') || '/'
 
-          <Suspense fallback={<p className="hint-text">Loading 3D sections…</p>}>
-            <Track3D />
-          </Suspense>
-        </main>
-      </div>
-    </div>
-  )
+export default function App() {
+  if (route === '/linear-algebra') {
+    return (
+      <Suspense fallback={null}>
+        <LinearAlgebra />
+      </Suspense>
+    )
+  }
+  return <Home />
 }
