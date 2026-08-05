@@ -2,12 +2,17 @@ import { ArrowMarkers } from './components/ArrowMarkers'
 import { Nav } from './components/Nav'
 import { Addition } from './sections/Addition'
 import { CrossProduct } from './sections/CrossProduct'
+import { Determinant } from './sections/Determinant'
 import { DotProduct } from './sections/DotProduct'
 import { Homogeneous } from './sections/Homogeneous'
+import { Inverse } from './sections/Inverse'
 import { Matrices } from './sections/Matrices'
+import { Normalize } from './sections/Normalize'
+import { Projection } from './sections/Projection'
 import { PuttingTogether } from './sections/PuttingTogether'
 import { Rotation } from './sections/Rotation'
 import { Scale } from './sections/Scale'
+import { Shear } from './sections/Shear'
 import { Translation } from './sections/Translation'
 import { Vectors } from './sections/Vectors'
 
@@ -26,14 +31,19 @@ export default function App() {
             </p>
           </header>
           <Vectors />
+          <Normalize />
           <Addition />
           <DotProduct />
+          <Projection />
           <CrossProduct />
           <Matrices />
           <Rotation />
           <Scale />
+          <Shear />
           <Translation />
           <Homogeneous />
+          <Inverse />
+          <Determinant />
           <PuttingTogether />
         </main>
       </div>

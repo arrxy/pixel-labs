@@ -1,7 +1,9 @@
 const VECTOR_LINKS = [
   { href: '#vectors', label: 'What is a vector?' },
+  { href: '#normalize', label: 'Unit vectors' },
   { href: '#addition', label: 'Addition & subtraction' },
   { href: '#dot', label: 'Dot product' },
+  { href: '#projection', label: 'Projection' },
   { href: '#cross', label: 'Cross product' },
 ]
 
@@ -9,8 +11,11 @@ const MATRIX_LINKS = [
   { href: '#matrix', label: 'Matrices' },
   { href: '#rotation', label: 'Rotation' },
   { href: '#scale', label: 'Scale' },
+  { href: '#shear', label: 'Shear' },
   { href: '#translation', label: 'Translation' },
   { href: '#homogeneous', label: 'Homogeneous coords' },
+  { href: '#inverse', label: 'Inverse transforms' },
+  { href: '#determinant', label: 'Determinant' },
   { href: '#together', label: 'Putting it together' },
 ]
 

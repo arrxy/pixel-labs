@@ -361,6 +361,50 @@ a:hover {
   text-align: right;
 }
 
+.matrix-grid.two {
+  grid-template-columns: repeat(2, 4.5ch);
+}
+
+.order-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 4px 0 8px;
+}
+
+.order-toggle button {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  text-align: left;
+  border-radius: 2px;
+}
+
+.order-toggle button.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.check-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  margin: 4px 0 8px;
+}
+
+.check-label input {
+  accent-color: var(--accent);
+}
+
 .vertex-result {
   padding-top: 1.5em;
   white-space: nowrap;
