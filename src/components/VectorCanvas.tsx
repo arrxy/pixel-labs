@@ -42,6 +42,12 @@ export function VectorCanvas(props: Props) {
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
+    const dpr = window.devicePixelRatio || 1
+    canvas.width = Math.round(width * dpr)
+    canvas.height = Math.round(height * dpr)
+    canvas.style.width = `${width}px`
+    canvas.style.height = `${height}px`
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     props.draw(ctx, canvas)
   })
 
@@ -85,8 +91,6 @@ export function VectorCanvas(props: Props) {
   return (
     <canvas
       ref={canvasRef}
-      width={width}
-      height={height}
       className={interactive ? 'vector-canvas interactive' : 'vector-canvas'}
       onMouseDown={onDown}
       onMouseMove={onMove}
