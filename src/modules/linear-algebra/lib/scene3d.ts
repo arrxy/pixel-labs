@@ -47,6 +47,10 @@ export function disposeObject(obj: THREE.Object3D) {
       const mat = child.material
       if (Array.isArray(mat)) mat.forEach((m) => m.dispose())
       else mat?.dispose()
+    } else if (child instanceof THREE.Sprite) {
+      const mat = child.material
+      mat.map?.dispose()
+      mat.dispose()
     }
   })
 }
@@ -263,4 +267,62 @@ export function createPoint(p: Vec3, color: string, radius = 0.08): THREE.Mesh {
   const m = new THREE.Mesh(new THREE.SphereGeometry(radius, 12, 8), makeMaterial(color))
   m.position.set(p.x, p.y, p.z)
   return m
+}
+
+/** Billboard text that faces the observer camera. */
+export function createSpriteLabel(
+  text: string,
+  position: Vec3,
+  opts?: { color?: string; worldHeight?: number },
+): THREE.Sprite {
+  const lines = text.split('\n')
+  const fontSize = 36
+  const lineH = 44
+  const padX = 14
+  const canvas = document.createElement('canvas')
+  const probe = canvas.getContext('2d')
+  if (!probe) {
+    const fallback = new THREE.Sprite(new THREE.SpriteMaterial({ color: opts?.color ?? '#1a1a1a' }))
+    fallback.position.set(position.x, position.y, position.z)
+    fallback.scale.set(0.01, 0.01, 1)
+    return fallback
+  }
+  probe.font = `600 ${fontSize}px Karla, system-ui, sans-serif`
+  const textW = Math.max(...lines.map((ln) => probe.measureText(ln).width), 8)
+  const w = Math.ceil(textW + padX * 2)
+  const h = Math.ceil(lineH * lines.length + 10)
+  const dpr = 2
+  canvas.width = w * dpr
+  canvas.height = h * dpr
+  const ctx = canvas.getContext('2d')!
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+  ctx.font = `600 ${fontSize}px Karla, system-ui, sans-serif`
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  const r = 8
+  ctx.fillStyle = 'rgba(255,255,255,0.9)'
+  ctx.beginPath()
+  ctx.moveTo(r, 0)
+  ctx.lineTo(w - r, 0)
+  ctx.quadraticCurveTo(w, 0, w, r)
+  ctx.lineTo(w, h - r)
+  ctx.quadraticCurveTo(w, h, w - r, h)
+  ctx.lineTo(r, h)
+  ctx.quadraticCurveTo(0, h, 0, h - r)
+  ctx.lineTo(0, r)
+  ctx.quadraticCurveTo(0, 0, r, 0)
+  ctx.closePath()
+  ctx.fill()
+  ctx.fillStyle = opts?.color ?? '#1a1a1a'
+  lines.forEach((ln, i) => {
+    ctx.fillText(ln, w / 2, 5 + lineH * (i + 0.5))
+  })
+  const tex = new THREE.CanvasTexture(canvas)
+  tex.needsUpdate = true
+  const mat = new THREE.SpriteMaterial({ map: tex, depthTest: false, transparent: true })
+  const sprite = new THREE.Sprite(mat)
+  sprite.position.set(position.x, position.y, position.z)
+  const worldH = opts?.worldHeight ?? 0.28
+  sprite.scale.set(worldH * (w / h), worldH, 1)
+  return sprite
 }

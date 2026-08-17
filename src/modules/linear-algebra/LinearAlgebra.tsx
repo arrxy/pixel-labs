@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react'
+import { HashScroll } from '../../components/HashScroll'
 import { ArrowMarkers } from './components/ArrowMarkers'
 import { Nav } from './components/Nav'
 import { Addition } from './sections/Addition'
@@ -25,6 +26,7 @@ export function LinearAlgebra() {
   return (
     <div className="page">
       <ArrowMarkers />
+      <HashScroll />
       <div className="page-inner">
         <Nav />
         <main className="lesson-main">
@@ -54,6 +56,9 @@ export function LinearAlgebra() {
           <Suspense fallback={<p className="hint-text">Loading 3D sections…</p>}>
             <Track3D />
           </Suspense>
+          <p className="lesson-continue">
+            Next: <a href="/viewing">Part II — Viewing</a>
+          </p>
         </main>
       </div>
     </div>

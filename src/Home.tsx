@@ -11,7 +11,7 @@ const PARTS = [
     title: 'Viewing',
     blurb: 'Cameras, projections, and how 3D scenes become pixels on a screen.',
     href: '/viewing',
-    ready: false,
+    ready: true,
   },
 ] as const
 
