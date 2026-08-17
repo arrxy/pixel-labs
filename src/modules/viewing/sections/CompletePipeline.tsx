@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { PriorLectureLinks } from '../../../components/PriorLectureLinks'
 import { SliderRow } from '../../linear-algebra/components/Controls'
 import { Playground } from '../../linear-algebra/components/Diagram'
-import { MathParagraph, MathText } from '../../linear-algebra/components/MathText'
+import { MathText } from '../../linear-algebra/components/MathText'
 import { Vec3Inputs } from '../../linear-algebra/components/Vec3Inputs'
 import { Section } from '../../linear-algebra/components/Section'
 import { fmt } from '../../linear-algebra/lib/math'
@@ -28,13 +28,13 @@ import {
 type Stage = 'view' | 'clip' | 'ndc' | 'screen'
 
 const STAGES: { id: Stage; label: string }[] = [
-  { id: 'view', label: 'View' },
-  { id: 'clip', label: 'Clip' },
-  { id: 'ndc', label: 'NDC' },
-  { id: 'screen', label: 'Screen' },
+  { id: 'view', label: 'View point' },
+  { id: 'clip', label: 'Clip (pre-÷w)' },
+  { id: 'ndc', label: 'NDC (after ÷w)' },
+  { id: 'screen', label: 'Screen pixels' },
 ]
 
-const PER_TEX = String.raw`M_{\mathrm{per}}=M_{\mathrm{orth}}P=\begin{pmatrix}
+const PER_TEX = String.raw`M_{\mathrm{per}}=M_{\mathrm{orth}}M_{\mathrm{warp}}=\begin{pmatrix}
 \frac{2n}{r-l}&0&-\frac{r+l}{r-l}&0\\
 0&\frac{2n}{t-b}&-\frac{t+b}{t-b}&0\\
 0&0&\frac{n+f}{n-f}&-\frac{2fn}{n-f}\\
@@ -49,7 +49,7 @@ export function CompletePipeline() {
 
   const bounds = DEFAULT_BOUNDS
   const Morth = orthographicMatrix(bounds)
-  const Pwarp = perspectiveWarp(bounds)
+  const Mwarp = perspectiveWarp(bounds)
   const Mper = perspectiveMatrix(bounds)
   const clip = Mper ? apply4(Mper, toHomogeneous(p)) : null
   const ndc = clip ? divideByW(clip) : null
@@ -74,10 +74,29 @@ export function CompletePipeline() {
 
   return (
     <Section id="full-pipeline" title="The full projection" noBorder>
-      <MathParagraph>
-        {`Perspective projection is the warp $P$ followed by the same orthographic map. Then divide by $w$ and scale into pixels.`}
-      </MathParagraph>
-      <MathText tex={String.raw`M_{\mathrm{per}}=M_{\mathrm{orth}}P`} display />
+      <p className="body-text">
+        The full perspective projection applies the perspective warp <span className="math-sym">M<sub>warp</sub></span>{' '}
+        first, then the orthographic map <span className="math-sym">M<sub>orth</sub></span>. Their product is the full
+        projection matrix <span className="math-sym">M<sub>per</sub></span>.
+      </p>
+      <MathText tex={String.raw`M_{\mathrm{per}}=M_{\mathrm{orth}}M_{\mathrm{warp}}`} display />
+      <p className="body-text">
+        <strong>Clip space</strong> is the four-coordinate result immediately after{' '}
+        <span className="math-sym">M<sub>per</sub></span>, before dividing by w. “Clip” here names a coordinate stage;
+        it is different from “clipped,” which meant a point was rejected for being outside the view volume.
+      </p>
+      <p className="body-text">
+        Dividing clip coordinates by w produces <strong>NDC</strong>. A <strong>viewport</strong> is the rectangular
+        region of the screen where that NDC image is drawn. Its width W and height H are measured in pixels.
+      </p>
+      <MathText
+        tex={String.raw`x_{\mathrm{screen}}=\frac{(x_{\mathrm{ndc}}+1)W}{2}\qquad y_{\mathrm{screen}}=\frac{(1-y_{\mathrm{ndc}})H}{2}`}
+        display
+      />
+      <p className="hint-text">
+        The x formula changes [−1, 1] into [0, W]. The y formula also flips the direction because screen y usually
+        increases downward.
+      </p>
       <PriorLectureLinks links={[{ href: '/linear-algebra#together3d', label: 'Review matrix composition in Part I' }]} />
       <Playground label="Playground: one vertex through the pipeline">
         <FrustumScene
@@ -108,14 +127,10 @@ export function CompletePipeline() {
           </div>
         </div>
       </Playground>
-      <MatrixReadout matrix={Mper} label="Mper = Morth P" tex={PER_TEX} />
-      <MathText
-        tex={String.raw`x_{\mathrm{screen}}=\frac{(x_{\mathrm{ndc}}+1)W}{2}\qquad y_{\mathrm{screen}}=\frac{(1-y_{\mathrm{ndc}})H}{2}`}
-        display
-      />
+      <MatrixReadout matrix={Mper} label="Mper = Morth Mwarp" tex={PER_TEX} />
       <p className="hint-text">
-        {Morth && Pwarp
-          ? 'The numeric matrix above is exactly Morth times P, then the viewport formulas map the NDC square to pixels.'
+        {Morth && Mwarp
+          ? 'The numeric matrix above is exactly Morth times Mwarp, then the viewport formulas map the NDC square to pixels.'
           : 'Choose valid near/far distances to build the matrix.'}
       </p>
     </Section>

@@ -88,7 +88,7 @@ export function ProjectionPreview({
   const status = !matrix
     ? 'invalid bounds'
     : tracked
-      ? `P → NDC (${fmt(tracked.ndc.x)}, ${fmt(tracked.ndc.y)}, ${fmt(tracked.ndc.z)})${tracked.inside ? '' : ' · clipped'}`
+      ? `P → NDC (${fmt(tracked.ndc.x)}, ${fmt(tracked.ndc.y)}, ${fmt(tracked.ndc.z)})${tracked.inside ? '' : ' · outside NDC'}`
       : `${insideCount}/${vertices.length} vertices inside the NDC square`
 
   return (

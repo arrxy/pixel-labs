@@ -206,7 +206,7 @@ export function CameraSpaces() {
           <div className="controls-col wide">
             <SliderRow label="camera x" value={camX} min={-3} max={4} step={0.1} onChange={(v) => setCamX(clamp(v, 4))} />
             <SliderRow label="camera z" value={camZ} min={2} max={8} step={0.1} onChange={setCamZ} />
-            <SliderRow label="yaw" value={yaw} min={-60} max={60} step={1} onChange={setYaw} />
+            <SliderRow label="yaw (turn left/right)" value={yaw} min={-60} max={60} step={1} onChange={setYaw} />
             <button type="button" className="mode-btn" onClick={reset}>
               Reset
             </button>

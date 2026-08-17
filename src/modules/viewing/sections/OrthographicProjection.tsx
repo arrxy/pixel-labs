@@ -65,11 +65,16 @@ export function OrthographicProjection() {
   return (
     <Section id="orthographic" title="Orthographic projection">
       <p className="body-text">
-        Parallel rays hit the near plane. Depth does not change apparent size: a cube at z = n and a cube at z = f
-        draw the same on screen. Mapping the view box onto <span className="math-sym">[−1, 1]³</span> is one scale and
-        one translation per axis. No shear, no divide-by-w. That is why the last row is (0, 0, 0, 1) and every
-        off-diagonal is 0.
+        Parallel rays hit the near plane. Depth does not change apparent size: a cube at the near plane and a cube at
+        the far plane draw at the same size. Mapping the view box onto{' '}
+        <span className="math-sym">[−1, 1]³</span> uses one scale and one translation per axis. The axes are not mixed:
+        output x uses only input x, output y uses only input y, and output z uses only input z.
       </p>
+      <p className="body-text">
+        To shorten the matrix, let <strong>n = −near</strong> and <strong>f = −far</strong>. They are signed z
+        coordinates, not positive distances. Because the camera looks down −z, both are negative and n &gt; f.
+      </p>
+      <MathText tex={String.raw`n=-\mathrm{near}\qquad f=-\mathrm{far}\qquad n>f`} display />
       <MathText tex={ORTH_TEX} display />
 
       <div className="walkthrough">
@@ -105,8 +110,8 @@ export function OrthographicProjection() {
             (e.g. −8), so n &gt; f. Same recipe with u₀ = f, u₁ = n: scale 2/(n − f), translation −(n + f)/(n − f).
           </li>
           <li>
-            <strong>w, row 4.</strong> (0, 0, 0, 1). Orthographic does not change w, so there is no perspective divide
-            later.
+            <strong>Fourth-coordinate row.</strong> A 4×4 matrix carries one extra coordinate, initialized to 1 for a
+            point. The row (0, 0, 0, 1) leaves it equal to 1. Perspective will introduce and use this coordinate later.
           </li>
         </ol>
       </div>
@@ -182,7 +187,7 @@ export function OrthographicProjection() {
             {projected.ok ? (
               <div>
                 NDC ({fmt(projected.ndc.x)}, {fmt(projected.ndc.y)}, {fmt(projected.ndc.z)})
-                {inNdc(projected.ndc) ? ' · inside' : ' · clipped'}
+                {inNdc(projected.ndc) ? ' · inside' : ' · outside NDC'}
               </div>
             ) : (
               <div>not projectable</div>

@@ -32,6 +32,11 @@ function pointColor(kind: PointClass): string {
   return '#9b978a'
 }
 
+function pointStatus(kind: PointClass): string {
+  if (kind === 'clipped') return 'outside'
+  return kind
+}
+
 const VOLUME_LOOK = { x: 0, y: 0.15, z: -3.8 }
 const VOLUME_FROM = { x: 0.72, y: 0.42, z: 0.5 }
 
@@ -133,7 +138,7 @@ export function ViewVolume() {
             plane.
           </li>
           <li>
-            Dots: teal = inside that volume, grey = clipped, orange = behind the camera. Watch <strong>B</strong>: it
+            Dots: teal = inside that volume, grey = outside (rejected), orange = behind the camera. Watch <strong>B</strong>: it
             can sit in the wedge and miss the box.
           </li>
         </ul>
@@ -171,7 +176,7 @@ export function ViewVolume() {
               points={classes.map((s) => ({
                 p: s.p,
                 color: pointColor(s.persp),
-                label: `${s.label}\n${s.persp}`,
+                label: `${s.label}\n${pointStatus(s.persp)}`,
               }))}
             />
             <VolumePane
@@ -184,7 +189,7 @@ export function ViewVolume() {
               points={classes.map((s) => ({
                 p: s.p,
                 color: pointColor(s.ortho),
-                label: `${s.label}\n${s.ortho}`,
+                label: `${s.label}\n${pointStatus(s.ortho)}`,
               }))}
             />
           </div>
@@ -215,7 +220,7 @@ export function ViewVolume() {
             <div className="mono-block muted" aria-live="polite">
               {classes.map((s) => (
                 <div key={s.label}>
-                  {s.label} ({s.note}): persp {s.persp} · ortho {s.ortho}
+                  {s.label} ({s.note}): perspective {pointStatus(s.persp)} · orthographic {pointStatus(s.ortho)}
                 </div>
               ))}
             </div>

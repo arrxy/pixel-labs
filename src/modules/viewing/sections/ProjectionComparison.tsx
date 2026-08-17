@@ -14,8 +14,11 @@ import {
   type ProjectionMode,
 } from '../lib/projection'
 
+const VOLUME_LOOK = { x: 0, y: 0.15, z: -3.8 }
+const VOLUME_FROM = { x: 0.72, y: 0.42, z: 0.5 }
+
 export function ProjectionComparison() {
-  const [mode, setMode] = useState<ProjectionMode>('perspective')
+  const [mode, setMode] = useState<ProjectionMode>('orthographic')
   const matrix = useMemo(() => projectionMatrix(DEFAULT_BOUNDS, mode), [mode])
 
   return (
@@ -23,6 +26,9 @@ export function ProjectionComparison() {
       <MathParagraph>
         {`Same near and far cubes, two cameras. Orthographic keeps their screen size. Perspective makes the farther cube shrink — rays meet at the camera origin.`}
       </MathParagraph>
+      <p className="hint-text">
+        This playground previews the visual difference. The next section derives the perspective rule.
+      </p>
       <PriorLectureLinks
         links={[
           {
@@ -32,19 +38,27 @@ export function ProjectionComparison() {
         ]}
       />
       <Playground label="Playground: identical geometry, two projections">
-        <FrustumScene
-          bounds={DEFAULT_BOUNDS}
-          mode={mode}
-          cubes={SAMPLE_CUBES}
-          ariaLabel={`${mode} view of a near cube and a far cube`}
-        />
-        <ProjectionPreview
-          vertices={stackedCubeVertices()}
-          edges={stackedCubeEdges()}
-          groupColors={SAMPLE_CUBES.map((c) => c.color)}
-          matrix={matrix}
-          caption={`${mode} camera output in NDC xy`}
-        />
+        <div className="projection-pair">
+          <FrustumScene
+            bounds={DEFAULT_BOUNDS}
+            mode={mode}
+            cubes={SAMPLE_CUBES}
+            width={400}
+            height={400}
+            cameraDistance={22}
+            fov={48}
+            orbitTarget={VOLUME_LOOK}
+            cameraOffset={VOLUME_FROM}
+            ariaLabel={`${mode} view of a near cube and a far cube`}
+          />
+          <ProjectionPreview
+            vertices={stackedCubeVertices()}
+            edges={stackedCubeEdges()}
+            groupColors={SAMPLE_CUBES.map((c) => c.color)}
+            matrix={matrix}
+            caption={`${mode} camera output in NDC xy`}
+          />
+        </div>
         <div className="controls-col">
           <div className="btn-row" role="group" aria-label="Projection type">
             <button

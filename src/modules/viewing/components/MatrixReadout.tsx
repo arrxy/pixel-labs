@@ -12,7 +12,7 @@ export function MatrixReadout({ matrix, label, tex }: Props) {
   return (
     <div className="matrix-readout">
       <div className="mono-block">
-        <div className="muted-label">{label} · row-major</div>
+        <div className="muted-label">{label} · read each row left to right</div>
         {matrix ? (
           <div className="matrix-grid four">
             {matrix.flat().map((n, i) => (

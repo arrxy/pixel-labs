@@ -63,12 +63,13 @@ export function CanonicalVolume() {
         box (orthographic).
       </p>
       <p className="body-text">
-        Clipping and pixels should not care which shape you started from. Projection maps that volume into one shared
-        cube <span className="math-sym">[−1, 1]³</span>, the canonical view volume. Left pane: still camera space.
-        Right pane: after the warp.
+        Throwing away points outside the volume, and later drawing on a screen, should not depend on which shape we
+        started from. A <strong>projection map</strong> reshapes either volume into one shared cube{' '}
+        <span className="math-sym">[−1, 1]³</span>. This standard target is the <strong>canonical view volume</strong>.
+        Here “warp” simply means reshaping coordinates.
       </p>
       <MathText
-        tex={String.raw`\text{view space}\xrightarrow{M_{\mathrm{proj}}}\text{canonical cube }[-1,1]^3`}
+        tex={String.raw`\text{camera (view) space}\xrightarrow{\text{projection map}}\text{canonical cube }[-1,1]^3`}
         display
       />
 
@@ -87,31 +88,27 @@ export function CanonicalVolume() {
       </div>
 
       <div className="walkthrough">
-        <div className="label-caps">Why cuboid vs parallelepiped</div>
+        <div className="label-caps">What each projection map does</div>
         <ol>
           <li>
-            <strong>Orthographic warp.</strong> Translate the view box so its center is the origin, then scale each
-            axis so the box becomes <span className="math-sym">[−1, 1]³</span>. That is affine: parallel edges stay
-            parallel, a cube stays a rectangular box (a cuboid). Depth does not change width, so teal and orange stay
-            the same size.
+            <strong>Orthographic warp.</strong> First shift the view box so its center is the origin. Then scale each
+            axis so the box becomes <span className="math-sym">[−1, 1]³</span>. Parallel edges stay parallel, so a
+            cube stays a rectangular box (a cuboid). Depth does not change width, so teal and orange stay the same
+            size.
           </li>
           <li>
-            <strong>Perspective warp.</strong> First a matrix <span className="math-sym">P</span> bends the wedge into
-            that same box (similar triangles, then a depth remap). Then the same <Mx sub="orth" />. Written{' '}
-            <Mx sub="per" /> = <Mx sub="orth" /> <span className="math-sym">P</span>, with{' '}
-            <span className="math-sym">P</span> applied first. Because <em>x</em> and <em>y</em> are scaled by how far
-            you are (divide by <em>w</em>), a cube’s near face stays larger than its far face. The cube tapers — a
-            frustum that, from this angle, reads as a parallelepiped. Orange (farther) shrinks more than teal.
+            <strong>Perspective warp.</strong> First shrink horizontal and vertical coordinates according to depth,
+            so farther objects become smaller. Then reshape the result into the same canonical cube. The orange cube
+            is farther away, so it shrinks more than the teal cube. The following sections derive the exact rules and
+            matrix order.
           </li>
         </ol>
       </div>
 
-      <MathText tex={String.raw`M_{\mathrm{per}}=M_{\mathrm{orth}}\,P`} display />
       <PriorLectureLinks
         links={[
           { href: '/linear-algebra#translation3d', label: 'Review translation in Part I' },
           { href: '/linear-algebra#scale3d', label: 'scale' },
-          { href: '/linear-algebra#homogeneous3d', label: 'homogeneous coordinates' },
         ]}
       />
 
@@ -119,7 +116,7 @@ export function CanonicalVolume() {
         <div className="frame-lab">
           <div className="frame-grid pair">
             <div className="frame-pane">
-              <h3 className="frame-title">View space</h3>
+              <h3 className="frame-title">Camera (view) space</h3>
               <FrustumScene
                 bounds={DEFAULT_BOUNDS}
                 mode={mode}
@@ -154,8 +151,8 @@ export function CanonicalVolume() {
                 ariaLabel="Near and far cubes mapped into the canonical cube"
               />
               <p className="frame-caption">
-                After <Mx sub="proj" />. Orthographic: two cuboids of one size. Perspective: tapered boxes, far one
-                smaller.
+                After the projection map. Orthographic: two cuboids of one size. Perspective: tapered boxes, with the
+                farther orange box smaller.
               </p>
             </div>
           </div>
@@ -179,7 +176,7 @@ export function CanonicalVolume() {
               </button>
             </div>
             <p className="hint-text">
-              Watch the right pane: cuboids of equal size for orthographic; parallelepipeds, orange smaller, for
+              Watch the right pane: equal-size cuboids for orthographic; tapered boxes, with orange smaller, for
               perspective.
             </p>
           </div>
