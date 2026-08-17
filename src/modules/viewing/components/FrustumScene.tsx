@@ -12,14 +12,14 @@ import {
 } from '../lib/scene'
 import type { ProjectionMode, ViewBounds } from '../lib/projection'
 
-export type SampleCube = { center: Vec3; size: number; color: string }
+export type SampleCube = { center: Vec3; size: number; color: string; label?: string }
 
 type Props = {
   bounds: ViewBounds
   mode: ProjectionMode
   points?: { p: Vec3; color?: string; label?: string }[]
   cubes?: SampleCube[]
-  transformedCubes?: { corners: Vec3[]; color: string }[]
+  transformedCubes?: { corners: Vec3[]; color: string; label?: string }[]
   showVolume?: boolean
   showCanonical?: boolean
   showCamera?: boolean
@@ -79,16 +79,43 @@ export function FrustumScene({
         volumeColor,
       ]}
       setup={({ root }) => {
-        if (showCamera) root.add(createCameraGizmo())
+        if (showCamera) {
+          root.add(createCameraGizmo())
+          root.add(createArrow({ x: 0, y: 0, z: -2.2 }, SCENE_COLORS.axisZ, { shaftRadius: 0.02, headLength: 0.22 }))
+        }
         if (showVolume) {
           root.add(createViewVolumeWire(bounds, mode, volumeColor))
           root.add(createNearFarPlanes(bounds, mode))
           if (showPlaneLabels) root.add(createViewVolumePlaneLabels(bounds, mode))
         }
         if (showCanonical) root.add(createCanonicalCube())
-        root.add(createArrow({ x: 0, y: 0, z: -2.2 }, SCENE_COLORS.axisZ, { shaftRadius: 0.02, headLength: 0.22 }))
-        for (const c of cubes) root.add(createBoxAt(c.center, c.size, c.color))
-        for (const box of transformedCubes) root.add(createTransformedBox(box.corners, box.color))
+        for (const c of cubes) {
+          root.add(createBoxAt(c.center, c.size, c.color))
+          if (c.label) {
+            root.add(
+              createSpriteLabel(c.label, { x: c.center.x, y: c.center.y + c.size * 0.55, z: c.center.z }, {
+                color: c.color,
+                worldHeight: 0.28,
+              }),
+            )
+          }
+        }
+        for (const box of transformedCubes) {
+          root.add(createTransformedBox(box.corners, box.color))
+          if (box.label && box.corners.length > 0) {
+            const mid = box.corners.reduce(
+              (acc, p) => ({ x: acc.x + p.x, y: acc.y + p.y, z: acc.z + p.z }),
+              { x: 0, y: 0, z: 0 },
+            )
+            const n = box.corners.length
+            root.add(
+              createSpriteLabel(box.label, { x: mid.x / n, y: mid.y / n + 0.18, z: mid.z / n }, {
+                color: box.color,
+                worldHeight: 0.22,
+              }),
+            )
+          }
+        }
         for (const pt of points) {
           root.add(createPoint(pt.p, pt.color ?? SCENE_COLORS.a, 0.09))
           if (pt.label) {

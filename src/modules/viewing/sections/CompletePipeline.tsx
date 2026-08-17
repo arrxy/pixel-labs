@@ -90,8 +90,10 @@ export function CompletePipeline() {
         <ProjectionPreview
           vertices={stackedCubeVertices()}
           edges={stackedCubeEdges()}
+          groupColors={SAMPLE_CUBES.map((c) => c.color)}
+          markers={[{ p, color: '#1a1a1a', label: 'P' }]}
           matrix={Mper}
-          caption="Final perspective projection"
+          caption="Final perspective projection in NDC xy"
         />
         <div className="controls-col wide">
           <PipelineStepper stages={STAGES} active={stage} onChange={setStage} />

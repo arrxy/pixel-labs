@@ -14,6 +14,21 @@
   flex: 1 1 200px;
 }
 
+.projection-pair {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.projection-pair > .scene3d-responsive,
+.projection-pair > .projection-preview {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+
 .projection-svg,
 .projection-diagram,
 .depth-plot {
@@ -249,6 +264,10 @@
 @media (max-width: 800px) {
   .projection-diagram {
     max-width: 100%;
+  }
+
+  .projection-pair {
+    grid-template-columns: 1fr;
   }
 
   .frame-grid {

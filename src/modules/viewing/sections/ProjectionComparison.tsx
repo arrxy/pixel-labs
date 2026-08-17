@@ -41,8 +41,9 @@ export function ProjectionComparison() {
         <ProjectionPreview
           vertices={stackedCubeVertices()}
           edges={stackedCubeEdges()}
+          groupColors={SAMPLE_CUBES.map((c) => c.color)}
           matrix={matrix}
-          caption={`${mode} camera output`}
+          caption={`${mode} camera output in NDC xy`}
         />
         <div className="controls-col">
           <div className="btn-row" role="group" aria-label="Projection type">
