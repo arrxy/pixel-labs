@@ -58,10 +58,10 @@ export function Normalize() {
             markerEnd="url(#arrowInk)"
           />
           <line x1="110" y1="100" x2="142" y2="76" stroke="#0f6e63" strokeWidth="2.5" markerEnd="url(#arrowA)" />
-          <text x="156" y="52" fontFamily="Source Serif 4, serif" fontSize="13" fill="#6b6b63" fontStyle="italic">
+          <text x="156" y="52" fontFamily="Instrument Serif, serif" fontSize="13" fill="#6b6b63" fontStyle="italic">
             v
           </text>
-          <text x="146" y="72" fontFamily="Source Serif 4, serif" fontSize="13" fill="#0f6e63" fontStyle="italic">
+          <text x="146" y="72" fontFamily="Instrument Serif, serif" fontSize="13" fill="#0f6e63" fontStyle="italic">
             v̂
           </text>
         </svg>

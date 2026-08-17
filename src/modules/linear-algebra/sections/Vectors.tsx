@@ -33,13 +33,13 @@ export function Vectors() {
           <line x1="30" y1="90" x2="110" y2="90" stroke="#c9c6ba" strokeWidth="1" strokeDasharray="4,3" />
           <line x1="110" y1="90" x2="110" y2="150" stroke="#c9c6ba" strokeWidth="1" strokeDasharray="4,3" />
           <line x1="30" y1="150" x2="106" y2="91" stroke="#0f6e63" strokeWidth="2.5" markerEnd="url(#arrowA)" />
-          <text x="63" y="145" fontFamily="IBM Plex Mono, monospace" fontSize="12" fill="#4a4841">
+          <text x="63" y="145" fontFamily="Space Mono, monospace" fontSize="12" fill="#4a4841">
             4
           </text>
-          <text x="115" y="122" fontFamily="IBM Plex Mono, monospace" fontSize="12" fill="#4a4841">
+          <text x="115" y="122" fontFamily="Space Mono, monospace" fontSize="12" fill="#4a4841">
             3
           </text>
-          <text x="95" y="78" fontFamily="Source Serif 4, serif" fontSize="14" fill="#0f6e63" fontStyle="italic">
+          <text x="95" y="78" fontFamily="Instrument Serif, serif" fontSize="14" fill="#0f6e63" fontStyle="italic">
             v
           </text>
         </svg>

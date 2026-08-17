@@ -72,13 +72,13 @@ export function Projection() {
             markerEnd="url(#arrowInk)"
           />
           <line x1="30" y1="150" x2="130" y2="90" stroke="#0f6e63" strokeWidth="2.5" markerEnd="url(#arrowA)" />
-          <text x="134" y="86" fontFamily="Source Serif 4, serif" fontSize="13" fill="#0f6e63" fontStyle="italic">
+          <text x="134" y="86" fontFamily="Instrument Serif, serif" fontSize="13" fill="#0f6e63" fontStyle="italic">
             a
           </text>
-          <text x="194" y="154" fontFamily="Source Serif 4, serif" fontSize="13" fill="#d9622b" fontStyle="italic">
+          <text x="194" y="154" fontFamily="Instrument Serif, serif" fontSize="13" fill="#d9622b" fontStyle="italic">
             b
           </text>
-          <text x="70" y="166" fontFamily="IBM Plex Mono, monospace" fontSize="11" fill="#6b6b63">
+          <text x="70" y="166" fontFamily="Space Mono, monospace" fontSize="11" fill="#6b6b63">
             proj
           </text>
         </svg>

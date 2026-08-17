@@ -47,10 +47,10 @@ export function Shear() {
         <svg viewBox="0 0 220 180" className="diagram-svg">
           <rect x="50" y="80" width="50" height="50" fill="none" stroke="#c9c6ba" strokeWidth="2" strokeDasharray="4,3" />
           <polygon points="50,130 100,130 130,80 80,80" fill="none" stroke="#0f6e63" strokeWidth="2.5" />
-          <text x="54" y="74" fontFamily="IBM Plex Mono, monospace" fontSize="11" fill="#6b6b63">
+          <text x="54" y="74" fontFamily="Space Mono, monospace" fontSize="11" fill="#6b6b63">
             original
           </text>
-          <text x="134" y="78" fontFamily="Source Serif 4, serif" fontSize="12" fill="#0f6e63" fontStyle="italic">
+          <text x="134" y="78" fontFamily="Instrument Serif, serif" fontSize="12" fill="#0f6e63" fontStyle="italic">
             sheared
           </text>
         </svg>

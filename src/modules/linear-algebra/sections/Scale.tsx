@@ -41,10 +41,10 @@ export function Scale() {
         <svg viewBox="0 0 220 180" className="diagram-svg">
           <rect x="30" y="110" width="40" height="40" fill="none" stroke="#c9c6ba" strokeWidth="2" strokeDasharray="4,3" />
           <rect x="30" y="130" width="120" height="20" fill="none" stroke="#0f6e63" strokeWidth="2.5" />
-          <text x="36" y="104" fontFamily="IBM Plex Mono, monospace" fontSize="11" fill="#6b6b63">
+          <text x="36" y="104" fontFamily="Space Mono, monospace" fontSize="11" fill="#6b6b63">
             unit square
           </text>
-          <text x="156" y="144" fontFamily="Source Serif 4, serif" fontSize="12" fill="#0f6e63" fontStyle="italic">
+          <text x="156" y="144" fontFamily="Instrument Serif, serif" fontSize="12" fill="#0f6e63" fontStyle="italic">
             scaled
           </text>
         </svg>

@@ -52,13 +52,13 @@ export function CrossProduct() {
           <polygon points="30,150 90,130 110,70 50,90" fill="rgba(15,110,99,0.12)" />
           <line x1="30" y1="150" x2="90" y2="130" stroke="#0f6e63" strokeWidth="2.5" markerEnd="url(#arrowA)" />
           <line x1="30" y1="150" x2="50" y2="90" stroke="#d9622b" strokeWidth="2.5" markerEnd="url(#arrowB)" />
-          <text x="92" y="148" fontFamily="Source Serif 4, serif" fontSize="13" fill="#0f6e63" fontStyle="italic">
+          <text x="92" y="148" fontFamily="Instrument Serif, serif" fontSize="13" fill="#0f6e63" fontStyle="italic">
             a
           </text>
-          <text x="36" y="86" fontFamily="Source Serif 4, serif" fontSize="13" fill="#d9622b" fontStyle="italic">
+          <text x="36" y="86" fontFamily="Instrument Serif, serif" fontSize="13" fill="#d9622b" fontStyle="italic">
             b
           </text>
-          <text x="66" y="118" fontFamily="IBM Plex Mono, monospace" fontSize="11" fill="#0a4f47">
+          <text x="66" y="118" fontFamily="Space Mono, monospace" fontSize="11" fill="#0a4f47">
             area
           </text>
         </svg>

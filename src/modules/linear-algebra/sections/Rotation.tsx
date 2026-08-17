@@ -55,13 +55,13 @@ export function Rotation() {
           <line x1="110" y1="90" x2="153" y2="65" stroke="#0f6e63" strokeWidth="2.5" markerEnd="url(#arrowA)" />
           <line x1="110" y1="90" x2="85" y2="47" stroke="#d9622b" strokeWidth="2.5" markerEnd="url(#arrowB)" />
           <path d="M 140 90 A 30 30 0 0 0 132 74" fill="none" stroke="#6b6b63" strokeWidth="1" />
-          <text x="140" y="78" fontFamily="IBM Plex Mono, monospace" fontSize="11" fill="#6b6b63">
+          <text x="140" y="78" fontFamily="Space Mono, monospace" fontSize="11" fill="#6b6b63">
             θ
           </text>
-          <text x="156" y="62" fontFamily="Source Serif 4, serif" fontSize="12" fill="#0f6e63" fontStyle="italic">
+          <text x="156" y="62" fontFamily="Instrument Serif, serif" fontSize="12" fill="#0f6e63" fontStyle="italic">
             x&apos;
           </text>
-          <text x="66" y="48" fontFamily="Source Serif 4, serif" fontSize="12" fill="#d9622b" fontStyle="italic">
+          <text x="66" y="48" fontFamily="Instrument Serif, serif" fontSize="12" fill="#d9622b" fontStyle="italic">
             y&apos;
           </text>
         </svg>

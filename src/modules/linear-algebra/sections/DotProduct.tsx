@@ -63,13 +63,13 @@ export function DotProduct() {
           <line x1="96" y1="104" x2="102" y2="132" stroke="#c9c6ba" strokeWidth="1" strokeDasharray="4,3" />
           <line x1="30" y1="150" x2="102" y2="132" stroke="#0f6e63" strokeWidth="2.5" markerEnd="url(#arrowA)" />
           <line x1="30" y1="150" x2="64" y2="98" stroke="#d9622b" strokeWidth="2.5" markerEnd="url(#arrowB)" />
-          <text x="106" y="128" fontFamily="Source Serif 4, serif" fontSize="13" fill="#0f6e63" fontStyle="italic">
+          <text x="106" y="128" fontFamily="Instrument Serif, serif" fontSize="13" fill="#0f6e63" fontStyle="italic">
             a
           </text>
-          <text x="66" y="92" fontFamily="Source Serif 4, serif" fontSize="13" fill="#d9622b" fontStyle="italic">
+          <text x="66" y="92" fontFamily="Instrument Serif, serif" fontSize="13" fill="#d9622b" fontStyle="italic">
             b
           </text>
-          <text x="70" y="112" fontFamily="IBM Plex Mono, monospace" fontSize="11" fill="#6b6b63">
+          <text x="70" y="112" fontFamily="Space Mono, monospace" fontSize="11" fill="#6b6b63">
             d
           </text>
         </svg>

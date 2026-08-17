@@ -50,13 +50,13 @@ export function Addition() {
           <line x1="30" y1="150" x2="48" y2="92" stroke="#d9622b" strokeWidth="1.5" strokeDasharray="4,3" />
           <line x1="90" y1="130" x2="108" y2="72" stroke="#d9622b" strokeWidth="2.5" markerEnd="url(#arrowB)" />
           <line x1="30" y1="150" x2="108" y2="72" stroke="#1a1a1a" strokeWidth="2.5" markerEnd="url(#arrowInk)" />
-          <text x="52" y="148" fontFamily="Source Serif 4, serif" fontSize="13" fill="#0f6e63" fontStyle="italic">
+          <text x="52" y="148" fontFamily="Instrument Serif, serif" fontSize="13" fill="#0f6e63" fontStyle="italic">
             a
           </text>
-          <text x="96" y="98" fontFamily="Source Serif 4, serif" fontSize="13" fill="#d9622b" fontStyle="italic">
+          <text x="96" y="98" fontFamily="Instrument Serif, serif" fontSize="13" fill="#d9622b" fontStyle="italic">
             b
           </text>
-          <text x="58" y="70" fontFamily="Source Serif 4, serif" fontSize="13" fill="#1a1a1a" fontStyle="italic">
+          <text x="58" y="70" fontFamily="Instrument Serif, serif" fontSize="13" fill="#1a1a1a" fontStyle="italic">
             a+b
           </text>
         </svg>

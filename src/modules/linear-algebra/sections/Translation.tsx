@@ -61,13 +61,13 @@ export function Translation() {
           />
           <circle cx="60" cy="90" r="4" fill="#9b978a" />
           <circle cx="90" cy="60" r="4" fill="#0f6e63" />
-          <text x="38" y="104" fontFamily="Source Serif 4, serif" fontSize="12" fill="#6b6b63" fontStyle="italic">
+          <text x="38" y="104" fontFamily="Instrument Serif, serif" fontSize="12" fill="#6b6b63" fontStyle="italic">
             a = (1,2)
           </text>
-          <text x="94" y="54" fontFamily="Source Serif 4, serif" fontSize="12" fill="#0f6e63" fontStyle="italic">
+          <text x="94" y="54" fontFamily="Instrument Serif, serif" fontSize="12" fill="#0f6e63" fontStyle="italic">
             a+t = (2,3)
           </text>
-          <text x="66" y="70" fontFamily="IBM Plex Mono, monospace" fontSize="11" fill="#6b6b63">
+          <text x="66" y="70" fontFamily="Space Mono, monospace" fontSize="11" fill="#6b6b63">
             t
           </text>
         </svg>

@@ -82,7 +82,7 @@ export function Determinant() {
           <polygon points="40,140 120,140 150,70 70,70" fill="rgba(15,110,99,0.12)" stroke="#0f6e63" strokeWidth="2" />
           <line x1="40" y1="140" x2="120" y2="140" stroke="#0f6e63" strokeWidth="2.5" markerEnd="url(#arrowA)" />
           <line x1="40" y1="140" x2="70" y2="70" stroke="#d9622b" strokeWidth="2.5" markerEnd="url(#arrowB)" />
-          <text x="100" y="100" fontFamily="IBM Plex Mono, monospace" fontSize="12" fill="#4a4841">
+          <text x="100" y="100" fontFamily="Space Mono, monospace" fontSize="12" fill="#4a4841">
             area = det
           </text>
         </svg>
