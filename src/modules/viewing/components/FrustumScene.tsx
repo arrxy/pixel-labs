@@ -5,6 +5,7 @@ import {
   createBoxAt,
   createCameraGizmo,
   createCanonicalCube,
+  createCanonicalCubeLabels,
   createNearFarPlanes,
   createTransformedBox,
   createViewVolumePlaneLabels,
@@ -88,7 +89,10 @@ export function FrustumScene({
           root.add(createNearFarPlanes(bounds, mode))
           if (showPlaneLabels) root.add(createViewVolumePlaneLabels(bounds, mode))
         }
-        if (showCanonical) root.add(createCanonicalCube())
+        if (showCanonical) {
+          root.add(createCanonicalCube())
+          root.add(createCanonicalCubeLabels())
+        }
         for (const c of cubes) {
           root.add(createBoxAt(c.center, c.size, c.color))
           if (c.label) {

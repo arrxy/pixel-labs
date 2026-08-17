@@ -120,11 +120,35 @@ export function ProjectionDiagram({
       )}
       {pOnNear && (
         <>
-          <line x1={pPt.x} y1={pPt.y} x2={pOnNear.x} y2={pOnNear.y} className="proj-drop" />
+          <path
+            d={`M${cam.x},${cam.y} L${pPt.x},${cam.y} L${pPt.x},${pPt.y} Z`}
+            className="triangle-fill large"
+          />
+          <path
+            d={`M${cam.x},${cam.y} L${pOnNear.x},${cam.y} L${pOnNear.x},${pOnNear.y} Z`}
+            className="triangle-fill small"
+          />
+          <line x1={pPt.x} y1={cam.y} x2={pPt.x} y2={pPt.y} className="proj-drop" />
+          <line x1={pOnNear.x} y1={cam.y} x2={pOnNear.x} y2={pOnNear.y} className="proj-drop" />
           <circle cx={pOnNear.x} cy={pOnNear.y} r={5} className="proj-dot-b" />
+          <text x={pPt.x + 7} y={(cam.y + pPt.y) / 2} className="diagram-label">
+            |x|
+          </text>
+          <text x={pOnNear.x + 7} y={(cam.y + pOnNear.y) / 2} className="diagram-label">
+            |x′|
+          </text>
+          <text x={(cam.x + pPt.x) / 2} y={cam.y + 15} textAnchor="middle" className="diagram-label">
+            |z|
+          </text>
+          <text x={(cam.x + pOnNear.x) / 2} y={cam.y - 8} textAnchor="middle" className="diagram-label">
+            |n|
+          </text>
         </>
       )}
       <circle cx={cam.x} cy={cam.y} r={5} fill="#1a1a1a" />
+      <text x={cam.x + 8} y={cam.y + 16} className="diagram-label">
+        O · camera
+      </text>
       <circle cx={pPt.x} cy={pPt.y} r={7} className="proj-dot handle" />
       <text x={pPt.x + 10} y={pPt.y - 8} className="ndc-label">
         P

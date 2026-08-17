@@ -104,8 +104,17 @@ export function ProjectionPreview({
         <rect x={ox} y={oy} width={inner} height={inner} className="ndc-frame" />
         <line x1={sx(-1)} y1={sy(0)} x2={sx(1)} y2={sy(0)} className="ndc-axis" />
         <line x1={sx(0)} y1={sy(-1)} x2={sx(0)} y2={sy(1)} className="ndc-axis" />
-        <text x={width / 2} y={oy - 8} textAnchor="middle" className="ndc-label">
-          NDC xy · film
+        <text x={width / 2} y={oy - 14} textAnchor="middle" className="ndc-label">
+          NDC x–y square
+        </text>
+        <text x={width / 2} y={oy - 3} textAnchor="middle" className="ndc-label">
+          x/y shown · z depth hidden
+        </text>
+        <text x={sx(-1) + 3} y={sy(1) + 12} className="ndc-label">
+          (−1, +1)
+        </text>
+        <text x={sx(1) - 3} y={sy(-1) - 6} textAnchor="end" className="ndc-label">
+          (+1, −1)
         </text>
         <text x={sx(1) - 2} y={sy(0) + 12} textAnchor="end" className="ndc-label">
           x

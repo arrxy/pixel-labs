@@ -31,7 +31,9 @@
 
 .projection-svg,
 .projection-diagram,
-.depth-plot {
+.depth-plot,
+.interval-map-diagram,
+.viewport-diagram {
   display: block;
   max-width: 100%;
   height: auto;
@@ -61,6 +63,68 @@
   font-family: var(--font-mono);
   font-size: 11px;
   fill: var(--muted-soft);
+}
+
+.diagram-title,
+.diagram-label {
+  font-family: var(--font-mono);
+  fill: var(--muted);
+}
+
+.diagram-title {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.diagram-label {
+  font-size: 11px;
+}
+
+.map-line {
+  stroke: var(--axis);
+  stroke-width: 1.5;
+}
+
+.map-dot {
+  fill: var(--accent);
+}
+
+.map-dot.target {
+  fill: var(--secondary);
+}
+
+.map-mid {
+  fill: var(--ink);
+}
+
+.map-arrow {
+  stroke: var(--muted);
+  stroke-width: 1.2;
+}
+
+.viewport-frame {
+  fill: var(--diagram-bg);
+  stroke: var(--secondary);
+  stroke-width: 1.5;
+}
+
+.viewport-arrow {
+  stroke: var(--ink);
+  stroke-width: 1.4;
+}
+
+.viewport-arrow-head {
+  fill: var(--ink);
+}
+
+.triangle-fill {
+  fill: var(--secondary);
+  opacity: 0.08;
+}
+
+.triangle-fill.small {
+  fill: var(--accent);
+  opacity: 0.13;
 }
 
 .proj-edge {
@@ -120,10 +184,80 @@
   stroke-width: 1.6;
 }
 
+.constraint-builder {
+  margin: 20px 0 28px;
+  max-width: 900px;
+}
+
+.constraint-grid {
+  display: grid;
+  grid-template-columns: 90px minmax(180px, 1fr) minmax(240px, 1.2fr);
+  margin-top: 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.constraint-head {
+  padding: 8px 10px;
+  background: var(--diagram-bg);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted-soft);
+}
+
+.constraint-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.constraint-row:last-child {
+  border-bottom: 0;
+}
+
+.constraint-row > * {
+  padding: 10px;
+}
+
+.constraint-number {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.constraint-output {
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.constraint-rule {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.constraint-row code {
+  font-size: 12px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
 .pipeline-stepper {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.btn-row {
+  flex-wrap: wrap;
+}
+
+.stage-readout {
+  border-left: 3px solid var(--accent);
 }
 
 .space-readout {
@@ -261,6 +395,14 @@
   margin: 6px 0 0;
 }
 
+@media (max-width: 1100px) {
+  .projection-pair,
+  .frame-grid,
+  .frame-grid.pair {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 800px) {
   .projection-diagram {
     max-width: 100%;
@@ -272,6 +414,24 @@
 
   .frame-grid {
     grid-template-columns: 1fr;
+  }
+
+  .constraint-grid {
+    display: block;
+  }
+
+  .constraint-head {
+    display: none;
+  }
+
+  .constraint-row {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+  }
+
+  .constraint-row code {
+    grid-column: 2;
+    padding-top: 0;
   }
 }
 

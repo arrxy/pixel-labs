@@ -64,15 +64,21 @@ export function createViewVolumePlaneLabels(bounds: ViewBounds, mode: Projection
   const r = mid(c[1], c[2])
   const b = mid(c[0], c[1])
   const t = mid(c[3], c[2])
+  const nearCenter = mid(c[0], c[2])
+  const farCenter = mid(c[4], c[6])
   l.x -= pad
   r.x += pad
   b.y -= pad
   t.y += pad
+  nearCenter.y += 0.35
+  farCenter.y += 0.35
   const g = new THREE.Group()
   g.add(createSpriteLabel('l', l, { worldHeight: 0.24 }))
   g.add(createSpriteLabel('r', r, { worldHeight: 0.24 }))
   g.add(createSpriteLabel('b', b, { worldHeight: 0.24 }))
   g.add(createSpriteLabel('t', t, { worldHeight: 0.24 }))
+  g.add(createSpriteLabel('near plane · film', nearCenter, { color: '#0f6e63', worldHeight: 0.23 }))
+  g.add(createSpriteLabel('far plane', farCenter, { color: '#d9622b', worldHeight: 0.23 }))
   return g
 }
 
@@ -120,6 +126,20 @@ export function createCanonicalCube(color = '#9b978a'): THREE.LineSegments {
     { x: -s, y: s, z: s },
   ]
   return edgesFromCorners(corners, color)
+}
+
+export function createCanonicalCubeLabels(): THREE.Group {
+  const g = new THREE.Group()
+  const labels: { text: string; p: Vec3 }[] = [
+    { text: 'x = −1 · left', p: { x: -1.25, y: 0, z: 0 } },
+    { text: 'x = +1 · right', p: { x: 1.25, y: 0, z: 0 } },
+    { text: 'y = −1 · bottom', p: { x: 0, y: -1.22, z: 0 } },
+    { text: 'y = +1 · top', p: { x: 0, y: 1.22, z: 0 } },
+    { text: 'z = +1 · near', p: { x: 0, y: 0.45, z: 1.18 } },
+    { text: 'z = −1 · far', p: { x: 0, y: -0.45, z: -1.18 } },
+  ]
+  for (const label of labels) g.add(createSpriteLabel(label.text, label.p, { worldHeight: 0.16 }))
+  return g
 }
 
 export function createBoxAt(center: Vec3, size: number, color: string, opacity = 0.28): THREE.Group {

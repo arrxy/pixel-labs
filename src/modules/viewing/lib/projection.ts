@@ -152,12 +152,27 @@ export function ndcToViewport(ndc: Vec3, width: number, height: number): { x: nu
   }
 }
 
-export function lookAt(eye: Vec3, target: Vec3, up: Vec3): Mat4 {
+export type CameraBasis = {
+  /** Camera right, written in world coordinates. */
+  u: Vec3
+  /** Camera up, written in world coordinates. */
+  v: Vec3
+  /** Camera backward, written in world coordinates. The camera looks along -w. */
+  w: Vec3
+}
+
+/** Builds the camera's right/up/backward unit axes from eye, target, and a preferred up direction. */
+export function lookAtBasis(eye: Vec3, target: Vec3, up: Vec3): CameraBasis {
   const w = normalize3(sub3(eye, target))
   let u = cross3(up, w)
   if (mag3(u) < 1e-8) u = cross3({ x: 1, y: 0, z: 0 }, w)
   u = normalize3(u)
   const v = cross3(w, u)
+  return { u, v, w }
+}
+
+export function lookAt(eye: Vec3, target: Vec3, up: Vec3): Mat4 {
+  const { u, v, w } = lookAtBasis(eye, target, up)
   return [
     [u.x, u.y, u.z, -dot3(u, eye)],
     [v.x, v.y, v.z, -dot3(v, eye)],

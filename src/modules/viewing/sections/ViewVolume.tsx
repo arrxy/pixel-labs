@@ -116,14 +116,20 @@ export function ViewVolume() {
         the camera, off to the side, infinitely far. A picture cannot. The view volume is the chunk we keep.
       </p>
       <p className="body-text">
-        The near rectangle is the film. <strong>l r b t</strong> are its left, right, bottom, and top edges.{' '}
-        <strong>near</strong> and <strong>far</strong> are distances in front of the pin. Because we look down −z,
-        those planes sit at z = −near and z = −far.
+        The first boundary is the <strong>near plane</strong>. Its rectangle is the film: the window through which the
+        scene is viewed. <strong>l, r, b, t</strong> name its left, right, bottom, and top coordinates.{' '}
+        <strong>near</strong> and <strong>far</strong> are positive distances from the camera. Because the camera looks
+        down −z, the two planes have camera-space coordinates z = −near and z = −far.
       </p>
       <p className="body-text">
-        Same six numbers, two shapes. Perspective opens the walls out from the pin: a wedge (a frustum). That is the
-        camera you already have after <Mx sub="view" /> — rays through the eye. Orthographic is the other choice:
-        walls stay parallel, a box, size does not change with depth.
+        The six numbers define two possible keep-regions. For perspective, the side walls open away from the camera
+        and form a <strong>frustum</strong>, meaning a pyramid with its tip cut off by the near plane. For
+        orthographic projection, the walls stay parallel and form a box.
+      </p>
+      <p className="body-text">
+        A point outside the chosen volume is rejected before drawing. This rejection is called{' '}
+        <strong>clipping</strong>. A point behind the camera is rejected too because no forward-looking ray reaches
+        the film.
       </p>
 
       <div className="legend-box">
@@ -156,9 +162,10 @@ export function ViewVolume() {
             far, are drawn. The rest are thrown away (clipped).
           </li>
           <li>
-            <strong>Two cameras, one window.</strong> A photograph wants the wedge: things farther from the pin fill
-            more of the far plane, so they look smaller on the film. A CAD drawing wants the box: size does not change
-            with depth. Drag <strong>r</strong> and both volumes widen together.
+            <strong>Two keep-regions, one window.</strong> Both shapes share the same six numbers. A photograph wants
+            the wedge: things farther from the pin fill more of the far plane, so they look smaller on the film. A CAD
+            drawing wants the box: size does not change with depth. Drag <strong>r</strong> and both volumes widen
+            together.
           </li>
         </ol>
       </div>

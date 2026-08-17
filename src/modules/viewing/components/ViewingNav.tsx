@@ -2,15 +2,17 @@ import { LessonNav } from '../../../components/LessonNav'
 
 const SPACE_LINKS = [
   { href: '#camera-space', label: 'Camera spaces' },
+  { href: '#camera-basis', label: 'Build the camera' },
   { href: '#view-volume', label: 'View volume' },
   { href: '#canonical-volume', label: 'Canonical volume' },
 ]
 
 const PROJECTION_LINKS = [
   { href: '#orthographic', label: 'Orthographic' },
-  { href: '#projection-types', label: 'Ortho vs perspective' },
-  { href: '#perspective', label: 'Perspective' },
-  { href: '#homogeneous', label: 'Homogeneous coords' },
+  { href: '#perspective', label: 'Similar triangles' },
+  { href: '#homogeneous', label: 'Projective w' },
+  { href: '#perspective-warp', label: 'Perspective warp' },
+  { href: '#projection-types', label: 'Compare projections' },
   { href: '#full-pipeline', label: 'Full pipeline' },
 ]
 

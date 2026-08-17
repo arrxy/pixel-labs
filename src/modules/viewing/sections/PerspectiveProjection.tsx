@@ -2,9 +2,10 @@ import { useMemo, useState } from 'react'
 import { PriorLectureLinks } from '../../../components/PriorLectureLinks'
 import { SliderRow } from '../../linear-algebra/components/Controls'
 import { Playground } from '../../linear-algebra/components/Diagram'
-import { MathParagraph, MathText } from '../../linear-algebra/components/MathText'
+import { MathText } from '../../linear-algebra/components/MathText'
 import { Section } from '../../linear-algebra/components/Section'
 import { fmt } from '../../linear-algebra/lib/math'
+import { ConstraintRows } from '../components/ConstraintRows'
 import { MatrixReadout } from '../components/MatrixReadout'
 import { ProjectionDiagram } from '../components/ProjectionDiagram'
 import {
@@ -12,45 +13,73 @@ import {
   apply4,
   divideByW,
   perspectiveDepthNdc,
+  perspectiveMatrix,
   perspectiveWarp,
   signedPlanes,
   similarTriangleX,
   toHomogeneous,
 } from '../lib/projection'
 
+const WARP_TEX = String.raw`M_{\mathrm{warp}}=\begin{pmatrix}
+n&0&0&0\\
+0&n&0&0\\
+0&0&n+f&-fn\\
+0&0&1&0
+\end{pmatrix}`
+
+const PER_TEX = String.raw`M_{\mathrm{per}}=M_{\mathrm{orth}}M_{\mathrm{warp}}=\begin{pmatrix}
+\frac{2n}{r-l}&0&-\frac{r+l}{r-l}&0\\
+0&\frac{2n}{t-b}&-\frac{t+b}{t-b}&0\\
+0&0&\frac{n+f}{n-f}&-\frac{2fn}{n-f}\\
+0&0&1&0
+\end{pmatrix}`
+
 function DepthPlot({ near, far, z }: { near: number; far: number; z: number }) {
-  const w = 320
-  const h = 140
-  const pad = 28
+  const width = 420
+  const height = 180
+  const pad = 38
   const n = -near
   const f = -far
-  const samples: { vz: number; ndc: number }[] = []
-  for (let i = 0; i <= 40; i++) {
-    const vz = n + ((f - n) * i) / 40
-    const ndc = perspectiveDepthNdc(vz, { ...DEFAULT_BOUNDS, nearDistance: near, farDistance: far })
-    if (ndc !== null) samples.push({ vz, ndc })
+  const samples: { viewZ: number; ndcZ: number }[] = []
+  for (let i = 0; i <= 60; i++) {
+    const viewZ = n + ((f - n) * i) / 60
+    const ndcZ = perspectiveDepthNdc(viewZ, { ...DEFAULT_BOUNDS, nearDistance: near, farDistance: far })
+    if (ndcZ !== null) samples.push({ viewZ, ndcZ })
   }
-  const xOf = (vz: number) => pad + ((vz - n) / (f - n)) * (w - 2 * pad)
-  const yOf = (ndc: number) => pad + ((1 - ndc) / 2) * (h - 2 * pad)
-  const d = samples.map((s, i) => `${i === 0 ? 'M' : 'L'}${xOf(s.vz).toFixed(1)},${yOf(s.ndc).toFixed(1)}`).join(' ')
-  const zNdc = perspectiveDepthNdc(z, { ...DEFAULT_BOUNDS, nearDistance: near, farDistance: far })
+  const xOf = (viewZ: number) => pad + ((viewZ - n) / (f - n)) * (width - 2 * pad)
+  const yOf = (ndcZ: number) => pad + ((1 - ndcZ) / 2) * (height - 2 * pad)
+  const path = samples
+    .map((sample, index) => `${index === 0 ? 'M' : 'L'}${xOf(sample.viewZ).toFixed(1)},${yOf(sample.ndcZ).toFixed(1)}`)
+    .join(' ')
+  const pointNdc = perspectiveDepthNdc(z, { ...DEFAULT_BOUNDS, nearDistance: near, farDistance: far })
 
   return (
-    <svg className="depth-plot" viewBox={`0 0 ${w} ${h}`} width="100%" role="img" aria-label="NDC depth versus view-space z">
-      <line x1={pad} y1={yOf(1)} x2={w - pad} y2={yOf(1)} className="ndc-axis" />
-      <line x1={pad} y1={yOf(-1)} x2={w - pad} y2={yOf(-1)} className="ndc-axis" />
-      <path d={d} className="depth-curve" fill="none" />
-      {zNdc !== null && <circle cx={xOf(z)} cy={yOf(zNdc)} r={4} className="proj-dot" />}
-      <text x={pad} y={h - 6} className="ndc-label">
-        z = n
+    <svg
+      className="depth-plot"
+      viewBox={`0 0 ${width} ${height}`}
+      width="100%"
+      role="img"
+      aria-label="Final NDC depth versus camera-space z, with near and far endpoints labeled"
+    >
+      <text x={pad} y="18" className="diagram-title">
+        camera-space z → final NDC z
       </text>
-      <text x={w - pad} y={h - 6} textAnchor="end" className="ndc-label">
-        z = f
+      <line x1={pad} y1={yOf(1)} x2={width - pad} y2={yOf(1)} className="ndc-axis" />
+      <line x1={pad} y1={yOf(-1)} x2={width - pad} y2={yOf(-1)} className="ndc-axis" />
+      <path d={path} className="depth-curve" fill="none" />
+      {pointNdc !== null && z <= n && z >= f ? (
+        <circle cx={xOf(z)} cy={yOf(pointNdc)} r={5} className="proj-dot" />
+      ) : null}
+      <text x={pad} y={height - 8} className="ndc-label">
+        near: z = n
       </text>
-      <text x={pad - 4} y={yOf(1) + 4} textAnchor="end" className="ndc-label">
+      <text x={width - pad} y={height - 8} textAnchor="end" className="ndc-label">
+        far: z = f
+      </text>
+      <text x={pad - 6} y={yOf(1) + 4} textAnchor="end" className="ndc-label">
         +1
       </text>
-      <text x={pad - 4} y={yOf(-1) + 4} textAnchor="end" className="ndc-label">
+      <text x={pad - 6} y={yOf(-1) + 4} textAnchor="end" className="ndc-label">
         −1
       </text>
     </svg>
@@ -70,11 +99,12 @@ export function PerspectiveProjection() {
   )
   const { n, f } = signedPlanes(bounds)
   const Mwarp = perspectiveWarp(bounds)
+  const Mper = perspectiveMatrix(bounds)
   const xPrime = similarTriangleX(x, z, n)
-  const warped = Mwarp ? apply4(Mwarp, toHomogeneous({ x, y: 0, z })) : null
-  const scaledWarped = Mwarp ? apply4(Mwarp, { x: alpha * x, y: 0, z: alpha * z, w: alpha }) : null
-  const divided = warped ? divideByW(warped) : null
-  const dividedScaled = scaledWarped ? divideByW(scaledWarped) : null
+  const clip = Mper ? apply4(Mper, toHomogeneous({ x, y: 0, z })) : null
+  const scaledClip = Mper ? apply4(Mper, { x: alpha * x, y: 0, z: alpha * z, w: alpha }) : null
+  const ndc = clip ? divideByW(clip) : null
+  const scaledNdc = scaledClip ? divideByW(scaledClip) : null
 
   const reset = () => {
     setX(1.1)
@@ -85,167 +115,255 @@ export function PerspectiveProjection() {
   }
 
   return (
-    <Section id="perspective" title="Perspective projection">
-      <MathParagraph>
-        {`Rays meet at the camera. By similar triangles a point $(x,z)$ hits the near plane at $x'=n x/z$`}
-      </MathParagraph>
+    <Section id="perspective" title="Perspective, derived from a camera ray">
       <p className="body-text">
-        <strong>P</strong> is the original 3D point in camera space: P = (x, y, z).
+        Perspective makes distant objects look smaller. We will first derive the geometric rule, then show how a 4×4
+        matrix and one division reproduce it.
       </p>
       <div className="legend-box">
+        <div className="label-caps">Symbols in the diagram</div>
         <ul className="legend-list">
           <li>
-            <strong>x, y</strong> are P’s horizontal and vertical coordinates.
+            <strong>P = (x, y, z)</strong> is the original point in camera space.
           </li>
           <li>
-            <strong>z</strong> is P’s depth. It is negative because the camera looks along −z.
+            <strong>P′ = (x′, y′, n)</strong> is where the ray from the camera through P meets the near plane.
           </li>
           <li>
-            <strong>P′</strong> is where the ray from the camera through P intersects the near plane:
-            P′ = (x′, y′, n).
+            <strong>x and y</strong> locate P horizontally and vertically. <strong>z</strong> is its signed depth and
+            is negative in front of the camera.
           </li>
           <li>
-            <strong>x′, y′</strong> are P’s projected coordinates on that near plane.
-          </li>
-          <li>
-            <strong>n</strong> is the signed near-plane position. The UI’s positive near distance becomes n = −near.
+            <strong>n = −near</strong> is the signed z coordinate of the near plane, introduced in the orthographic
+            section.
           </li>
         </ul>
       </div>
 
       <div className="walkthrough">
-        <div className="label-caps">Derivation</div>
+        <div className="label-caps">Similar-triangle derivation</div>
         <p className="body-text">
-          The camera is at the origin. P and P′ lie on the same ray, so the horizontal triangles are similar:
+          The camera is at the origin. P and P′ lie on the same straight ray. In the x–z side view, the small triangle
+          has side lengths |x′| and |n|; the larger one has matching lengths |x| and |z|. Similar triangles have equal
+          ratios:
         </p>
-        <MathText tex={String.raw`\frac{x'}{n}=\frac{x}{z}`} display />
-        <p className="body-text">Multiplying both sides by n gives:</p>
-        <MathText tex={String.raw`x'=\frac{n x}{z}`} display />
-        <p className="body-text">The same argument in the vertical direction gives:</p>
-        <MathText tex={String.raw`y'=\frac{n y}{z}`} display />
+        <MathText tex={String.raw`\frac{|x'|}{|n|}=\frac{|x|}{|z|}`} display />
+        <p className="body-text">
+          Lengths alone do not say whether P is left or right of the center. Restoring the signed x coordinates gives
+          x′/n = x/z. Multiply both sides by n:
+        </p>
+        <MathText tex={String.raw`x'=\frac{nx}{z}`} display />
+        <p className="body-text">
+          Looking from above gives the same argument for y. Therefore the film point is:
+        </p>
+        <MathText tex={String.raw`P'=\left(\frac{nx}{z},\frac{ny}{z},n\right)`} display />
         <p className="hint-text">
-          Both n and z are negative for a visible point, so their signs cancel. As |z| grows, x′ and y′ shrink:
-          farther objects look smaller.
+          For a visible point, n and z are both negative, so n/z is positive. As |z| grows, n/z gets smaller and the
+          image moves toward the film’s center.
         </p>
       </div>
-      <Playground label="Playground: drag P in the x–z plane">
-        <ProjectionDiagram bounds={bounds} x={x} z={z} onChange={({ x: nx, z: nz }) => { setX(nx); setZ(nz) }} />
+
+      <Playground label="Playground: drag P and watch the similar triangles">
+        <ProjectionDiagram
+          bounds={bounds}
+          x={x}
+          z={z}
+          onChange={({ x: nextX, z: nextZ }) => {
+            setX(nextX)
+            setZ(nextZ)
+          }}
+        />
         <div className="controls-col wide">
-          <SliderRow label="x" value={x} min={-3} max={3} step={0.05} onChange={setX} />
-          <SliderRow label="z" value={z} min={-10} max={-0.5} step={0.05} onChange={setZ} />
-          <SliderRow label="near" value={nearDistance} min={0.8} max={5} step={0.1} onChange={(v) => setNear(Math.min(v, farDistance - 0.4))} />
-          <SliderRow label="far" value={farDistance} min={3} max={14} step={0.1} onChange={(v) => setFar(Math.max(v, nearDistance + 0.4))} />
+          <SliderRow label="P horizontal x" value={x} min={-3} max={3} step={0.05} onChange={setX} />
+          <SliderRow label="P depth z" value={z} min={-10} max={-0.5} step={0.05} onChange={setZ} />
+          <SliderRow
+            label="near distance"
+            value={nearDistance}
+            min={0.8}
+            max={5}
+            step={0.1}
+            onChange={(value) => setNear(Math.min(value, farDistance - 0.4))}
+          />
+          <SliderRow
+            label="far distance"
+            value={farDistance}
+            min={3}
+            max={14}
+            step={0.1}
+            onChange={(value) => setFar(Math.max(value, nearDistance + 0.4))}
+          />
           <button type="button" className="mode-btn" onClick={reset}>
             Reset
           </button>
           <div className="mono-block muted" aria-live="polite">
-            <div>
-              P = ({fmt(x)}, 0, {fmt(z)})
-            </div>
-            <div>{xPrime === null ? 'not projectable' : `x′ = ${fmt(xPrime)} on z = n`}</div>
+            <div>P = ({fmt(x)}, 0, {fmt(z)})</div>
+            <div>{xPrime === null ? 'z is too close to 0' : `x′ = n·x/z = ${fmt(xPrime)}`}</div>
           </div>
         </div>
       </Playground>
 
       <h3 id="homogeneous" className="section-subtitle">
-        Homogeneous coordinates
+        Why a fourth coordinate w is useful
       </h3>
       <p className="body-text">
-        <strong>w</strong> is an extra scale coordinate added to x, y, and z. It is not another spatial direction.
-        To recover the ordinary 3D point, divide the first three coordinates by w:
+        Part I represented an ordinary 3D point as (x, y, z, 1). The fourth number is called <strong>w</strong>. It is
+        a scale coordinate, not another spatial direction. Part I kept w equal to 1; perspective deliberately changes
+        it.
+      </p>
+      <p className="body-text">
+        A four-number homogeneous point becomes an ordinary three-number point by dividing its first three numbers by
+        w. This operation is the <strong>perspective divide</strong>:
       </p>
       <MathText
         tex={String.raw`(x_h,y_h,z_h,w)\longrightarrow\left(\frac{x_h}{w},\frac{y_h}{w},\frac{z_h}{w}\right),\qquad w\ne0`}
         display
       />
       <p className="body-text">
-        An ordinary point starts as (x, y, z, 1), so dividing by w = 1 changes nothing. Multiplying all four
-        coordinates by the same nonzero α also changes nothing after division:
+        Multiplying all four numbers by the same nonzero α does not change the three ratios. The two four-number
+        tuples below therefore represent the same ordinary point:
       </p>
       <MathText
-        tex={String.raw`\begin{pmatrix}x\\y\\z\\1\end{pmatrix}\sim\begin{pmatrix}\alpha x\\\alpha y\\\alpha z\\\alpha\end{pmatrix}`}
+        tex={String.raw`(x_h,y_h,z_h,w)\sim(\alpha x_h,\alpha y_h,\alpha z_h,\alpha w)`}
         display
       />
-      <p className="hint-text">
-        Call the perspective-warp matrix <span className="math-sym">M</span>
-        <sub>warp</sub>. It makes the output w equal to the input z. Dividing by w then produces nx/z and ny/z.
+      <PriorLectureLinks
+        links={[
+          {
+            href: '/linear-algebra#homogeneous3d',
+            label: 'Part I introduced affine homogeneous points with w = 1',
+          },
+        ]}
+      />
+
+      <h3 id="perspective-warp" className="section-subtitle">
+        Build the perspective-warp matrix row by row
+      </h3>
+      <p className="body-text">
+        Call the matrix <span className="math-sym">M<sub>warp</sub></span>. Its input is the column vector (x, y, z,
+        1). We choose each row by stating exactly what its output must do.
       </p>
-      <PriorLectureLinks links={[{ href: '/linear-algebra#homogeneous3d', label: 'Review homogeneous coordinates in Part I' }]} />
-      <Playground label="Playground: scale α, same image point">
-        <div className="controls-col wide">
-          <SliderRow label="α" value={alpha} min={0.25} max={3} step={0.05} onChange={setAlpha} />
-          <div className="mono-block muted" aria-live="polite">
-            <div>
-              after Mwarp, before ÷w = ({warped ? fmt(warped.x) : '—'}, {warped ? fmt(warped.y) : '—'},{' '}
-              {warped ? fmt(warped.z) : '—'}, {warped ? fmt(warped.w) : '—'})
-            </div>
-            <div>
-              α·output → ({scaledWarped ? fmt(scaledWarped.x) : '—'},{' '}
-              {scaledWarped ? fmt(scaledWarped.y) : '—'}, {scaledWarped ? fmt(scaledWarped.z) : '—'},{' '}
-              {scaledWarped ? fmt(scaledWarped.w) : '—'})
-            </div>
-            <div>
-              after ÷w, x and z:{' '}
-              {divided && dividedScaled
-                ? `(${fmt(divided.x)}, ${fmt(divided.z)})  =  (${fmt(dividedScaled.x)}, ${fmt(dividedScaled.z)})`
-                : 'not projectable'}
-            </div>
-          </div>
-        </div>
-      </Playground>
       <div className="walkthrough">
-        <div className="label-caps">What the α playground shows</div>
+        <div className="label-caps">Rows 1, 2, and 4 · create the perspective fractions</div>
         <p className="body-text">
-          At the default α = 1.6, this playground demonstrates that homogeneous coordinates represent a point using
-          ratios, not one unique four-number tuple. After Mwarp, the first output is:
-        </p>
-        <MathText tex={String.raw`(-2.20,\ 0,\ 24,\ -4)`} display />
-        <p className="body-text">
-          Here w = −4. Divide the first three coordinates by w to recover the ordinary 3D coordinates:
+          We need x′ = nx/z after the divide. Make the first output nx and make the fourth output w = z. Dividing the
+          first by the fourth then gives nx/z. The same choice gives ny/z vertically.
         </p>
         <MathText
-          tex={String.raw`\left(\frac{-2.20}{-4},\frac{0}{-4},\frac{24}{-4}\right)=(0.55,\ 0,\ -6)`}
+          tex={String.raw`x_h=nx\qquad y_h=ny\qquad w=z\qquad\Longrightarrow\qquad \frac{x_h}{w}=\frac{nx}{z},\quad\frac{y_h}{w}=\frac{ny}{z}`}
           display
         />
-        <p className="body-text">Multiplying all four output coordinates by α = 1.6 gives:</p>
+      </div>
+      <div className="walkthrough">
+        <div className="label-caps">Row 3 · keep the near and far depths fixed</div>
+        <p className="body-text">
+          Let the third row produce z<sub>h</sub> = Az + B. After division by w = z, the ordinary depth is A + B/z.
+          We require the near input z = n to remain n and the far input z = f to remain f:
+        </p>
         <MathText
-          tex={String.raw`1.6(-2.20,\ 0,\ 24,\ -4)=(-3.52,\ 0,\ 38.40,\ -6.40)`}
+          tex={String.raw`A+\frac{B}{n}=n\qquad A+\frac{B}{f}=f`}
           display
         />
-        <p className="body-text">Dividing by the new w = −6.40 gives the same ordinary point:</p>
+        <p className="body-text">
+          Subtract the second equation from the first. Solving gives B = −fn. Substituting that into either equation
+          gives A = n + f.
+        </p>
         <MathText
-          tex={String.raw`\left(\frac{-3.52}{-6.40},\frac{0}{-6.40},\frac{38.40}{-6.40}\right)=(0.55,\ 0,\ -6)`}
+          tex={String.raw`B=-fn\qquad A=n+f\qquad z_h=(n+f)z-fn`}
           display
         />
-        <p className="hint-text">
-          The α slider does not move or resize the object. It only changes the homogeneous representation; the
-          ratios stay the same.
+      </div>
+      <ConstraintRows
+        title="Every row follows one stated requirement"
+        rows={[
+          {
+            row: '1',
+            output: 'xh = nx',
+            rule: <>xh/w must become nx/z</>,
+            entries: '[n, 0, 0, 0]',
+          },
+          {
+            row: '2',
+            output: 'yh = ny',
+            rule: <>yh/w must become ny/z</>,
+            entries: '[0, n, 0, 0]',
+          },
+          {
+            row: '3',
+            output: 'zh = (n+f)z − fn',
+            rule: <>near stays n; far stays f after ÷w</>,
+            entries: '[0, 0, n+f, −fn]',
+          },
+          {
+            row: '4',
+            output: 'w = z',
+            rule: <>the divide must use the point’s depth</>,
+            entries: '[0, 0, 1, 0]',
+          },
+        ]}
+      />
+      <MatrixReadout matrix={Mwarp} label="Mwarp · derived rows" tex={WARP_TEX} />
+
+      <div className="walkthrough">
+        <div className="label-caps">Finish the map to NDC</div>
+        <p className="body-text">
+          M<sub>warp</sub> changes the frustum into an orthographic-shaped box while keeping the near and far planes in
+          place. The already-derived M<sub>orth</sub> then maps that box to the NDC cube. Part I’s right-to-left
+          composition rule says the combined matrix is:
+        </p>
+        <MathText tex={String.raw`M_{\mathrm{per}}=M_{\mathrm{orth}}M_{\mathrm{warp}}`} display />
+        <p className="body-text">
+          Multiplying the two matrices row by column gives the full perspective matrix below. Its four-number output,
+          before dividing by w, is called the point’s <strong>clip coordinates</strong>. Dividing clip coordinates by
+          w gives NDC.
         </p>
       </div>
-      <p className="hint-text">
-        This is the result of Mwarp only, not NDC yet. The orthographic map from the previous section is still needed
-        to place the result inside [−1, 1]³.
-      </p>
+      <MatrixReadout matrix={Mper} label="Mper · full perspective projection" tex={PER_TEX} />
 
-      <MathParagraph>
-        {`After $M_{\\mathrm{warp}}$ and the divide by $w$, depth is $z'=(n+f)-fn/z$. Near and far stay put. Applying the orthographic map next turns them into NDC depths $+1$ and $-1$; the values between them are not evenly spaced.`}
-      </MathParagraph>
-      <MathText
-        tex={String.raw`z=n\Rightarrow z'=n\qquad z=f\Rightarrow z'=f\qquad z'=(n+f)-\frac{fn}{z}`}
-        display
-      />
-      <Playground label="Playground: nonlinear depth">
-        <DepthPlot near={nearDistance} far={farDistance} z={z} />
-        <div className="mono-block muted" aria-live="polite">
-          n = {fmt(n)}, f = {fmt(f)} · NDC z after Morth · Mwarp: near → +1, far → −1. The curve is not a straight
-          line.
+      <Playground label="Playground: α changes clip numbers, not the NDC point">
+        <div className="controls-col wide">
+          <SliderRow label="homogeneous scale α" value={alpha} min={0.25} max={3} step={0.05} onChange={setAlpha} />
+          <div className="mono-block muted" aria-live="polite">
+            <div>input point = ({fmt(x)}, 0, {fmt(z)}, 1)</div>
+            <div>
+              clip = ({clip ? fmt(clip.x) : '—'}, {clip ? fmt(clip.y) : '—'}, {clip ? fmt(clip.z) : '—'},{' '}
+              {clip ? fmt(clip.w) : '—'})
+            </div>
+            <div>
+              α-scaled clip = ({scaledClip ? fmt(scaledClip.x) : '—'}, {scaledClip ? fmt(scaledClip.y) : '—'},{' '}
+              {scaledClip ? fmt(scaledClip.z) : '—'}, {scaledClip ? fmt(scaledClip.w) : '—'})
+            </div>
+            <div>
+              after ÷w: {ndc && scaledNdc
+                ? `(${fmt(ndc.x)}, ${fmt(ndc.y)}, ${fmt(ndc.z)}) = (${fmt(scaledNdc.x)}, ${fmt(scaledNdc.y)}, ${fmt(scaledNdc.z)})`
+                : 'w is too close to 0'}
+            </div>
+          </div>
+          <p className="hint-text">
+            The default α is 1.6. Every clip coordinate becomes 1.6 times larger, including w, so each ratio after ÷w
+            stays unchanged.
+          </p>
         </div>
       </Playground>
-      <MatrixReadout
-        matrix={Mwarp}
-        label="Mwarp (perspective warp)"
-        tex={String.raw`M_{\mathrm{warp}}=\begin{pmatrix}n&0&0&0\\0&n&0&0\\0&0&n+f&-fn\\0&0&1&0\end{pmatrix}`}
-      />
+
+      <div className="walkthrough">
+        <div className="label-caps">Why perspective depth is not evenly spaced</div>
+        <p className="body-text">
+          Row 3 of M<sub>warp</sub>, followed by the divide by w = z, produces (n + f) − fn/z. Applying M
+          <sub>orth</sub> afterward sends near to +1 and far to −1. The 1/z term means equal changes in camera-space
+          depth do not create equal changes in NDC depth.
+        </p>
+        <MathText
+          tex={String.raw`z_{\mathrm{after\ warp}}=(n+f)-\frac{fn}{z}\qquad z=n\Rightarrow n\qquad z=f\Rightarrow f`}
+          display
+        />
+      </div>
+      <Playground label="Diagram: nonlinear depth after the full perspective projection">
+        <DepthPlot near={nearDistance} far={farDistance} z={z} />
+        <div className="mono-block muted" aria-live="polite">
+          near z = {fmt(n)} → NDC +1 · far z = {fmt(f)} → NDC −1 · current z = {fmt(z)} → NDC{' '}
+          {perspectiveDepthNdc(z, bounds) === null ? 'not projectable' : fmt(perspectiveDepthNdc(z, bounds)!)}
+        </div>
+      </Playground>
     </Section>
   )
 }

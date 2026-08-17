@@ -27,7 +27,8 @@ export function ProjectionComparison() {
         {`Same near and far cubes, two cameras. Orthographic keeps their screen size. Perspective makes the farther cube shrink — rays meet at the camera origin.`}
       </MathParagraph>
       <p className="hint-text">
-        This playground previews the visual difference. The next section derives the perspective rule.
+        Both matrices have now been derived. This playground applies them to identical geometry so only the
+        projection rule changes.
       </p>
       <PriorLectureLinks
         links={[
@@ -42,7 +43,8 @@ export function ProjectionComparison() {
           <FrustumScene
             bounds={DEFAULT_BOUNDS}
             mode={mode}
-            cubes={SAMPLE_CUBES}
+            cubes={SAMPLE_CUBES.map((c, i) => ({ ...c, label: i === 0 ? 'closer object' : 'farther object' }))}
+            showPlaneLabels
             width={400}
             height={400}
             cameraDistance={22}

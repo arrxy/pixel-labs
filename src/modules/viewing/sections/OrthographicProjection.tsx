@@ -7,7 +7,9 @@ import { Vec3Inputs } from '../../linear-algebra/components/Vec3Inputs'
 import { Section } from '../../linear-algebra/components/Section'
 import { fmt } from '../../linear-algebra/lib/math'
 import type { Vec3 } from '../../linear-algebra/lib/types'
+import { ConstraintRows } from '../components/ConstraintRows'
 import { FrustumScene } from '../components/FrustumScene'
+import { IntervalMapDiagram } from '../components/IntervalMapDiagram'
 import { MatrixReadout } from '../components/MatrixReadout'
 import { ProjectionPreview } from '../components/ProjectionPreview'
 import {
@@ -65,8 +67,8 @@ export function OrthographicProjection() {
   return (
     <Section id="orthographic" title="Orthographic projection">
       <p className="body-text">
-        Parallel rays hit the near plane. Depth does not change apparent size: a cube at the near plane and a cube at
-        the far plane draw at the same size. Mapping the view box onto{' '}
+        Orthographic projection preserves x and y without shrinking them according to depth. A closer cube and a
+        farther cube therefore draw at the same size. Mapping the view box onto{' '}
         <span className="math-sym">[−1, 1]³</span> uses one scale and one translation per axis. The axes are not mixed:
         output x uses only input x, output y uses only input y, and output z uses only input z.
       </p>
@@ -75,7 +77,6 @@ export function OrthographicProjection() {
         coordinates, not positive distances. Because the camera looks down −z, both are negative and n &gt; f.
       </p>
       <MathText tex={String.raw`n=-\mathrm{near}\qquad f=-\mathrm{far}\qquad n>f`} display />
-      <MathText tex={ORTH_TEX} display />
 
       <div className="walkthrough">
         <div className="label-caps">One axis, then copy it three times</div>
@@ -83,6 +84,7 @@ export function OrthographicProjection() {
           Take a number u that runs from u₀ to u₁. We want a new number U that runs from −1 to +1, linearly. Shift by
           the midpoint so the interval is centered on 0, then divide by the half-width so the ends land on ±1.
         </p>
+        <IntervalMapDiagram u0={l} u1={r} leftLabel="l" rightLabel="r" />
         <MathText
           tex={String.raw`m=\dfrac{u_0+u_1}{2}\qquad h=\dfrac{u_1-u_0}{2}\qquad U=\dfrac{u-m}{h}`}
           display
@@ -115,12 +117,46 @@ export function OrthographicProjection() {
           </li>
         </ol>
       </div>
+      <ConstraintRows
+        title="How the four rows are earned"
+        rows={[
+          {
+            row: '1',
+            output: 'xndc from x',
+            rule: <>l → −1 and r → +1</>,
+            entries: '[2/(r−l), 0, 0, −(r+l)/(r−l)]',
+          },
+          {
+            row: '2',
+            output: 'yndc from y',
+            rule: <>b → −1 and t → +1</>,
+            entries: '[0, 2/(t−b), 0, −(t+b)/(t−b)]',
+          },
+          {
+            row: '3',
+            output: 'zndc from z',
+            rule: <>n → +1 and f → −1</>,
+            entries: '[0, 0, 2/(n−f), −(n+f)/(n−f)]',
+          },
+          {
+            row: '4',
+            output: 'keep w equal to 1',
+            rule: <>ordinary points entered with w = 1</>,
+            entries: '[0, 0, 0, 1]',
+          },
+        ]}
+      />
       <MathText
         tex={String.raw`z=n\;\Rightarrow\;\dfrac{2n-(n+f)}{n-f}=1\qquad z=f\;\Rightarrow\;\dfrac{2f-(n+f)}{n-f}=-1`}
         display
       />
+      <p className="body-text">
+        Assembling the four rows gives the orthographic matrix. Every entry above is now accounted for.
+      </p>
+      <MathText tex={ORTH_TEX} display />
       <p className="hint-text">
-        Live values from the sliders (n = −near, f = −far). Watch the matrix below change with l, r, b, t, near, far.
+        Live values from the sliders (n = −near, f = −far). Watch the numeric matrix below change with l, r, b, t,
+        near, and far.
       </p>
       <div className="mono-block muted" aria-live="polite">
         <div>
@@ -141,10 +177,9 @@ export function OrthographicProjection() {
         ]}
       />
       <p className="body-text">
-        <strong>NDC</strong> (Normalized Device Coordinates) is the canonical cube{' '}
-        <span className="math-sym">[−1, 1]³</span> after <span className="math-sym">M</span>
-        <sub>orth</sub>. The square on the right is that cube looking down the camera’s −z — x right, y up. That is
-        the film. z is depth (near → +1, far → −1) and is not drawn as a third axis there.
+        As defined above, <strong>NDC</strong> means Normalized Device Coordinates in the canonical cube. The square on
+        the right is the canonical cube viewed along the camera’s −z direction: x points right and y points up. The
+        depth coordinate z is stored too, but is not drawn as a third axis in this square.
       </p>
       <p className="body-text">
         The 3D pane is an observer standing beside the volume, so near and far sit left and right. The NDC pane is
@@ -157,8 +192,9 @@ export function OrthographicProjection() {
           <FrustumScene
             bounds={bounds}
             mode="orthographic"
-            cubes={SAMPLE_CUBES.map((c, i) => ({ ...c, label: i === 0 ? 'near' : 'far' }))}
+            cubes={SAMPLE_CUBES.map((c, i) => ({ ...c, label: i === 0 ? 'closer object' : 'farther object' }))}
             points={[{ p, color: '#1a1a1a', label: 'P' }]}
+            showPlaneLabels
             width={400}
             height={400}
             ariaLabel="Orthographic view volume"

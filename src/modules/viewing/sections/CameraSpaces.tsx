@@ -7,7 +7,7 @@ import { Scene3D, type Scene3DApi } from '../../linear-algebra/components/Scene3
 import { Section } from '../../linear-algebra/components/Section'
 import { fmt } from '../../linear-algebra/lib/math'
 import { applyAffine4, clamp, computeCompositeM4, invertAffine4, mul4 } from '../../linear-algebra/lib/math3'
-import { createDashedLine, createPoint, SCENE_COLORS } from '../../linear-algebra/lib/scene3d'
+import { createDashedLine, createPoint, createSpriteLabel, SCENE_COLORS } from '../../linear-algebra/lib/scene3d'
 import { createCameraGizmo, createUnitCube } from '../lib/scene'
 import { lookAt } from '../lib/projection'
 
@@ -82,14 +82,30 @@ export function CameraSpaces() {
   const camDeps = [camX, camZ, yaw]
 
   return (
-    <Section id="camera-space" title="Camera spaces">
+    <Section id="camera-space" title="One point, three coordinate spaces">
       <p className="body-text">
-        Your display is 2D; the model is 3D. One cube is rewritten in three frames at once: its own, the world, then
-        the camera.
+        A <strong>coordinate space</strong> is a choice of origin and axes used to describe a point. The physical
+        point does not change when its coordinates are rewritten in another space.
       </p>
+      <div className="legend-box">
+        <div className="label-caps">The three spaces</div>
+        <ul className="legend-list">
+          <li>
+            <strong>Model space</strong> belongs to one object. The cube’s own origin and axes are used.
+          </li>
+          <li>
+            <strong>World space</strong> is the shared room containing every object and the camera.
+          </li>
+          <li>
+            <strong>Camera space</strong>, also called <strong>view space</strong>, uses the camera as the origin. Its
+            x-axis points right, y-axis points up, and it looks along −z.
+          </li>
+        </ul>
+      </div>
       <p className="body-text">
-        <strong>P</strong> is a point — the orange corner of the cube. <strong>M</strong> is a 4×4 transformation
-        matrix that rewrites that point into the next frame.
+        <strong>P</strong> is one physical point: the labeled orange corner of the cube. A 4×4 matrix rewrites P into
+        the next space. <Mx sub="model" /> places the object in the world; <Mx sub="view" /> rewrites world coordinates
+        relative to the camera.
       </p>
       <MathText
         tex={String.raw`P_{\text{world}}=M_{\text{model}}\,P_{\text{model}}\qquad P_{\text{camera}}=M_{\text{view}}\,P_{\text{world}}`}
@@ -103,6 +119,10 @@ export function CameraSpaces() {
         <Mx sub="view" /> does the opposite: it leaves the camera at the origin and moves the
         cube instead. That is what “inverse” means here — undo the camera’s placement. World: pin walks around a
         fixed cube. Camera: cube walks around a fixed pin.
+      </p>
+      <p className="hint-text">
+        This section uses <Mx sub="view" /> for its job. The next section constructs every row of that matrix from the
+        camera’s position and axes.
       </p>
       <PriorLectureLinks
         links={[
@@ -166,6 +186,10 @@ export function CameraSpaces() {
               setup={({ root }) => {
                 root.add(createUnitCube(SCENE_COLORS.a))
                 root.add(createPoint(P_LOCAL, SCENE_COLORS.b, 0.1))
+                root.add(createSpriteLabel('P', { x: P_LOCAL.x, y: P_LOCAL.y + 0.24, z: P_LOCAL.z }, {
+                  color: SCENE_COLORS.b,
+                  worldHeight: 0.22,
+                }))
               }}
             />
             <SpaceFrame
@@ -182,6 +206,10 @@ export function CameraSpaces() {
                 root.add(createUnitCube(SCENE_COLORS.muted, undefined, true))
                 root.add(createUnitCube(SCENE_COLORS.a, Mm))
                 root.add(createPoint(worldP, SCENE_COLORS.b, 0.1))
+                root.add(createSpriteLabel('P', { x: worldP.x, y: worldP.y + 0.24, z: worldP.z }, {
+                  color: SCENE_COLORS.b,
+                  worldHeight: 0.22,
+                }))
                 if (Mcam) {
                   root.add(createCameraGizmo(Mcam))
                   root.add(createDashedLine(eye, worldP, SCENE_COLORS.b))
@@ -200,6 +228,10 @@ export function CameraSpaces() {
                 root.add(createPoint({ x: 0, y: 0, z: 0 }, '#1a1a1a', 0.06))
                 root.add(createUnitCube(SCENE_COLORS.a, cubeView))
                 root.add(createPoint(viewP, SCENE_COLORS.b, 0.1))
+                root.add(createSpriteLabel('P', { x: viewP.x, y: viewP.y + 0.24, z: viewP.z }, {
+                  color: SCENE_COLORS.b,
+                  worldHeight: 0.22,
+                }))
               }}
             />
           </div>
