@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from 'react'
+import { useId, useState } from 'react'
 
 const VECTOR_LINKS = [
   { href: '#vectors', label: 'What is a vector?' },
@@ -72,16 +72,14 @@ function BackIcon() {
   )
 }
 
-function NavLinks({ onNavigate }: { onNavigate: () => void }) {
+function NavLinks() {
   return (
     <>
       <div className="nav-group-label">Vectors</div>
       <ul className="nav-list">
         {VECTOR_LINKS.map((l) => (
           <li key={l.href}>
-            <a href={l.href} onClick={onNavigate}>
-              {l.label}
-            </a>
+            <a href={l.href}>{l.label}</a>
           </li>
         ))}
       </ul>
@@ -89,9 +87,7 @@ function NavLinks({ onNavigate }: { onNavigate: () => void }) {
       <ul className="nav-list">
         {MATRIX_LINKS.map((l) => (
           <li key={l.href}>
-            <a href={l.href} onClick={onNavigate}>
-              {l.label}
-            </a>
+            <a href={l.href}>{l.label}</a>
           </li>
         ))}
       </ul>
@@ -99,9 +95,7 @@ function NavLinks({ onNavigate }: { onNavigate: () => void }) {
       <ul className="nav-list">
         {LINKS_3D.map((l) => (
           <li key={l.href}>
-            <a href={l.href} onClick={onNavigate}>
-              {l.label}
-            </a>
+            <a href={l.href}>{l.label}</a>
           </li>
         ))}
       </ul>
@@ -110,22 +104,8 @@ function NavLinks({ onNavigate }: { onNavigate: () => void }) {
 }
 
 export function Nav() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   const navId = useId()
-
-  useEffect(() => {
-    if (!open) return
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
-    }
-    const prevOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    window.addEventListener('keydown', onKey)
-    return () => {
-      document.body.style.overflow = prevOverflow
-      window.removeEventListener('keydown', onKey)
-    }
-  }, [open])
 
   const close = () => setOpen(false)
 
@@ -144,25 +124,22 @@ export function Nav() {
         </button>
       )}
       {open && (
-        <>
-          <div className="nav-backdrop" onClick={close} />
-          <nav id={navId} className="lesson-nav" aria-label="Lesson sections">
-            <div className="nav-icon-row">
-              <button type="button" className="nav-icon-btn" aria-label="Close menu" onClick={close}>
-                <CloseIcon />
-              </button>
-              <a className="nav-icon-btn" href="/" aria-label="Back to Processing Labs">
-                <BackIcon />
-              </a>
-            </div>
-            <div className="nav-brand">
-              Linear Algebra
-              <br />
-              for Graphics
-            </div>
-            <NavLinks onNavigate={close} />
-          </nav>
-        </>
+        <nav id={navId} className="lesson-nav" aria-label="Lesson sections">
+          <div className="nav-icon-row">
+            <button type="button" className="nav-icon-btn" aria-label="Close menu" onClick={close}>
+              <CloseIcon />
+            </button>
+            <a className="nav-icon-btn" href="/" aria-label="Back to Processing Labs">
+              <BackIcon />
+            </a>
+          </div>
+          <div className="nav-brand">
+            Linear Algebra
+            <br />
+            for Graphics
+          </div>
+          <NavLinks />
+        </nav>
       )}
     </>
   )
