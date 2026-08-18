@@ -45,10 +45,7 @@ type Props = {
 export function LessonNav({ brand, ariaLabel, groups }: Props) {
   const links = useMemo(() => groups.flatMap((group) => group.links), [groups])
   const [open, setOpen] = useState(true)
-  const [activeHref, setActiveHref] = useState(() => {
-    const hash = window.location.hash
-    return links.some((link) => link.href === hash) ? hash : (links[0]?.href ?? '')
-  })
+  const [activeHref, setActiveHref] = useState(links[0]?.href ?? '')
   const navId = useId()
   const close = () => setOpen(false)
 

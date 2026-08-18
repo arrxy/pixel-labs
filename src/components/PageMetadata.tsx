@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 
 const SITE_URL = 'https://learn.graphics.aritro.tech'
+const SOCIAL_IMAGE_ALT = 'Pixel Playground, interactive computer graphics lessons'
 
 type PageKey = 'home' | 'linear-algebra' | 'viewing'
 
@@ -39,7 +40,7 @@ export function PageMetadata({ page }: { page: PageKey }) {
   useEffect(() => {
     const metadata = pages[page]
     const canonicalUrl = `${SITE_URL}${metadata.path}`
-    const imageUrl = `${SITE_URL}/social-card.svg`
+    const imageUrl = `${SITE_URL}/social-card.png`
 
     document.title = metadata.title
     setMeta('meta[name="description"]', 'name', 'description', metadata.description)
@@ -50,10 +51,15 @@ export function PageMetadata({ page }: { page: PageKey }) {
     setMeta('meta[property="og:description"]', 'property', 'og:description', metadata.description)
     setMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl)
     setMeta('meta[property="og:image"]', 'property', 'og:image', imageUrl)
+    setMeta('meta[property="og:image:type"]', 'property', 'og:image:type', 'image/png')
+    setMeta('meta[property="og:image:width"]', 'property', 'og:image:width', '1200')
+    setMeta('meta[property="og:image:height"]', 'property', 'og:image:height', '630')
+    setMeta('meta[property="og:image:alt"]', 'property', 'og:image:alt', SOCIAL_IMAGE_ALT)
     setMeta('meta[name="twitter:card"]', 'name', 'twitter:card', 'summary_large_image')
     setMeta('meta[name="twitter:title"]', 'name', 'twitter:title', metadata.title)
     setMeta('meta[name="twitter:description"]', 'name', 'twitter:description', metadata.description)
     setMeta('meta[name="twitter:image"]', 'name', 'twitter:image', imageUrl)
+    setMeta('meta[name="twitter:image:alt"]', 'name', 'twitter:image:alt', SOCIAL_IMAGE_ALT)
 
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
     if (!canonical) {
@@ -71,10 +77,8 @@ export function PageMetadata({ page }: { page: PageKey }) {
       document.head.appendChild(structuredData)
     }
 
-    const pageType = page === 'home' ? 'CollectionPage' : 'LearningResource'
-    structuredData.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': pageType,
+    const pageData = {
+      '@type': page === 'home' ? 'CollectionPage' : 'LearningResource',
       name: metadata.title,
       description: metadata.description,
       url: canonicalUrl,
@@ -84,18 +88,41 @@ export function PageMetadata({ page }: { page: PageKey }) {
         url: SITE_URL,
       },
       ...(page === 'home'
-        ? {
-            hasPart: [
-              `${SITE_URL}/linear-algebra`,
-              `${SITE_URL}/viewing`,
-            ],
-          }
+        ? { hasPart: [`${SITE_URL}/linear-algebra`, `${SITE_URL}/viewing`] }
         : {
             learningResourceType: 'Interactive lesson',
             educationalUse: 'Instruction',
             inLanguage: 'en',
           }),
-    })
+    }
+
+    structuredData.textContent = JSON.stringify(
+      page === 'home'
+        ? { '@context': 'https://schema.org', ...pageData }
+        : {
+            '@context': 'https://schema.org',
+            '@graph': [
+              pageData,
+              {
+                '@type': 'BreadcrumbList',
+                itemListElement: [
+                  {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Pixel Playground',
+                    item: `${SITE_URL}/`,
+                  },
+                  {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: page === 'linear-algebra' ? 'Linear Algebra' : 'Viewing and Projection',
+                    item: canonicalUrl,
+                  },
+                ],
+              },
+            ],
+          },
+    )
   }, [page])
 
   return null

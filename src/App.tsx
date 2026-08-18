@@ -10,9 +10,8 @@ const Viewing = lazy(() =>
   import('./modules/viewing/Viewing').then((m) => ({ default: m.Viewing })),
 )
 
-const route = window.location.pathname.replace(/\/$/, '') || '/'
-
-export default function App() {
+export default function App({ pathname }: { pathname?: string }) {
+  const route = (pathname ?? window.location.pathname).replace(/\/$/, '') || '/'
   let page: 'home' | 'linear-algebra' | 'viewing' = 'home'
   let content = <Home />
 
