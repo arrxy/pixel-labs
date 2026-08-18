@@ -18,7 +18,7 @@ export function Translation3D() {
   return (
     <Section id="translation3d" title="Translation (3D)">
       <MathParagraph>
-        {`Translation offsets every point by $(t_x,t_y,t_z)$. A linear $3\\times 3$ matrix cannot do this — you need an extra homogeneous coordinate, just as in 2D.`}
+        {`Translation offsets every point by $(t_x,t_y,t_z)$. A linear $3\\times 3$ matrix cannot do this; you need an extra homogeneous coordinate, just as in 2D.`}
       </MathParagraph>
       <MathText
         tex={String.raw`p' = p + t = \begin{pmatrix}x+t_x\\y+t_y\\z+t_z\end{pmatrix}`}

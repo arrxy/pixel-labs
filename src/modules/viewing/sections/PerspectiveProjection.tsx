@@ -325,12 +325,12 @@ export function PerspectiveProjection() {
           <div className="mono-block muted" aria-live="polite">
             <div>input point = ({fmt(x)}, 0, {fmt(z)}, 1)</div>
             <div>
-              clip = ({clip ? fmt(clip.x) : '—'}, {clip ? fmt(clip.y) : '—'}, {clip ? fmt(clip.z) : '—'},{' '}
-              {clip ? fmt(clip.w) : '—'})
+              clip = ({clip ? fmt(clip.x) : 'unavailable'}, {clip ? fmt(clip.y) : 'unavailable'}, {clip ? fmt(clip.z) : 'unavailable'},{' '}
+              {clip ? fmt(clip.w) : 'unavailable'})
             </div>
             <div>
-              α-scaled clip = ({scaledClip ? fmt(scaledClip.x) : '—'}, {scaledClip ? fmt(scaledClip.y) : '—'},{' '}
-              {scaledClip ? fmt(scaledClip.z) : '—'}, {scaledClip ? fmt(scaledClip.w) : '—'})
+              α-scaled clip = ({scaledClip ? fmt(scaledClip.x) : 'unavailable'}, {scaledClip ? fmt(scaledClip.y) : 'unavailable'},{' '}
+              {scaledClip ? fmt(scaledClip.z) : 'unavailable'}, {scaledClip ? fmt(scaledClip.w) : 'unavailable'})
             </div>
             <div>
               after ÷w: {ndc && scaledNdc

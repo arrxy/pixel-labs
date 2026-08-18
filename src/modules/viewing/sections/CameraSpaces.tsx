@@ -117,7 +117,7 @@ export function CameraSpaces() {
       </p>
       <p className="body-text">
         <Mx sub="view" /> does the opposite: it leaves the camera at the origin and moves the
-        cube instead. That is what “inverse” means here — undo the camera’s placement. World: pin walks around a
+        cube instead. That is what “inverse” means here: undo the camera’s placement. World: pin walks around a
         fixed cube. Camera: cube walks around a fixed pin.
       </p>
       <p className="hint-text">

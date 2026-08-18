@@ -15,7 +15,7 @@ export function Shear3D() {
   return (
     <Section id="shear3d" title="Shear (3D)">
       <MathParagraph>
-        {`Shear slides one coordinate proportional to another. Here $x' = x + k_{xy} y + k_{xz} z$ while $y$ and $z$ stay put — a slanted box.`}
+        {`Shear slides one coordinate proportional to another. Here $x' = x + k_{xy} y + k_{xz} z$ while $y$ and $z$ stay put, producing a slanted box.`}
       </MathParagraph>
       <MathText
         tex={String.raw`H=\begin{pmatrix}1&k_{xy}&k_{xz}\\0&1&0\\0&0&1\end{pmatrix}`}

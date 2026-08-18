@@ -24,7 +24,7 @@ export function ProjectionComparison() {
   return (
     <Section id="projection-types" title="Orthographic vs perspective">
       <MathParagraph>
-        {`Same near and far cubes, two cameras. Orthographic keeps their screen size. Perspective makes the farther cube shrink — rays meet at the camera origin.`}
+        {`Same near and far cubes, two cameras. Orthographic keeps their screen size. Perspective makes the farther cube shrink because rays meet at the camera origin.`}
       </MathParagraph>
       <p className="hint-text">
         Both matrices have now been derived. This playground applies them to identical geometry so only the

@@ -57,7 +57,7 @@ export function LinearAlgebra() {
             <Track3D />
           </Suspense>
           <p className="lesson-continue">
-            Next: <a href="/viewing">Part II — Viewing</a>
+            Next: <a href="/viewing">Part II: Viewing</a>
           </p>
         </main>
       </div>

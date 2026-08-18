@@ -11,6 +11,6 @@ Open the URL Vite prints (default `http://localhost:5173`).
 
 ## Scripts
 
-- `npm run dev` — development server
-- `npm run build` — production build
-- `npm run preview` — preview the production build
+- `npm run dev`: development server
+- `npm run build`: production build
+- `npm run preview`: preview the production build

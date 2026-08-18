@@ -4,7 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { createAxes, createGrid, disposeObject } from '../lib/scene3d'
 
 export type Scene3DApi = {
-  /** Content group — add objects here. Cleared automatically between setups. */
+  /** Content group for adding objects. Cleared automatically between setups. */
   root: THREE.Group
   scene: THREE.Scene
 }
