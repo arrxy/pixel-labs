@@ -276,6 +276,7 @@ U=\dfrac{u-4}{2}=\dfrac{1}{2}u-2`}
             markers={[{ p, color: '#1a1a1a', label: 'P' }]}
             matrix={M}
             caption="Orthographic camera output in the NDC x–y plane"
+            showStatus={false}
           />
         </div>
         <div className="controls-col wide orthographic-controls">
