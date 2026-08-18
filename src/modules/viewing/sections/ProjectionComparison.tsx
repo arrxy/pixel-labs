@@ -8,6 +8,8 @@ import { ProjectionPreview } from '../components/ProjectionPreview'
 import {
   DEFAULT_BOUNDS,
   SAMPLE_CUBES,
+  inNdc,
+  projectPoint,
   projectionMatrix,
   stackedCubeEdges,
   stackedCubeVertices,
@@ -20,6 +22,13 @@ const VOLUME_FROM = { x: 0.72, y: 0.42, z: 0.5 }
 export function ProjectionComparison() {
   const [mode, setMode] = useState<ProjectionMode>('orthographic')
   const matrix = useMemo(() => projectionMatrix(DEFAULT_BOUNDS, mode), [mode])
+  const vertices = stackedCubeVertices()
+  const insideCount = matrix
+    ? vertices.filter((vertex) => {
+        const projected = projectPoint(matrix, vertex)
+        return projected.ok && inNdc(projected.ndc)
+      }).length
+    : 0
 
   return (
     <Section id="projection-types" title="Orthographic vs perspective">
@@ -39,29 +48,35 @@ export function ProjectionComparison() {
         ]}
       />
       <Playground label="Playground: identical geometry, two projections">
-        <div className="projection-pair">
-          <FrustumScene
-            bounds={DEFAULT_BOUNDS}
-            mode={mode}
-            cubes={SAMPLE_CUBES.map((c, i) => ({ ...c, label: i === 0 ? 'closer object' : 'farther object' }))}
-            showPlaneLabels
-            width={400}
-            height={400}
-            cameraDistance={22}
-            fov={48}
-            orbitTarget={VOLUME_LOOK}
-            cameraOffset={VOLUME_FROM}
-            ariaLabel={`${mode} view of a near cube and a far cube`}
-          />
-          <ProjectionPreview
-            vertices={stackedCubeVertices()}
-            edges={stackedCubeEdges()}
-            groupColors={SAMPLE_CUBES.map((c) => c.color)}
-            matrix={matrix}
-            caption={`${mode} camera output in the NDC x–y plane`}
-          />
+        <div className="projection-pair-group">
+          <div className="projection-pair">
+            <FrustumScene
+              bounds={DEFAULT_BOUNDS}
+              mode={mode}
+              cubes={SAMPLE_CUBES.map((c, i) => ({ ...c, label: i === 0 ? 'closer object' : 'farther object' }))}
+              showPlaneLabels
+              width={400}
+              height={400}
+              cameraDistance={22}
+              fov={48}
+              orbitTarget={VOLUME_LOOK}
+              cameraOffset={VOLUME_FROM}
+              ariaLabel={`${mode} view of a near cube and a far cube`}
+            />
+            <ProjectionPreview
+              vertices={vertices}
+              edges={stackedCubeEdges()}
+              groupColors={SAMPLE_CUBES.map((c) => c.color)}
+              matrix={matrix}
+              caption={`${mode} camera output in the NDC x–y plane`}
+              showStatus={false}
+            />
+          </div>
+          <div className="mono-block muted projection-row-status" aria-live="polite">
+            {insideCount}/{vertices.length} vertices inside the NDC box.
+          </div>
         </div>
-        <div className="controls-col">
+        <div className="controls-col projection-comparison-controls">
           <div className="btn-row" role="group" aria-label="Projection type">
             <button
               type="button"

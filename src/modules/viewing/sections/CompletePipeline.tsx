@@ -163,32 +163,38 @@ export function CompletePipeline() {
             camera-space, NDC, and screen stages.
           </p>
         </div>
-        <div className="projection-pair">
-          <div className="frame-pane">
-            <h3 className="frame-title">Camera-space view</h3>
-            <p className="frame-caption">A 3D observer view of the camera, perspective frustum, objects, and point P.</p>
-            <FrustumScene
-              bounds={bounds}
-              mode="perspective"
-              cubes={SAMPLE_CUBES}
-              points={[{ p: viewP, color: '#1a1a1a', label: 'P' }]}
-              width={400}
-              height={400}
-              ariaLabel="Perspective frustum with the tracked point in camera space"
-            />
+        <div className="projection-pair-group">
+          <div className="projection-pair">
+            <div className="frame-pane">
+              <h3 className="frame-title">Camera-space view</h3>
+              <p className="frame-caption">A 3D observer view of the camera, perspective frustum, objects, and point P.</p>
+              <FrustumScene
+                bounds={bounds}
+                mode="perspective"
+                cubes={SAMPLE_CUBES}
+                points={[{ p: viewP, color: '#1a1a1a', label: 'P' }]}
+                width={400}
+                height={400}
+                ariaLabel="Perspective frustum with the tracked point in camera space"
+              />
+            </div>
+            <div className="frame-pane">
+              <h3 className="frame-title">NDC x–y view</h3>
+              <p className="frame-caption">The projected result after dividing by w; depth is not shown.</p>
+              <ProjectionPreview
+                vertices={stackedCubeVertices()}
+                edges={stackedCubeEdges()}
+                groupColors={SAMPLE_CUBES.map((cube) => cube.color)}
+                markers={[{ p: viewP, color: '#1a1a1a', label: 'P' }]}
+                matrix={Mper}
+                caption="The tracked point after perspective projection in the NDC x–y plane"
+                showAnnotations={false}
+                showStatus={false}
+              />
+            </div>
           </div>
-          <div className="frame-pane">
-            <h3 className="frame-title">NDC x–y view</h3>
-            <p className="frame-caption">The projected result after dividing by w; depth is not shown.</p>
-            <ProjectionPreview
-              vertices={stackedCubeVertices()}
-              edges={stackedCubeEdges()}
-              groupColors={SAMPLE_CUBES.map((cube) => cube.color)}
-              markers={[{ p: viewP, color: '#1a1a1a', label: 'P' }]}
-              matrix={Mper}
-              caption="The tracked point after perspective projection in the NDC x–y plane"
-              showAnnotations={false}
-            />
+          <div className="mono-block muted projection-row-status" aria-live="polite">
+            {ndc ? `P → NDC ${tuple3(ndc)}` : 'P → NDC unavailable'}
           </div>
         </div>
         <ViewportDiagram ndc={ndc} width={VIEWPORT_WIDTH} height={VIEWPORT_HEIGHT} />

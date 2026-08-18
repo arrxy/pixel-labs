@@ -243,7 +243,7 @@ export function CameraSpaces() {
               Reset
             </button>
             <p className="hint-text">
-              Move camera x and watch the World and Camera panes together. The Model pane should not move.
+              Move camera x and watch the World and Camera panes together.
             </p>
           </div>
         </div>
