@@ -200,7 +200,7 @@ export function ViewVolume() {
               }))}
             />
           </div>
-          <div className="controls-col wide">
+          <div className="controls-col wide view-volume-controls">
             <SliderRow label="l" value={l} min={-3} max={-0.2} step={0.1} onChange={setL} />
             <SliderRow label="r" value={r} min={0.2} max={3} step={0.1} onChange={setR} />
             <SliderRow label="b" value={b} min={-2.5} max={-0.2} step={0.1} onChange={setB} />
@@ -224,19 +224,27 @@ export function ViewVolume() {
             <button type="button" className="mode-btn" onClick={reset}>
               Reset
             </button>
-            <div className="mono-block muted" aria-live="polite">
-              {classes.map((s) => (
-                <div key={s.label}>
-                  {s.label} ({s.note}): perspective {pointStatus(s.persp)} · orthographic {pointStatus(s.ortho)}
-                </div>
-              ))}
-            </div>
-            <p className="hint-text">
-              Look at B in both panes, then drag r until the box contains B too.
-            </p>
           </div>
         </div>
       </Playground>
+      <div className="view-volume-results">
+        <div className="mono-block muted view-volume-test-grid" aria-live="polite">
+          {classes.map((s) => (
+            <div className="view-volume-test-row" key={s.label}>
+              <span>{s.label}</span>
+              <span>({s.note}):</span>
+              <span>perspective</span>
+              <span>{pointStatus(s.persp)}</span>
+              <span aria-hidden="true">·</span>
+              <span>orthographic</span>
+              <span>{pointStatus(s.ortho)}</span>
+            </div>
+          ))}
+        </div>
+        <p className="hint-text">
+          Look at B in both panes, then drag r until the box contains B too.
+        </p>
+      </div>
     </Section>
   )
 }

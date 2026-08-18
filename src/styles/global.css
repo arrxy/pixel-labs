@@ -417,6 +417,36 @@ a.part-card:hover {
   align-items: center;
 }
 
+.playground:has(> .transform-stack-controls) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+}
+
+.playground:has(> .transform-stack-controls) > .vector-canvas {
+  justify-self: center;
+  max-width: 100%;
+  height: auto;
+}
+
+.playground:has(> .look-at-controls) {
+  display: grid;
+  grid-template-columns: minmax(0, 520px);
+  justify-content: center;
+  align-items: start;
+  gap: 20px;
+  padding-block: 32px;
+}
+
+.transform-stack-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px 20px;
+  width: 100%;
+  min-width: 0;
+}
+
 .vector-canvas {
   background: #fff;
   display: block;
@@ -440,6 +470,59 @@ a.part-card:hover {
 .controls-col.wide {
   gap: 14px;
   min-width: 220px;
+}
+
+.controls-col.wide.transform-stack-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px 20px;
+  width: 100%;
+  min-width: 0;
+}
+
+.controls-col.wide.look-at-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+}
+
+.look-at-controls > .mode-btn {
+  grid-column: 1 / -1;
+}
+
+.look-at-results {
+  display: grid;
+  grid-template-columns: 18ch 1ch 1ch 6ch 1ch 6ch 1ch 6ch 1ch;
+  width: 100%;
+  margin: 16px 0 0;
+  overflow-x: auto;
+}
+
+.look-at-result-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+}
+
+.look-at-result-row > :nth-child(4),
+.look-at-result-row > :nth-child(6),
+.look-at-result-row > :nth-child(8) {
+  text-align: right;
+}
+
+.look-at-matrix {
+  width: 100%;
+}
+
+.look-at-controls .slider-row input[type='range'] {
+  min-width: 0;
+  width: 100%;
+}
+
+.look-at-controls .num-input {
+  width: 56px;
 }
 
 .vec-pair {

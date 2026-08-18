@@ -101,7 +101,7 @@ export function CanonicalVolume() {
               </p>
             </div>
           </div>
-          <div className="controls-col wide">
+          <div className="controls-col wide canonical-volume-controls">
             <div className="btn-row" role="group" aria-label="Starting view-volume shape">
               <button
                 type="button"

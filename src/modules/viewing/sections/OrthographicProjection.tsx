@@ -3,7 +3,6 @@ import { PriorLectureLinks } from '../../../components/PriorLectureLinks'
 import { SliderRow } from '../../linear-algebra/components/Controls'
 import { Playground } from '../../linear-algebra/components/Diagram'
 import { MathText } from '../../linear-algebra/components/MathText'
-import { Vec3Inputs } from '../../linear-algebra/components/Vec3Inputs'
 import { Section } from '../../linear-algebra/components/Section'
 import { fmt } from '../../linear-algebra/lib/math'
 import type { Vec3 } from '../../linear-algebra/lib/types'
@@ -279,14 +278,16 @@ U=\dfrac{u-4}{2}=\dfrac{1}{2}u-2`}
             caption="Orthographic camera output in the NDC x–y plane"
           />
         </div>
-        <div className="controls-col wide">
+        <div className="controls-col wide orthographic-controls">
           <SliderRow label="l" value={l} min={-3} max={-0.2} step={0.1} onChange={setL} />
           <SliderRow label="r" value={r} min={0.2} max={3} step={0.1} onChange={setR} />
           <SliderRow label="b" value={b} min={-2.5} max={-0.2} step={0.1} onChange={setB} />
           <SliderRow label="t" value={t} min={0.2} max={2.5} step={0.1} onChange={setT} />
           <SliderRow label="near" value={nearDistance} min={0.6} max={5} step={0.1} onChange={(v) => setNear(Math.min(v, farDistance - 0.4))} />
           <SliderRow label="far" value={farDistance} min={3} max={14} step={0.1} onChange={(v) => setFar(Math.max(v, nearDistance + 0.4))} />
-          <Vec3Inputs value={p} onChange={setP} prefix="P" color="var(--ink)" />
+          <SliderRow label="Px" value={p.x} min={-4} max={4} step={0.1} onChange={(x) => setP({ ...p, x })} />
+          <SliderRow label="Py" value={p.y} min={-4} max={4} step={0.1} onChange={(y) => setP({ ...p, y })} />
+          <SliderRow label="Pz" value={p.z} min={-14} max={-0.2} step={0.1} onChange={(z) => setP({ ...p, z })} />
           <button type="button" className="mode-btn" onClick={reset}>
             Reset
           </button>
@@ -294,7 +295,8 @@ U=\dfrac{u-4}{2}=\dfrac{1}{2}u-2`}
             {projected.ok ? (
               <div>
                 NDC ({fmt(projected.ndc.x)}, {fmt(projected.ndc.y)}, {fmt(projected.ndc.z)})
-                {inNdc(projected.ndc) ? ' · inside' : ' · outside NDC'}
+                {' · '}
+                {inNdc(projected.ndc) ? 'inside' : <span className="outside-ndc">outside NDC</span>}
               </div>
             ) : (
               <div>not projectable</div>

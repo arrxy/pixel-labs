@@ -90,11 +90,16 @@ export function ProjectionPreview({
   const status = !matrix
     ? 'invalid bounds'
     : tracked
-      ? `P → NDC (${fmt(tracked.ndc.x)}, ${fmt(tracked.ndc.y)}, ${fmt(tracked.ndc.z)})${tracked.inside ? '' : ' · outside NDC'}`
+      ? `P → NDC (${fmt(tracked.ndc.x)}, ${fmt(tracked.ndc.y)}, ${fmt(tracked.ndc.z)})`
       : `${insideCount}/${vertices.length} vertices inside the NDC square`
 
   return (
     <figure className="projection-preview">
+      {tracked && !tracked.inside ? (
+        <div className="projection-outside-status" role="status" aria-label="outside NDC">
+          <span className="visually-hidden">outside NDC</span>
+        </div>
+      ) : null}
       <svg
         className="projection-svg"
         viewBox={`0 0 ${width} ${height}`}
