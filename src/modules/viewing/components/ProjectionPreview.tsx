@@ -16,6 +16,7 @@ type Props = {
   width?: number
   height?: number
   caption?: string
+  showAnnotations?: boolean
 }
 
 export function ProjectionPreview({
@@ -28,6 +29,7 @@ export function ProjectionPreview({
   width = 220,
   height = 220,
   caption = 'Camera output in NDC',
+  showAnnotations = true,
 }: Props) {
   const pad = 28
   const inner = Math.min(width, height) - pad * 2
@@ -104,24 +106,28 @@ export function ProjectionPreview({
         <rect x={ox} y={oy} width={inner} height={inner} className="ndc-frame" />
         <line x1={sx(-1)} y1={sy(0)} x2={sx(1)} y2={sy(0)} className="ndc-axis" />
         <line x1={sx(0)} y1={sy(-1)} x2={sx(0)} y2={sy(1)} className="ndc-axis" />
-        <text x={width / 2} y={oy - 14} textAnchor="middle" className="ndc-label">
-          NDC x–y square
-        </text>
-        <text x={width / 2} y={oy - 3} textAnchor="middle" className="ndc-label">
-          x/y shown · z depth hidden
-        </text>
-        <text x={sx(-1) + 3} y={sy(1) + 12} className="ndc-label">
-          (−1, +1)
-        </text>
-        <text x={sx(1) - 3} y={sy(-1) - 6} textAnchor="end" className="ndc-label">
-          (+1, −1)
-        </text>
-        <text x={sx(1) - 2} y={sy(0) + 12} textAnchor="end" className="ndc-label">
-          x
-        </text>
-        <text x={sx(0) + 6} y={sy(1) + 12} className="ndc-label">
-          y
-        </text>
+        {showAnnotations ? (
+          <>
+            <text x={width / 2} y={oy - 14} textAnchor="middle" className="ndc-label">
+              NDC x–y square
+            </text>
+            <text x={sx(-1) + 3} y={sy(1) + 12} className="ndc-label">
+              (−1, +1)
+            </text>
+            <text x={sx(1) - 3} y={sy(-1) - 6} textAnchor="end" className="ndc-label">
+              (+1, −1)
+            </text>
+            <text x={sx(1) - 2} y={sy(0) + 12} textAnchor="end" className="ndc-label">
+              x
+            </text>
+            <text x={sx(0) + 6} y={sy(1) + 12} className="ndc-label">
+              y
+            </text>
+            <text x={width / 2} y={height - 7} textAnchor="middle" className="ndc-label">
+              x/y shown · z depth hidden
+            </text>
+          </>
+        ) : null}
         {lines.map((ln, i) => (
           <line
             key={i}

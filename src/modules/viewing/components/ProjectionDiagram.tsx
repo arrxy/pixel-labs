@@ -82,6 +82,9 @@ export function ProjectionDiagram({
         <marker id={`${gid}-arrow`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
           <path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a" />
         </marker>
+        <clipPath id={`${gid}-plot-clip`}>
+          <rect x="42" y="28" width={VB_W - 62} height={VB_H - 48} />
+        </clipPath>
       </defs>
       <text x="48" y="18" className="ndc-label">
         x–z side view · camera at origin, looking −z
@@ -116,6 +119,7 @@ export function ProjectionDiagram({
           x2={mapZ(rayEndZ)}
           y2={mapX(rayEndX)}
           className="proj-ray"
+          clipPath={`url(#${gid}-plot-clip)`}
         />
       )}
       {pOnNear && (
@@ -137,24 +141,21 @@ export function ProjectionDiagram({
           <text x={pOnNear.x + 7} y={(cam.y + pOnNear.y) / 2} className="diagram-label">
             |x′|
           </text>
-          <text x={(cam.x + pPt.x) / 2} y={cam.y + 15} textAnchor="middle" className="diagram-label">
+          <text x={(cam.x + pPt.x) / 2} y={cam.y + 18} textAnchor="middle" className="diagram-label">
             |z|
           </text>
-          <text x={(cam.x + pOnNear.x) / 2} y={cam.y - 8} textAnchor="middle" className="diagram-label">
+          <text x={(cam.x + pOnNear.x) / 2} y={cam.y - 10} textAnchor="middle" className="diagram-label">
             |n|
           </text>
         </>
       )}
       <circle cx={cam.x} cy={cam.y} r={5} fill="#1a1a1a" />
-      <text x={cam.x + 8} y={cam.y + 16} className="diagram-label">
-        O · camera
-      </text>
       <circle cx={pPt.x} cy={pPt.y} r={7} className="proj-dot handle" />
       <text x={pPt.x + 10} y={pPt.y - 8} className="ndc-label">
         P
       </text>
       {pOnNear && (
-        <text x={pOnNear.x + 8} y={pOnNear.y + 14} className="ndc-label">
+        <text x={pOnNear.x + 8} y={pOnNear.y - 8} className="ndc-label">
           P′
         </text>
       )}

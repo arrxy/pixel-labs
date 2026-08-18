@@ -13,7 +13,7 @@ export function IntervalMapDiagram({ u0, u1, leftLabel = 'u₀', rightLabel = 'u
   return (
     <svg
       className="interval-map-diagram"
-      viewBox="0 0 520 180"
+      viewBox="0 0 520 196"
       width="100%"
       role="img"
       aria-label={`Linear map from ${leftLabel} ${fmt(u0)} and ${rightLabel} ${fmt(u1)} to minus one and plus one`}

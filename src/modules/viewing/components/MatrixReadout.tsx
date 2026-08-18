@@ -1,10 +1,11 @@
 import { MathText } from '../../linear-algebra/components/MathText'
 import { fmt } from '../../linear-algebra/lib/math'
 import type { Mat4 } from '../../linear-algebra/lib/math3'
+import type { ReactNode } from 'react'
 
 type Props = {
   matrix: Mat4 | null
-  label: string
+  label: ReactNode
   tex?: string
 }
 

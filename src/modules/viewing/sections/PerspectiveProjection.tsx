@@ -301,7 +301,7 @@ export function PerspectiveProjection() {
           },
         ]}
       />
-      <MatrixReadout matrix={Mwarp} label="Mwarp · derived rows" tex={WARP_TEX} />
+      <MatrixReadout matrix={Mwarp} label={<>M<sub>warp</sub> · derived rows</>} tex={WARP_TEX} />
 
       <div className="walkthrough">
         <div className="label-caps">Finish the map to NDC</div>
@@ -317,7 +317,7 @@ export function PerspectiveProjection() {
           w gives NDC.
         </p>
       </div>
-      <MatrixReadout matrix={Mper} label="Mper · full perspective projection" tex={PER_TEX} />
+      <MatrixReadout matrix={Mper} label={<>M<sub>per</sub> · full perspective projection</>} tex={PER_TEX} />
 
       <Playground label="Playground: α changes clip numbers, not the NDC point">
         <div className="controls-col wide">

@@ -23,19 +23,6 @@ export function ViewportDiagram({ ndc, width, height }: { ndc: Vec3 | null; widt
         NDC square
       </text>
       <rect x={ndcBox.x} y={ndcBox.y} width={ndcBox.w} height={ndcBox.h} className="ndc-frame" />
-      <text x={ndcBox.x} y={ndcBox.y - 8} className="diagram-label">
-        (−1, +1)
-      </text>
-      <text x={ndcBox.x + ndcBox.w} y={ndcBox.y + ndcBox.h + 17} textAnchor="end" className="diagram-label">
-        (+1, −1)
-      </text>
-      <text x={ndcBox.x + ndcBox.w / 2} y={ndcBox.y - 8} textAnchor="middle" className="diagram-label">
-        y = +1
-      </text>
-      <text x={ndcBox.x + ndcBox.w / 2} y={ndcBox.y + ndcBox.h + 17} textAnchor="middle" className="diagram-label">
-        y = −1
-      </text>
-
       <line x1="214" y1="117" x2="282" y2="117" className="viewport-arrow" />
       <polygon points="282,117 270,111 270,123" className="viewport-arrow-head" />
       <text x="248" y="103" textAnchor="middle" className="diagram-label">
@@ -46,15 +33,9 @@ export function ViewportDiagram({ ndc, width, height }: { ndc: Vec3 | null; widt
       </text>
 
       <text x={viewBox.x} y="22" className="diagram-title">
-        screen viewport · {width} × {height} px
+        Viewport · {width} × {height} px
       </text>
       <rect x={viewBox.x} y={viewBox.y} width={viewBox.w} height={viewBox.h} className="viewport-frame" />
-      <text x={viewBox.x} y={viewBox.y - 8} className="diagram-label">
-        (0, 0)
-      </text>
-      <text x={viewBox.x + viewBox.w} y={viewBox.y + viewBox.h + 17} textAnchor="end" className="diagram-label">
-        ({width}, {height})
-      </text>
       <text x={viewBox.x + 8} y={viewBox.y + 18} className="diagram-label">
         +y goes down
       </text>
@@ -63,11 +44,17 @@ export function ViewportDiagram({ ndc, width, height }: { ndc: Vec3 | null; widt
         <>
           <circle cx={ndcX} cy={ndcY} r="5" className="proj-dot" />
           <text x={ndcX + 8} y={ndcY - 8} className="diagram-label">
-            P ({fmt(ndc.x)}, {fmt(ndc.y)})
+            P
           </text>
           <circle cx={screenX} cy={screenY} r="5" className="proj-dot-b" />
           <text x={screenX + 8} y={screenY - 8} className="diagram-label">
-            P ({fmt(screen.x)}, {fmt(screen.y)}) px
+            P
+          </text>
+          <text x={ndcBox.x} y="222" className="diagram-label">
+            P = ({fmt(ndc.x)}, {fmt(ndc.y)})
+          </text>
+          <text x={viewBox.x} y="222" className="diagram-label">
+            P = ({fmt(screen.x)}, {fmt(screen.y)}) px
           </text>
         </>
       ) : null}

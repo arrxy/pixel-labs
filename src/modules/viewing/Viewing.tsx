@@ -36,10 +36,7 @@ export function Viewing() {
                   transforms undo a placement.
                 </li>
               </ul>
-              <p className="hint-text">
-                Camera spaces, view volumes, Normalized Device Coordinates, the perspective divide, clip coordinates,
-                and the viewport are taught here. They are not assumed.
-              </p>
+              
             </div>
             <PriorLectureLinks
               links={[{ href: '/linear-algebra#together3d', label: 'This continues from 4×4 transforms in Part I' }]}

@@ -123,7 +123,7 @@ w_x&w_y&w_z&-\mathbf w\cdot\mathbf{eye}\\
           </div>
         </div>
       </Playground>
-      <MatrixReadout matrix={Mview} label="Mview · world to camera" />
+      <MatrixReadout matrix={Mview} label={<>M<sub>view</sub> · world to camera</>} />
     </Section>
   )
 }
