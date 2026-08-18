@@ -19,7 +19,7 @@ export function Home() {
   return (
     <div className="home">
       <header className="home-header">
-        <p className="home-brand">Processing Labs</p>
+        <p className="home-brand">Pixel Playground</p>
         <h1>Graphics from first principles</h1>
         <p className="home-lead">Interactive lessons on the math and pipelines behind computer graphics.</p>
       </header>
