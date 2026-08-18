@@ -49,7 +49,7 @@ export function Rotation() {
         display
       />
       <Diagram>
-        <svg viewBox="0 0 220 180" className="diagram-svg">
+        <svg viewBox="0 0 220 180" className="diagram-svg" role="img" aria-label="Original vector and its rotation on a coordinate grid">
           <line x1="110" y1="90" x2="160" y2="90" stroke="#c9c6ba" strokeWidth="2" strokeDasharray="4,3" />
           <line x1="110" y1="90" x2="110" y2="40" stroke="#c9c6ba" strokeWidth="2" strokeDasharray="4,3" />
           <line x1="110" y1="90" x2="153" y2="65" stroke="#0f6e63" strokeWidth="2.5" markerEnd="url(#arrowA)" />

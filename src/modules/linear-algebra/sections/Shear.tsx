@@ -44,7 +44,7 @@ export function Shear() {
         related: flipping an axis is equivalent to applying a negative scale, as shown in the Scale playground.
       </MathParagraph>
       <Diagram>
-        <svg viewBox="0 0 220 180" className="diagram-svg">
+        <svg viewBox="0 0 220 180" className="diagram-svg" role="img" aria-label="Original and sheared rectangle on a coordinate grid">
           <rect x="50" y="80" width="50" height="50" fill="none" stroke="#c9c6ba" strokeWidth="2" strokeDasharray="4,3" />
           <polygon points="50,130 100,130 130,80 80,80" fill="none" stroke="#0f6e63" strokeWidth="2.5" />
           <text x="54" y="74" fontFamily="Space Mono, monospace" fontSize="11" fill="#6b6b63">

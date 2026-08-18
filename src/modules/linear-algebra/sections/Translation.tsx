@@ -48,7 +48,7 @@ export function Translation() {
         {`Unlike rotation and scaling, translation cannot be written as a matrix multiplied by a 2D vector: there is no matrix M for which $M\\begin{pmatrix}x\\\\y\\end{pmatrix}$ produces $\\begin{pmatrix}x+t_x\\\\y+t_y\\end{pmatrix}$ for every x and y. Homogeneous coordinates solve this problem.`}
       </MathParagraph>
       <Diagram>
-        <svg viewBox="0 0 220 180" className="diagram-svg">
+        <svg viewBox="0 0 220 180" className="diagram-svg" role="img" aria-label="Original and translated point on a coordinate grid">
           <line
             x1="60"
             y1="90"

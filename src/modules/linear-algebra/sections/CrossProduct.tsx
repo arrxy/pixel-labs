@@ -46,7 +46,7 @@ export function CrossProduct() {
       <MathText tex={String.raw`a_xb_y-a_yb_x`} display />
       <MathParagraph>A positive value means b is counterclockwise from a; negative means clockwise.</MathParagraph>
       <Diagram>
-        <svg viewBox="0 0 220 180" className="diagram-svg">
+        <svg viewBox="0 0 220 180" className="diagram-svg" role="img" aria-label="Three-dimensional vectors a and b with their perpendicular cross product">
           <line x1="10" y1="150" x2="205" y2="150" stroke="#cfccc0" strokeWidth="1.5" />
           <line x1="30" y1="170" x2="30" y2="15" stroke="#cfccc0" strokeWidth="1.5" />
           <polygon points="30,150 90,130 110,70 50,90" fill="rgba(15,110,99,0.12)" />

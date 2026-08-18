@@ -58,7 +58,7 @@ export function Projection() {
         {`What is left over is the rejection, perpendicular to $\\mathbf{b}$: $\\mathbf{a}-\\mathrm{proj}_{\\mathbf{b}}\\mathbf{a}$. Lighting, constraints, and sliding along a surface all use this split.`}
       </MathParagraph>
       <Diagram>
-        <svg viewBox="0 0 220 180" className="diagram-svg">
+        <svg viewBox="0 0 220 180" className="diagram-svg" role="img" aria-label="Projection of vector a onto vector b">
           <line x1="30" y1="150" x2="190" y2="150" stroke="#d9622b" strokeWidth="2.5" markerEnd="url(#arrowB)" />
           <line x1="30" y1="150" x2="130" y2="150" stroke="#9b978a" strokeWidth="2.5" markerEnd="url(#arrowInk)" />
           <line

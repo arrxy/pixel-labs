@@ -27,7 +27,7 @@ export function Vectors() {
         {`A vector describes a length and a direction. In a 2D coordinate plane with an x-axis and a y-axis, the vector $\\begin{pmatrix}4\\\\3\\end{pmatrix}$ means 4 units in the x direction and 3 units in the y direction.`}
       </MathParagraph>
       <Diagram>
-        <svg viewBox="0 0 220 180" className="diagram-svg">
+        <svg viewBox="0 0 220 180" className="diagram-svg" role="img" aria-label="Vector from the origin to point v on a coordinate grid">
           <line x1="10" y1="150" x2="205" y2="150" stroke="#cfccc0" strokeWidth="1.5" />
           <line x1="30" y1="170" x2="30" y2="15" stroke="#cfccc0" strokeWidth="1.5" />
           <line x1="30" y1="90" x2="110" y2="90" stroke="#c9c6ba" strokeWidth="1" strokeDasharray="4,3" />

@@ -29,7 +29,7 @@ export function LinearAlgebra() {
       <HashScroll />
       <div className="page-inner">
         <Nav />
-        <main className="lesson-main">
+        <main id="main-content" className="lesson-main" tabIndex={-1}>
           <header className="lesson-header">
             <h1>Linear Algebra for Graphics</h1>
             <p>

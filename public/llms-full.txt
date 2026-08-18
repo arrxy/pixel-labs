@@ -1,0 +1,30 @@
+# Pixel Playground detailed guide
+
+Pixel Playground teaches computer graphics concepts with interactive diagrams. It is framework-independent and focuses on the mathematics that graphics APIs implement.
+
+## Linear Algebra for Computer Graphics
+
+- [What is a vector?](https://learn.graphics.aritro.tech/linear-algebra#vectors): Components, direction, and magnitude.
+- [Unit vectors](https://learn.graphics.aritro.tech/linear-algebra#normalize): Normalization and vector length.
+- [Addition and subtraction](https://learn.graphics.aritro.tech/linear-algebra#addition): Head-to-tail vector operations.
+- [Dot product](https://learn.graphics.aritro.tech/linear-algebra#dot): Angles, alignment, and perpendicularity.
+- [Projection](https://learn.graphics.aritro.tech/linear-algebra#projection): Resolving one vector along another.
+- [Cross product](https://learn.graphics.aritro.tech/linear-algebra#cross): Perpendicular vectors and orientation.
+- [Matrices and transforms](https://learn.graphics.aritro.tech/linear-algebra#matrix): Rotation, scale, shear, translation, and composition.
+- [Homogeneous coordinates](https://learn.graphics.aritro.tech/linear-algebra#homogeneous): Representing affine transforms with matrices.
+- [Inverse transforms](https://learn.graphics.aritro.tech/linear-algebra#inverse): Reversing a transform.
+- [Determinant](https://learn.graphics.aritro.tech/linear-algebra#determinant): Area, volume, orientation, and invertibility.
+- [3D transforms](https://learn.graphics.aritro.tech/linear-algebra#vectors3d): Extending vector and matrix concepts to three dimensions.
+
+## 3D Viewing and Projection
+
+- [Camera spaces](https://learn.graphics.aritro.tech/viewing#camera-spaces): Model, world, and camera coordinates.
+- [Build the camera](https://learn.graphics.aritro.tech/viewing#camera-basis): Eye, target, camera basis, and the view matrix.
+- [View volume](https://learn.graphics.aritro.tech/viewing#view-volume): Orthographic boxes and perspective frustums.
+- [Canonical volume](https://learn.graphics.aritro.tech/viewing#canonical-volume): Mapping visible geometry into normalized device coordinates.
+- [Orthographic projection](https://learn.graphics.aritro.tech/viewing#orthographic): Linear interval mapping and the orthographic matrix.
+- [Similar triangles](https://learn.graphics.aritro.tech/viewing#similar-triangles): The geometric basis of perspective.
+- [Projective w](https://learn.graphics.aritro.tech/viewing#homogeneous): Homogeneous division and depth-dependent scaling.
+- [Perspective warp](https://learn.graphics.aritro.tech/viewing#perspective-warp): The perspective projection matrix.
+- [Compare projections](https://learn.graphics.aritro.tech/viewing#compare): Orthographic and perspective behavior using identical geometry.
+- [Full pipeline](https://learn.graphics.aritro.tech/viewing#full-pipeline): Model coordinates through world, camera, clip, NDC, and screen coordinates.

@@ -14,7 +14,7 @@ export function Viewing() {
       <HashScroll />
       <div className="page-inner">
         <ViewingNav />
-        <main className="lesson-main">
+        <main id="main-content" className="lesson-main" tabIndex={-1}>
           <header className="lesson-header">
             <h1>Viewing</h1>
             <p>
