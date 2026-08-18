@@ -53,7 +53,7 @@ export function DotProduct() {
       </MathParagraph>
       <MathText tex={String.raw`\mathbf{a}\cdot\mathbf{b}=a_xb_x+a_yb_y`} display />
       <MathParagraph>
-        {`It also relates to the angle between the vectors, $\\mathbf{a}\\cdot\\mathbf{b}=|\\mathbf{a}||\\mathbf{b}|\\cos\\theta$, and to the length of the projection of a onto b, $d=\\dfrac{\\mathbf{a}\\cdot\\mathbf{b}}{|\\mathbf{b}|}$.`}
+        {`It also relates to the angle between the vectors, $\\mathbf{a}\\cdot\\mathbf{b}=|\\mathbf{a}||\\mathbf{b}|\\cos\\theta$, and to the signed length of the projection of a onto b, $d=\\dfrac{\\mathbf{a}\\cdot\\mathbf{b}}{|\\mathbf{b}|}$.`}
       </MathParagraph>
       <Diagram>
         <svg viewBox="0 0 220 180" className="diagram-svg">
@@ -74,7 +74,7 @@ export function DotProduct() {
           </text>
         </svg>
       </Diagram>
-      <Playground label="Playground: drag or type to change a and b. Gray arrow is a's projection onto b">
+      <Playground label="Playground: drag or type to change a and b. The gray arrow is the projection of a onto b">
         <VectorCanvas
           mode="pair"
           a={a}

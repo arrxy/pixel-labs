@@ -59,14 +59,14 @@ export function Inverse() {
   return (
     <Section id="inverse" title="Inverse transforms">
       <MathParagraph>
-        {`Every useful transform has an inverse that undoes it. Translate by $-t$, rotate by $-\\theta$, scale by $1/s$. For a rotation matrix the inverse is simply the transpose: $R^{-1}=R^{\\mathsf{T}}$.`}
+        {`Every nonsingular transform has an inverse that undoes it. Invert a translation with $-t$, a rotation with $-\\theta$, and a nonzero scale with $1/s$. For a rotation matrix, the inverse is simply the transpose: $R^{-1}=R^{\\mathsf{T}}$.`}
       </MathParagraph>
       <MathText
         tex={String.raw`R(\theta)^{-1}=R(-\theta)=\begin{pmatrix}\cos\theta&\sin\theta\\-\sin\theta&\cos\theta\end{pmatrix}=R(\theta)^{\mathsf{T}}`}
         display
       />
       <MathParagraph>
-        {`For a composite $M=SRT$, the inverse reverses the order: $M^{-1}=T^{-1}R^{-1}S^{-1}$. Apply $M$, then $M^{-1}$, and you are back where you started: world space to local and back.`}
+        {`For a composite $M=SRT$, the inverse reverses the order: $M^{-1}=T^{-1}R^{-1}S^{-1}$. Apply $M$, then $M^{-1}$, and you return to the original coordinates.`}
       </MathParagraph>
       <Playground label="Playground: green is M·shape; orange is M⁻¹ applied to the green result">
         <VectorCanvas draw={draw} interactive={false} />

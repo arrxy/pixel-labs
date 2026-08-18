@@ -29,7 +29,7 @@ export function Inverse3D() {
   return (
     <Section id="inverse3d" title="Inverse transforms (3D)">
       <MathParagraph>
-        {`For $M = SRT$, the inverse reverses the order: $M^{-1}=T^{-1}R^{-1}S^{-1}$. Green is $M$ on the unit cube; orange recovers the original via $M^{-1}$.`}
+        {`For $M = SRT$, the inverse reverses the order: $M^{-1}=T^{-1}R^{-1}S^{-1}$. The green cube is the result of applying $M$ to the unit cube; orange recovers the original with $M^{-1}$.`}
       </MathParagraph>
       <MathText tex={String.raw`M^{-1}M = I`} display />
       <Playground label="Playground: composite and its inverse">

@@ -68,7 +68,7 @@ export function OrthographicProjection() {
     <Section id="orthographic" title="Orthographic projection">
       <p className="body-text">
         Orthographic projection preserves x and y without shrinking them according to depth. A closer cube and a
-        farther cube therefore draw at the same size. Mapping the view box onto{' '}
+        farther cube are therefore rendered at the same size. Mapping the view box onto{' '}
         <span className="math-sym">[−1, 1]³</span> uses one scale and one translation per axis. The axes are not mixed:
         output x uses only input x, output y uses only input y, and output z uses only input z.
       </p>
@@ -81,13 +81,13 @@ export function OrthographicProjection() {
       <div className="walkthrough">
         <div className="label-caps">One axis, then copy it three times</div>
         <p className="body-text">
-          Take a number u that runs from u₀ to u₁. We want a new number U that runs from −1 to +1, linearly. Shift by
+          Take a number u that ranges from u₀ to u₁. We want a new number U that ranges linearly from −1 to +1. Shift by
           the midpoint so the interval is centered on 0, then divide by the half-width so the ends land on ±1.
         </p>
         <div className="label-caps">What the symbols mean</div>
         <ul className="symbol-list">
           <li><strong>u</strong> is the original x, y, or z coordinate.</li>
-          <li><strong>u₀</strong> and <strong>u₁</strong> are the lower and upper endpoints of its interval.</li>
+          <li><strong>u₀</strong> and <strong>u₁</strong> are the lower and upper endpoints of the input interval.</li>
           <li><strong>m</strong> is the interval midpoint; <strong>h</strong> is its half-width.</li>
           <li><strong>U</strong> is the normalized output coordinate, between −1 and +1.</li>
           <li><strong>s</strong> is the scale factor; <strong>c</strong> is the constant translation after scaling.</li>
@@ -179,8 +179,9 @@ U=\dfrac{u-4}{2}=\dfrac{1}{2}u-2`}
             → +1.
           </li>
           <li>
-            <strong>z, row 3.</strong> Near should become +1, far −1. n is the near plane (e.g. −2), f the far plane
-            (e.g. −8), so n &gt; f. Same recipe with u₀ = f, u₁ = n: scale 2/(n − f), translation −(n + f)/(n − f).
+            <strong>z, row 3.</strong> Near should become +1 and far should become −1. The near-plane coordinate n
+            might be −2, while the far-plane coordinate f might be −8, so n &gt; f. Apply the same formula with u₀ = f
+            and u₁ = n: scale 2/(n − f), translation −(n + f)/(n − f).
           </li>
           <li>
             <strong>Fourth-coordinate row.</strong> A 4×4 matrix carries one extra coordinate, initialized to 1 for a
@@ -193,26 +194,26 @@ U=\dfrac{u-4}{2}=\dfrac{1}{2}u-2`}
         rows={[
           {
             row: '1',
-            output: 'xndc from x',
+            output: 'x NDC from x',
             rule: <>l → −1 and r → +1</>,
             entries: '[2/(r−l), 0, 0, −(r+l)/(r−l)]',
           },
           {
             row: '2',
-            output: 'yndc from y',
+            output: 'y NDC from y',
             rule: <>b → −1 and t → +1</>,
             entries: '[0, 2/(t−b), 0, −(t+b)/(t−b)]',
           },
           {
             row: '3',
-            output: 'zndc from z',
+            output: 'z NDC from z',
             rule: <>n → +1 and f → −1</>,
             entries: '[0, 0, 2/(n−f), −(n+f)/(n−f)]',
           },
           {
             row: '4',
             output: 'keep w equal to 1',
-            rule: <>ordinary points entered with w = 1</>,
+            rule: <>ordinary points enter with w = 1</>,
             entries: '[0, 0, 0, 1]',
           },
         ]}
@@ -242,21 +243,20 @@ U=\dfrac{u-4}{2}=\dfrac{1}{2}u-2`}
       </div>
       <PriorLectureLinks
         links={[
-          { href: '/linear-algebra#translation3d', label: 'Review translation in Part I' },
-          { href: '/linear-algebra#scale3d', label: 'scale' },
-          { href: '/linear-algebra#matrix3d', label: '3D matrices' },
+          { href: '/linear-algebra#translation3d', label: 'Review translation' },
+          { href: '/linear-algebra#scale3d', label: 'scaling' },
+          { href: '/linear-algebra#matrix3d', label: '3D matrices in Part I' },
         ]}
       />
       <p className="body-text">
-        The square on
-        the right is the canonical cube viewed along the camera’s −z direction: x points right and y points up. The
-        depth coordinate z is stored too, but is not drawn as a third axis in this square.
+        The square on the right is the canonical cube viewed along the camera’s −z direction: x points right and y
+        points up. The depth coordinate z is stored too, but is not drawn as a third axis in this square.
       </p>
       <p className="body-text">
         The 3D pane is an observer standing beside the volume, so near and far sit left and right. The NDC pane is
-        what the pin sees. They will not look like the same picture. Under orthographic, x and y ignore z, so the
+        what the pin sees. The two panes show different views. Under orthographic projection, x and y ignore z, so the
         front and back of a cube land on one square. Teal (near) and orange (far) are the same size; they only shift
-        if their x, y differ.
+        if their x or y coordinates differ.
       </p>
       <Playground label="Playground: orthographic box, NDC, and a test point">
         <div className="projection-pair">
@@ -276,7 +276,7 @@ U=\dfrac{u-4}{2}=\dfrac{1}{2}u-2`}
             groupColors={SAMPLE_CUBES.map((c) => c.color)}
             markers={[{ p, color: '#1a1a1a', label: 'P' }]}
             matrix={M}
-            caption="Orthographic camera output in NDC xy"
+            caption="Orthographic camera output in the NDC x–y plane"
           />
         </div>
         <div className="controls-col wide">

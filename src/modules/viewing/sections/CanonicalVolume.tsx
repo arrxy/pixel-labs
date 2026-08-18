@@ -31,8 +31,8 @@ export function CanonicalVolume() {
       </p>
       <p className="body-text">
         That standard target is the <strong>canonical view volume</strong>. Every coordinate in it lies between −1
-        and +1. Coordinates measured in this cube are called <strong>Normalized Device Coordinates</strong>, shortened
-        to <strong>NDC</strong>.
+        and +1. Coordinates measured in this cube are called <strong>Normalized Device Coordinates</strong>, abbreviated
+        as <strong>NDC</strong>.
       </p>
       <MathText
         tex={String.raw`-1\le x_{\mathrm{ndc}}\le1\qquad -1\le y_{\mathrm{ndc}}\le1\qquad -1\le z_{\mathrm{ndc}}\le1`}

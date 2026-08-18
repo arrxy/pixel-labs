@@ -20,7 +20,7 @@ export function Rotation3D() {
   return (
     <Section id="rotation3d" title="Rotation (3D)">
       <MathParagraph>
-        {`A 3D rotation needs an axis. Here we rotate about X, Y, or Z. The dashed arrow is the original vector; green is after rotation.`}
+        {`A 3D rotation needs an axis. Here we rotate about x, y, or z. The dashed arrow is the original vector; the green arrow shows the result after rotation.`}
       </MathParagraph>
       <MathText
         tex={String.raw`R_y(\theta)=\begin{pmatrix}\cos\theta&0&\sin\theta\\0&1&0\\-\sin\theta&0&\cos\theta\end{pmatrix}`}

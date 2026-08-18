@@ -18,7 +18,7 @@ export function Viewing() {
           <header className="lesson-header">
             <h1>Viewing</h1>
             <p>
-              Follow one 3D point from its model to a screen pixel. We will build the camera, choose what it can see,
+              Follow one 3D point from model space to a screen pixel. We will build the camera, choose what it can see,
               derive both projection matrices from their endpoint rules, and label every coordinate stage.
             </p>
             <div className="legend-box">
@@ -29,14 +29,13 @@ export function Viewing() {
                 </li>
                 <li>
                   Affine 4×4 transforms with a fourth coordinate <strong>w = 1</strong>, including translation, rotation,
-                  and scale.
+                  and scaling.
                 </li>
                 <li>
                   Matrix composition is right-to-left: <span className="math-sym">AB</span> applies B first. Inverse
                   transforms undo a placement.
                 </li>
               </ul>
-              
             </div>
             <PriorLectureLinks
               links={[{ href: '/linear-algebra#together3d', label: 'This continues from 4×4 transforms in Part I' }]}

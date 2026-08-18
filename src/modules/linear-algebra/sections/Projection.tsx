@@ -48,7 +48,7 @@ export function Projection() {
   return (
     <Section id="projection" title="Projection">
       <MathParagraph>
-        {`The orthogonal projection of $\\mathbf{a}$ onto $\\mathbf{b}$ is the shadow of $\\mathbf{a}$ along the direction of $\\mathbf{b}$. It is the piece of $\\mathbf{a}$ that lies parallel to $\\mathbf{b}$:`}
+        {`The orthogonal projection of $\\mathbf{a}$ onto $\\mathbf{b}$ is the shadow of $\\mathbf{a}$ on the line spanned by $\\mathbf{b}$. It is the part of $\\mathbf{a}$ that lies parallel to $\\mathbf{b}$:`}
       </MathParagraph>
       <MathText
         tex={String.raw`\mathrm{proj}_{\mathbf{b}}\mathbf{a}=\dfrac{\mathbf{a}\cdot\mathbf{b}}{\mathbf{b}\cdot\mathbf{b}}\,\mathbf{b}`}

@@ -124,7 +124,7 @@ export function ProjectionPreview({
               y
             </text>
             <text x={width / 2} y={height - 7} textAnchor="middle" className="ndc-label">
-              x/y shown · z depth hidden
+              x and y shown · z-depth hidden
             </text>
           </>
         ) : null}

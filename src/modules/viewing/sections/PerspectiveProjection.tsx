@@ -154,7 +154,7 @@ export function PerspectiveProjection() {
         </p>
         <MathText tex={String.raw`x'=\frac{nx}{z}`} display />
         <p className="body-text">
-          Looking from above gives the same argument for y. Therefore the film point is:
+          Looking from above gives the same argument for y. Therefore, the point on the near plane is:
         </p>
         <MathText tex={String.raw`P'=\left(\frac{nx}{z},\frac{ny}{z},n\right)`} display />
         <p className="hint-text">
@@ -207,8 +207,8 @@ export function PerspectiveProjection() {
       </h3>
       <p className="body-text">
         Part I represented an ordinary 3D point as (x, y, z, 1). The fourth number is called <strong>w</strong>. It is
-        a scale coordinate, not another spatial direction. Part I kept w equal to 1; perspective deliberately changes
-        it.
+        a homogeneous scale coordinate, not another spatial direction. Part I kept w equal to 1; perspective
+        deliberately changes it.
       </p>
       <p className="body-text">
         A four-number homogeneous point becomes an ordinary three-number point by dividing its first three numbers by
@@ -277,20 +277,20 @@ export function PerspectiveProjection() {
         rows={[
           {
             row: '1',
-            output: 'xh = nx',
-            rule: <>xh/w must become nx/z</>,
+            output: 'xₕ = nx',
+            rule: <>xₕ/w must become nx/z</>,
             entries: '[n, 0, 0, 0]',
           },
           {
             row: '2',
-            output: 'yh = ny',
-            rule: <>yh/w must become ny/z</>,
+            output: 'yₕ = ny',
+            rule: <>yₕ/w must become ny/z</>,
             entries: '[0, n, 0, 0]',
           },
           {
             row: '3',
-            output: 'zh = (n+f)z − fn',
-            rule: <>near stays n; far stays f after ÷w</>,
+            output: 'zₕ = (n+f)z − fn',
+            rule: <>near remains n; far remains f after ÷w</>,
             entries: '[0, 0, n+f, −fn]',
           },
           {
@@ -306,7 +306,7 @@ export function PerspectiveProjection() {
       <div className="walkthrough">
         <div className="label-caps">Finish the map to NDC</div>
         <p className="body-text">
-          M<sub>warp</sub> changes the frustum into an orthographic-shaped box while keeping the near and far planes in
+          M<sub>warp</sub> changes the frustum into an orthographic box while keeping the near and far planes in
           place. The already-derived M<sub>orth</sub> then maps that box to the NDC cube. Part I’s right-to-left
           composition rule says the combined matrix is:
         </p>

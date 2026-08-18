@@ -68,7 +68,7 @@ export function ProjectionDiagram({
       viewBox={`0 0 ${VB_W} ${VB_H}`}
       width="100%"
       role="img"
-      aria-label="Side view of perspective projection in the x z plane"
+      aria-label="Side view of perspective projection in the x–z plane"
       onPointerDown={(e) => {
         e.currentTarget.setPointerCapture(e.pointerId)
         pointerToWorld(e.clientX, e.clientY, e.currentTarget)
@@ -162,7 +162,7 @@ export function ProjectionDiagram({
       <title>
         {xPrime === null
           ? `P = (${fmt(x)}, ${fmt(z)}) is not projectable`
-          : `P = (${fmt(x)}, ${fmt(z)}) projects to x' = ${fmt(xPrime)} on the near plane`}
+          : `P = (${fmt(x)}, ${fmt(z)}) projects to x′ = ${fmt(xPrime)} on the near plane`}
       </title>
     </svg>
   )

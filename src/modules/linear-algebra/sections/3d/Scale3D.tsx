@@ -16,7 +16,7 @@ export function Scale3D() {
   return (
     <Section id="scale3d" title="Scale (3D)">
       <MathParagraph>
-        {`Non-uniform scale stretches each axis independently. The dashed cube is the unit cube; green is after scale.`}
+        {`Nonuniform scaling stretches each axis independently. The dashed cube is the unit cube; the green cube shows the result after scaling.`}
       </MathParagraph>
       <MathText
         tex={String.raw`S=\begin{pmatrix}s_x&0&0\\0&s_y&0\\0&0&s_z\end{pmatrix}`}

@@ -23,7 +23,7 @@ export function CrossProduct3D() {
         tex={String.raw`a\times b=\begin{pmatrix}a_yb_z-a_zb_y\\a_zb_x-a_xb_z\\a_xb_y-a_yb_x\end{pmatrix}`}
         display
       />
-      <Playground label="Playground: muted arrow = a × b">
+      <Playground label="Playground: purple arrow = a × b">
         <Scene3D
           deps={[a, b]}
           setup={({ root }) => {

@@ -15,7 +15,7 @@ const MATRIX_LINKS = [
   { href: '#scale', label: 'Scale' },
   { href: '#shear', label: 'Shear' },
   { href: '#translation', label: 'Translation' },
-  { href: '#homogeneous', label: 'Homogeneous coords' },
+  { href: '#homogeneous', label: 'Homogeneous coordinates' },
   { href: '#inverse', label: 'Inverse transforms' },
   { href: '#determinant', label: 'Determinant' },
   { href: '#together', label: 'Putting it together' },

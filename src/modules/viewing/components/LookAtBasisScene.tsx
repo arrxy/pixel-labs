@@ -34,7 +34,7 @@ export function LookAtBasisScene({ eye, target, up }: Props) {
       height={340}
       cameraDistance={9}
       orbitTarget={{ x: 0, y: 0.6, z: 0 }}
-      ariaLabel="Camera eye, target, and labeled right up backward basis vectors"
+      ariaLabel="Camera eye, target, and labeled right, up, and backward basis vectors"
       deps={[eye, target, up]}
       setup={({ root }) => {
         if (cameraPose) root.add(createCameraGizmo(cameraPose))
@@ -50,9 +50,9 @@ export function LookAtBasisScene({ eye, target, up }: Props) {
           color: SCENE_COLORS.b,
           worldHeight: 0.24,
         }))
-        root.add(createSpriteLabel('u · right', rightEnd, { color: SCENE_COLORS.axisX, worldHeight: 0.24 }))
-        root.add(createSpriteLabel('v · up', upEnd, { color: SCENE_COLORS.axisY, worldHeight: 0.24 }))
-        root.add(createSpriteLabel('w · back', backEnd, { color: SCENE_COLORS.axisZ, worldHeight: 0.24 }))
+        root.add(createSpriteLabel('u = right', rightEnd, { color: SCENE_COLORS.axisX, worldHeight: 0.24 }))
+        root.add(createSpriteLabel('v = up', upEnd, { color: SCENE_COLORS.axisY, worldHeight: 0.24 }))
+        root.add(createSpriteLabel('w = back', backEnd, { color: SCENE_COLORS.axisZ, worldHeight: 0.24 }))
         root.add(createSpriteLabel('looks along −w', forwardEnd, {
           color: SCENE_COLORS.axisZ,
           worldHeight: 0.22,

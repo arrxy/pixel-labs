@@ -21,7 +21,8 @@ export function Track3D() {
       <header id="from-2d-to-3d" className="lesson-bridge">
         <h2>From 2D to 3D</h2>
         <p>
-          Same ideas in space: three components, a true cross product, and 4×4 matrices. Drag each scene to orbit.
+          The same ideas extend into space with three components, a true cross product, and 4×4 matrices. Drag each
+          scene to orbit.
         </p>
       </header>
       <Vectors3D />

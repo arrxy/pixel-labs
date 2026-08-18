@@ -24,7 +24,7 @@ export function ProjectionComparison() {
   return (
     <Section id="projection-types" title="Orthographic vs perspective">
       <MathParagraph>
-        {`Same near and far cubes, two cameras. Orthographic keeps their screen size. Perspective makes the farther cube shrink because rays meet at the camera origin.`}
+        {`The same near and far cubes are shown through two cameras. Orthographic projection preserves their screen size. Perspective projection makes the farther cube shrink because the rays meet at the camera origin.`}
       </MathParagraph>
       <p className="hint-text">
         Both matrices have now been derived. This playground applies them to identical geometry so only the
@@ -58,7 +58,7 @@ export function ProjectionComparison() {
             edges={stackedCubeEdges()}
             groupColors={SAMPLE_CUBES.map((c) => c.color)}
             matrix={matrix}
-            caption={`${mode} camera output in NDC xy`}
+            caption={`${mode} camera output in the NDC x–y plane`}
           />
         </div>
         <div className="controls-col">
@@ -81,7 +81,7 @@ export function ProjectionComparison() {
             </button>
           </div>
           <p className="hint-text">
-            Green is nearer, orange is farther. Switch modes and watch the output square.
+            Green is nearer, and orange is farther. Switch modes and watch the projected output.
           </p>
         </div>
       </Playground>

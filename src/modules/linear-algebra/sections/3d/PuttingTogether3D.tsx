@@ -25,7 +25,7 @@ export function PuttingTogether3D() {
   return (
     <Section id="together3d" title="Putting it together (3D)" noBorder>
       <MathParagraph>
-        {`Compose scale, rotation, and translation into one $4\\times 4$ matrix $M = SRT$. The dashed cube is local space; green is after $M$.`}
+        {`Compose scaling, rotation, and translation into one $4\\times 4$ matrix $M = SRT$. The dashed cube is in local space; the green cube shows the result after applying $M$.`}
       </MathParagraph>
       <MathText tex={String.raw`M = S\,R\,T`} display />
       <Playground label="Playground: full affine stack">
@@ -62,7 +62,7 @@ export function PuttingTogether3D() {
           </div>
         </div>
         <div className="mono-block muted vertex-result">
-          vertex (1,1,1) → <span className="secondary">({fmt(tp.x)}, {fmt(tp.y)}, {fmt(tp.z)})</span>
+          vertex (1, 1, 1) → <span className="secondary">({fmt(tp.x)}, {fmt(tp.y)}, {fmt(tp.z)})</span>
         </div>
       </div>
     </Section>

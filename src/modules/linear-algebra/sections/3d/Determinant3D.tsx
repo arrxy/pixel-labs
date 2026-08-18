@@ -29,7 +29,7 @@ export function Determinant3D() {
   return (
     <Section id="determinant3d" title="Determinant (3D)">
       <MathParagraph>
-        {`For a $3\\times 3$ matrix the determinant is the signed volume of the parallelepiped spanned by its columns. Negative means orientation flipped (a reflection sneaked in).`}
+        {`For a $3\\times 3$ matrix, the determinant is the signed volume of the parallelepiped spanned by its columns. A negative value means the orientation is flipped, so the transformation includes a reflection.`}
       </MathParagraph>
       <MathText tex={String.raw`\det M = \text{signed volume of basis parallelepiped}`} display />
       <Playground label="Playground: scale, shear, flip Y">

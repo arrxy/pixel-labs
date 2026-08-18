@@ -86,12 +86,12 @@ export function PuttingTogether() {
   return (
     <Section id="together" title="Putting it together" noBorder>
       <MathParagraph>
-        {`Say you have a table asset that needs to move whenever a force is applied. First translate it by $\\begin{pmatrix}t_x\\\\t_y\\end{pmatrix}$, then rotate it counterclockwise by θ, then scale it by $s_x$ and $s_y$. Transformations apply right to left, so the combined matrix is:`}
+        {`Suppose a table asset must be transformed. First translate it by $\\begin{pmatrix}t_x\\\\t_y\\end{pmatrix}$, then rotate it counterclockwise by θ, and finally scale it by $s_x$ and $s_y$. Transformations apply from right to left, so the combined matrix is:`}
       </MathParagraph>
       <MathText tex={String.raw`M=S\cdot R(\theta)\cdot T`} display />
       <MathParagraph>
-        Multiply the three matrices once, in the order they will be applied (translate innermost, since it is
-        rightmost), and reuse that single M for every vertex of the table, no matter how complex the mesh.
+        Multiply the three matrices once in composition order, with translation innermost because it is rightmost.
+        Reuse that single M for every vertex of the table, no matter how complex the mesh.
       </MathParagraph>
       <p className="hint-text">
         Playground: move the sliders or type values. The dashed rectangle is the original table; the vertex{' '}

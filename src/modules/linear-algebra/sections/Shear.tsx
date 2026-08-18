@@ -40,8 +40,8 @@ export function Shear() {
         display
       />
       <MathParagraph>
-        Shear is still a linear map (origin stays put) but it is not a pure rotate-or-scale. Reflection is related:
-        flipping an axis is just a negative scale, which you already saw in the Scale playground.
+        Shear is still a linear map (the origin stays put), but it is not a pure rotation or scaling. Reflection is
+        related: flipping an axis is equivalent to applying a negative scale, as shown in the Scale playground.
       </MathParagraph>
       <Diagram>
         <svg viewBox="0 0 220 180" className="diagram-svg">

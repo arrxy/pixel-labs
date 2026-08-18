@@ -64,7 +64,7 @@ export function CompletePipeline() {
   return (
     <Section id="full-pipeline" title="One point through the complete pipeline" noBorder>
       <p className="body-text">
-        This section gathers the operations in one order so we can follow a point without skipping a name.
+        This section places the operations in sequence so we can follow a point through every named stage.
       </p>
       <p className="body-text">
         A <strong>viewport</strong> is the rectangular screen region where the final image is drawn. Its width W and
@@ -80,7 +80,7 @@ export function CompletePipeline() {
             <strong>World.</strong> M<sub>model</sub> places the object in the shared scene.
           </li>
           <li>
-            <strong>Camera / view.</strong> M<sub>view</sub> rewrites P relative to the camera.
+            <strong>Camera (view).</strong> M<sub>view</sub> rewrites P relative to the camera.
           </li>
           <li>
             <strong>Clip.</strong> M<sub>per</sub> produces four clip coordinates. They have not yet been divided by w.
@@ -159,14 +159,14 @@ export function CompletePipeline() {
             Reset
           </button>
           <p className="hint-text">
-            The summary updates every stage together. The three diagrams below provide visual references for the
-            camera-space, NDC, and screen rows.
+            The summary updates all stages together. The three diagrams below provide visual references for the
+            camera-space, NDC, and screen stages.
           </p>
         </div>
         <div className="projection-pair">
           <div className="frame-pane">
             <h4 className="frame-title">Camera-space view</h4>
-            <p className="frame-caption">A 3D side view of the camera, perspective frustum, objects, and point P.</p>
+            <p className="frame-caption">A 3D observer view of the camera, perspective frustum, objects, and point P.</p>
             <FrustumScene
               bounds={bounds}
               mode="perspective"
@@ -186,7 +186,7 @@ export function CompletePipeline() {
               groupColors={SAMPLE_CUBES.map((cube) => cube.color)}
               markers={[{ p: viewP, color: '#1a1a1a', label: 'P' }]}
               matrix={Mper}
-              caption="The tracked point after perspective projection in NDC xy"
+              caption="The tracked point after perspective projection in the NDC x–y plane"
               showAnnotations={false}
             />
           </div>

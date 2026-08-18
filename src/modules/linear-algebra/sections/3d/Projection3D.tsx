@@ -17,13 +17,13 @@ export function Projection3D() {
   return (
     <Section id="projection3d" title="Projection (3D)">
       <MathParagraph>
-        {`The orthogonal projection of $a$ onto $b$ is the shadow of $a$ along $b$. The rejection is the perpendicular leftover: $a = \\mathrm{proj}_b a + \\mathrm{rej}_b a$.`}
+        {`The orthogonal projection of $a$ onto $b$ is the shadow of $a$ on the line spanned by $b$. The rejection is the perpendicular remainder: $a = \\mathrm{proj}_b a + \\mathrm{rej}_b a$.`}
       </MathParagraph>
       <MathText
         tex={String.raw`\mathrm{proj}_b a=\frac{a\cdot b}{b\cdot b}\,b\qquad \mathrm{rej}_b a=a-\mathrm{proj}_b a`}
         display
       />
-      <Playground label="Playground: gray = proj, dashed = reject">
+      <Playground label="Playground: gray = projection, dashed = rejection">
         <Scene3D
           deps={[a, b]}
           setup={({ root }) => {

@@ -37,7 +37,7 @@ export function ViewportDiagram({ ndc, width, height }: { ndc: Vec3 | null; widt
       </text>
       <rect x={viewBox.x} y={viewBox.y} width={viewBox.w} height={viewBox.h} className="viewport-frame" />
       <text x={viewBox.x + 8} y={viewBox.y + 18} className="diagram-label">
-        +y goes down
+        Positive y points down
       </text>
 
       {ndc && screen ? (

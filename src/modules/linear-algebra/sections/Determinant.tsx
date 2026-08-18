@@ -75,7 +75,7 @@ export function Determinant() {
       </MathParagraph>
       <MathText tex={String.raw`\det M=ad-bc`} display />
       <MathParagraph>
-        {`Positive means orientation is preserved (counterclockwise basis stays counterclockwise). Negative means the shape is flipped: a reflection. Absolute value is how much areas scale. Zero means the matrix collapses space onto a line.`}
+        {`A positive value means orientation is preserved (a counterclockwise basis stays counterclockwise). A negative value means the shape is flipped by a reflection. The absolute value tells us how much the matrix scales area. Zero means the matrix collapses space onto a line.`}
       </MathParagraph>
       <Diagram>
         <svg viewBox="0 0 220 180" className="diagram-svg">

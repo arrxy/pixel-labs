@@ -69,11 +69,11 @@ export function Matrices() {
           </text>
         </svg>
       </Diagram>
-      <Playground label="Playground: A = rotation, B = scale in x. Toggle order">
+      <Playground label="Playground: A = rotation, B = scaling along x. Toggle the order">
         <VectorCanvas draw={draw} interactive={false} />
         <div className="controls-col wide">
           <SliderRow label="θ (A = rotation)" value={theta} min={-180} max={180} step={1} onChange={setTheta} />
-          <SliderRow label="sx (B = scale x)" value={sx} min={0.3} max={2.5} step={0.1} onChange={setSx} />
+          <SliderRow label="sx (B = scaling along x)" value={sx} min={0.3} max={2.5} step={0.1} onChange={setSx} />
           <div className="order-toggle">
             <button type="button" className={order === 'AB' ? 'active' : ''} onClick={() => setOrder('AB')}>
               A·B (scale then rotate)

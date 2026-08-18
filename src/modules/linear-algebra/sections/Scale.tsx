@@ -8,7 +8,7 @@ import { OX, OY, drawGrid, polyOutline } from '../lib/canvas'
 import { DEFAULT_COLORS } from '../lib/types'
 
 export function Scale() {
-  const [sx, setSx] = useState(2)
+  const [sx, setSx] = useState(3)
   const [sy, setSy] = useState(0.5)
 
   const draw = useCallback(

@@ -21,7 +21,7 @@ export function DotProduct3D() {
   return (
     <Section id="dot3d" title="Dot product (3D)">
       <MathParagraph>
-        {`Same formula as 2D: $a\\cdot b = |a||b|\\cos\\theta = a_xb_x+a_yb_y+a_zb_z$. The gray segment is the projection of $a$ onto $b$.`}
+        {`The formula is the same as in 2D: $a\\cdot b = |a||b|\\cos\\theta = a_xb_x+a_yb_y+a_zb_z$. The gray segment is the projection of $a$ onto $b$.`}
       </MathParagraph>
       <MathText tex={String.raw`a\cdot b=a_xb_x+a_yb_y+a_zb_z`} display />
       <Playground label="Playground: edit a and b">

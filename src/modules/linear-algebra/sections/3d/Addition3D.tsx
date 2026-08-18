@@ -21,7 +21,7 @@ export function Addition3D() {
       <MathParagraph>
         {`Tip-to-tail still works in 3D: $a+b$ places $b$ at the tip of $a$. Subtraction is $a+(-b)$.`}
       </MathParagraph>
-      <Playground label="Playground: toggle add / subtract">
+      <Playground label="Playground: toggle between addition and subtraction">
         <Scene3D
           deps={[a, b, mode]}
           setup={({ root }) => {

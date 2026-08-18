@@ -40,7 +40,7 @@ export function CrossProduct() {
     <Section id="cross" title="Cross product" noBorder>
       <MathParagraph>
         The cross product takes two vectors, a and b, and produces a third vector perpendicular to both, following the
-        thumb-curl rule. In 2D we only see its z-component: a signed number equal to the area of the parallelogram the
+        right-hand rule. In 2D we only see its z-component: a signed number equal to the area of the parallelogram the
         two vectors span.
       </MathParagraph>
       <MathText tex={String.raw`a_xb_y-a_yb_x`} display />

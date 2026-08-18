@@ -33,7 +33,7 @@ export function Matrices3D() {
         tex={String.raw`M=\begin{pmatrix}| & | & |\\e_1' & e_2' & e_3'\\| & | & |\end{pmatrix}`}
         display
       />
-      <Playground label="Playground: A = rot Z, B = scale X">
+      <Playground label="Playground: A = rotation about z, B = scaling along x">
         <Scene3D
           deps={[theta, sx, order]}
           setup={({ root }) => {
@@ -43,8 +43,8 @@ export function Matrices3D() {
           }}
         />
         <div className="controls-col wide">
-          <SliderRow label="θ (A = rot Z)" value={theta} min={-180} max={180} step={1} onChange={setTheta} />
-          <SliderRow label="sx (B = scale x)" value={sx} min={0.3} max={2.5} step={0.1} onChange={setSx} />
+          <SliderRow label="θ (A = rotation about z)" value={theta} min={-180} max={180} step={1} onChange={setTheta} />
+          <SliderRow label="sx (B = scaling along x)" value={sx} min={0.3} max={2.5} step={0.1} onChange={setSx} />
           <div className="order-toggle">
             <button type="button" className={order === 'AB' ? 'active' : ''} onClick={() => setOrder('AB')}>
               A·B (scale then rotate)

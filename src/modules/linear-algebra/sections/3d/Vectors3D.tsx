@@ -14,7 +14,7 @@ export function Vectors3D() {
   return (
     <Section id="vectors3d" title="What is a vector? (3D)">
       <MathParagraph>
-        {`In 3D a vector has three components: $\\begin{pmatrix}x\\\\y\\\\z\\end{pmatrix}$. Length is still the Euclidean norm: $|v|=\\sqrt{x^2+y^2+z^2}$. Drag the scene to orbit.`}
+        {`In 3D, a vector has three components: $\\begin{pmatrix}x\\\\y\\\\z\\end{pmatrix}$. Length is still the Euclidean norm: $|v|=\\sqrt{x^2+y^2+z^2}$. Drag the scene to orbit.`}
       </MathParagraph>
       <Playground label="Playground: edit components; drag to orbit">
         <Scene3D

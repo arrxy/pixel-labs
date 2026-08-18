@@ -98,7 +98,7 @@ export function CameraSpaces() {
           </li>
           <li>
             <strong>Camera space</strong>, also called <strong>view space</strong>, uses the camera as the origin. Its
-            x-axis points right, y-axis points up, and it looks along −z.
+            x-axis points right, its y-axis points up, and it looks along −z.
           </li>
         </ul>
       </div>
@@ -116,9 +116,10 @@ export function CameraSpaces() {
         World pane). If you used that pose as a matrix, it would plant the camera into the world.
       </p>
       <p className="body-text">
-        <Mx sub="view" /> does the opposite: it leaves the camera at the origin and moves the
-        cube instead. That is what “inverse” means here: undo the camera’s placement. World: pin walks around a
-        fixed cube. Camera: cube walks around a fixed pin.
+        <Mx sub="view" /> does the opposite: it leaves the camera at the origin and moves the cube instead. That is
+        what “inverse” means here: it undoes the camera’s placement. In the World pane, the pin moves around a fixed
+        cube.
+        In the Camera pane, the cube moves around a fixed pin.
       </p>
       <p className="hint-text">
         This section uses <Mx sub="view" /> for its job. The next section constructs every row of that matrix from the
@@ -126,8 +127,8 @@ export function CameraSpaces() {
       </p>
       <PriorLectureLinks
         links={[
-          { href: '/linear-algebra#together3d', label: 'Review composed 4×4 transforms in Part I' },
-          { href: '/linear-algebra#inverse3d', label: 'inverse transforms' },
+          { href: '/linear-algebra#together3d', label: 'Review composed 4×4 transforms' },
+          { href: '/linear-algebra#inverse3d', label: 'inverse transforms in Part I' },
         ]}
       />
 
@@ -143,11 +144,10 @@ export function CameraSpaces() {
             coordinates.
           </li>
           <li>
-            The <strong>black pin</strong> is the camera’s position (the eye). The camera icon faces along the camera’s
-            −z.
+            The <strong>black pin</strong> is the camera’s position (the eye). The camera icon faces along its −z-axis.
           </li>
           <li>
-            The <strong>dashed grey cube</strong> in World is a ghost of Model: where the cube sat before{' '}
+            The <strong>dashed gray cube</strong> in World is a ghost of Model: where the cube sat before{' '}
             <Mx sub="model" />.
           </li>
         </ul>
@@ -166,9 +166,9 @@ export function CameraSpaces() {
             that room. The dashed orange line is “camera to P.”
           </li>
           <li>
-            <strong>Camera.</strong> Undo the camera’s placement: pin locked at (0,0,0), looking −z, cube moves. Drag{' '}
-            <strong>camera x</strong>: in World the pin slides, in Camera the cube slides the other way. Same motion,
-            opposite description. That is <Mx sub="view" />.
+            <strong>Camera.</strong> Undoing the camera’s placement locks the pin at (0, 0, 0), looking along −z, while
+            the cube moves. Drag <strong>camera x</strong>: in World the pin slides, while in Camera the cube slides
+            the other way. It is the same motion described from the opposite frame. That is <Mx sub="view" />.
           </li>
         </ol>
       </div>
@@ -220,7 +220,7 @@ export function CameraSpaces() {
             <SpaceFrame
               title="3 · Camera"
               coord={`P = (${fmt(viewP.x)}, ${fmt(viewP.y)}, ${fmt(viewP.z)})`}
-              caption="Pin locked at (0,0,0), looking −z. Drag the sliders: the cube moves, not the pin."
+              caption="The pin is locked at (0, 0, 0), looking along −z. Drag the sliders: the cube moves, not the pin."
               ariaLabel="Cube in camera space"
               deps={camDeps}
               setup={({ root }) => {
@@ -243,7 +243,7 @@ export function CameraSpaces() {
               Reset
             </button>
             <p className="hint-text">
-              Try it: drag camera x and watch World and Camera at the same time. Model should not move.
+              Move camera x and watch the World and Camera panes together. The Model pane should not move.
             </p>
           </div>
         </div>

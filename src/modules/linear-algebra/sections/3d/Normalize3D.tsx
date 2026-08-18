@@ -15,7 +15,7 @@ export function Normalize3D() {
   return (
     <Section id="normalize3d" title="Unit vectors (3D)">
       <MathParagraph>
-        {`Divide by length to get a unit vector on the sphere of radius 1. Same idea as 2D, now in space.`}
+        {`Divide by the vector’s length to obtain a unit vector on the sphere of radius 1. This is the same idea as in 2D, now extended into space.`}
       </MathParagraph>
       <MathText tex={String.raw`\hat{v}=\frac{v}{|v|}`} display />
       <Playground label="Playground: green = v, orange = unit vector">
@@ -32,7 +32,7 @@ export function Normalize3D() {
           <div className="mono-block muted">
             <div>|v| = {fmt(mag3(v))}</div>
             <div className="ink">
-              û = ({fmt(u.x)}, {fmt(u.y)}, {fmt(u.z)})
+              <MathText tex={String.raw`\hat v`} /> = ({fmt(u.x)}, {fmt(u.y)}, {fmt(u.z)})
             </div>
           </div>
         </div>

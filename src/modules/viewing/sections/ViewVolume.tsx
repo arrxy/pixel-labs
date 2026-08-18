@@ -112,8 +112,9 @@ export function ViewVolume() {
   return (
     <Section id="view-volume" title="View volume">
       <p className="body-text">
-        Camera space left the pin at the origin, looking down −z. That rewrite still contains the whole room: behind
-        the camera, off to the side, infinitely far. A picture cannot. The view volume is the chunk we keep.
+        Camera space left the pin at the origin, looking down −z. The rewritten scene still includes points behind
+        the camera, off to the side, and infinitely far away. A picture cannot include all of them. The view volume is
+        the region we keep.
       </p>
       <p className="body-text">
         The first boundary is the <strong>near plane</strong>. Its rectangle is the film: the window through which the
@@ -122,13 +123,13 @@ export function ViewVolume() {
         down −z, the two planes have camera-space coordinates z = −near and z = −far.
       </p>
       <p className="body-text">
-        The six numbers define two possible keep-regions. For perspective, the side walls open away from the camera
+        The six numbers define two possible visible regions. For perspective, the side walls open away from the camera
         and form a <strong>frustum</strong>, meaning a pyramid with its tip cut off by the near plane. For
         orthographic projection, the walls stay parallel and form a box.
       </p>
       <p className="body-text">
         A point outside the chosen volume is rejected before drawing. This rejection is called{' '}
-        <strong>clipping</strong>. A point behind the camera is rejected too because no forward-looking ray reaches
+        <strong>clipping</strong>. A point behind the camera is also rejected because no forward-looking ray reaches
         the film.
       </p>
 
@@ -144,8 +145,8 @@ export function ViewVolume() {
             plane.
           </li>
           <li>
-            Dots: teal = inside that volume, grey = outside (rejected), orange = behind the camera. Watch <strong>B</strong>: it
-            can sit in the wedge and miss the box.
+            Dots: teal = inside that volume, gray = outside (rejected), and orange = behind the camera. Watch{' '}
+            <strong>B</strong>: it can sit in the wedge and miss the box.
           </li>
         </ul>
       </div>
@@ -154,18 +155,17 @@ export function ViewVolume() {
         <div className="label-caps">Why this exists</div>
         <ol>
           <li>
-            <strong>After</strong> <Mx sub="view" />. We know where every point is relative to the camera. We still
-            have no idea which of those points hit a finite screen.
+            <strong>Apply</strong> <Mx sub="view" />. We then know where every point is relative to the camera, but we
+            still do not know which points fall within a finite image.
           </li>
           <li>
             <strong>Keep a window.</strong> Only points that pass through the near rectangle, and lie between near and
             far, are drawn. The rest are thrown away (clipped).
           </li>
           <li>
-            <strong>Two keep-regions, one window.</strong> Both shapes share the same six numbers. A photograph wants
-            the wedge: things farther from the pin fill more of the far plane, so they look smaller on the film. A CAD
-            drawing wants the box: size does not change with depth. Drag <strong>r</strong> and both volumes widen
-            together.
+            <strong>Two visible regions, one window.</strong> Both shapes share the same six numbers. A photograph wants
+            the wedge because objects appear smaller as their distance from the pin increases. A CAD drawing uses the
+            box because size does not change with depth. Drag <strong>r</strong> and both volumes widen together.
           </li>
         </ol>
       </div>
@@ -232,7 +232,7 @@ export function ViewVolume() {
               ))}
             </div>
             <p className="hint-text">
-              Try it: look at B in both panes, then drag r until the box swallows B too.
+              Look at B in both panes, then drag r until the box contains B too.
             </p>
           </div>
         </div>

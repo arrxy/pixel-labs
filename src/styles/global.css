@@ -545,6 +545,20 @@ a.part-card:hover {
   overflow-x: auto;
 }
 
+.matrix-readout .matrix-formula {
+  flex: 1 1 100%;
+  width: 100%;
+  min-width: 0;
+  margin-bottom: 0;
+  overflow-x: hidden;
+}
+
+@media (max-width: 800px) {
+  .matrix-readout .matrix-formula {
+    font-size: 12px;
+  }
+}
+
 .matrix-grid {
   display: grid;
   grid-template-columns: repeat(3, 4.5ch);

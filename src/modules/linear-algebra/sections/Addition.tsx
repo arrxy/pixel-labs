@@ -36,9 +36,9 @@ export function Addition() {
   return (
     <Section id="addition" title="Addition & subtraction">
       <MathParagraph>
-        {`Suppose two vectors add: $\\mathbf{a}=\\begin{pmatrix}x\\\\z\\end{pmatrix}$, $\\mathbf{b}=\\begin{pmatrix}u\\\\v\\end{pmatrix}$.`}
+        {`For $\\mathbf{a}=\\begin{pmatrix}a_x\\\\a_y\\end{pmatrix}$ and $\\mathbf{b}=\\begin{pmatrix}b_x\\\\b_y\\end{pmatrix}$, add the corresponding components:`}
       </MathParagraph>
-      <MathText tex={String.raw`\mathbf{a}+\mathbf{b}=\begin{pmatrix}x+u\\z+v\end{pmatrix}`} display />
+      <MathText tex={String.raw`\mathbf{a}+\mathbf{b}=\begin{pmatrix}a_x+b_x\\a_y+b_y\end{pmatrix}`} display />
       <MathParagraph>
         {`Subtraction works the same way, with the second vector negated: $\\mathbf{a}-\\mathbf{b}=\\mathbf{a}+(-\\mathbf{b})$.`}
       </MathParagraph>

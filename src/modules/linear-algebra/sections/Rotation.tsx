@@ -34,7 +34,7 @@ export function Rotation() {
   return (
     <Section id="rotation" title="Rotation">
       <MathParagraph>
-        {`To rotate a vector by θ, picture rotating the coordinate axes themselves. The x-axis unit vector $\\begin{pmatrix}1\\\\0\\end{pmatrix}$ becomes $\\begin{pmatrix}\\cos\\theta\\\\\\sin\\theta\\end{pmatrix}$, and the y-axis unit vector $\\begin{pmatrix}0\\\\1\\end{pmatrix}$ becomes $\\begin{pmatrix}-\\sin\\theta\\\\\\cos\\theta\\end{pmatrix}$. Those two new columns are the rotation matrix:`}
+        {`To rotate a vector by θ, picture rotating the basis vectors and watching where they land. The x-axis unit vector $\\begin{pmatrix}1\\\\0\\end{pmatrix}$ becomes $\\begin{pmatrix}\\cos\\theta\\\\\\sin\\theta\\end{pmatrix}$, and the y-axis unit vector $\\begin{pmatrix}0\\\\1\\end{pmatrix}$ becomes $\\begin{pmatrix}-\\sin\\theta\\\\\\cos\\theta\\end{pmatrix}$. Those two new columns are the rotation matrix:`}
       </MathParagraph>
       <MathText
         tex={String.raw`R(\theta)=\begin{pmatrix}\cos\theta & -\sin\theta\\\sin\theta & \cos\theta\end{pmatrix}`}

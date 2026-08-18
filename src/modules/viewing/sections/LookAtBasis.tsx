@@ -43,7 +43,7 @@ export function LookAtBasis() {
             <strong>target</strong> is a world-space point the camera looks toward.
           </li>
           <li>
-            <strong>up</strong> is a preferred upward direction. Here it is the world y direction (0, 1, 0).
+            <strong>up</strong> is a preferred upward direction. Here it is the world y-axis direction (0, 1, 0).
           </li>
         </ul>
       </div>
@@ -72,7 +72,7 @@ export function LookAtBasis() {
       <div className="walkthrough">
         <div className="label-caps">Step 2 · find a point’s camera coordinates</div>
         <p className="body-text">
-          Let p be any point in world space. First subtract eye, so the camera position becomes the origin. A dot
+          Let p be any point in world space. First subtract eye so the camera position becomes the origin. A dot
           product with each camera axis then measures the point along that axis:
         </p>
         <MathText
@@ -93,16 +93,16 @@ w_x&w_y&w_z&-\mathbf w\cdot\mathbf{eye}\\
           display
         />
         <p className="hint-text">
-          Check the result: substitute p = eye. Every one of the first three rows becomes axis·eye − axis·eye = 0,
+          Check the result: substitute p = eye. Each of the first three rows becomes axis·eye − axis·eye = 0,
           so the camera moves to (0, 0, 0).
         </p>
       </div>
 
       <PriorLectureLinks
         links={[
-          { href: '/linear-algebra#normalize3d', label: 'Review normalization in Part I' },
-          { href: '/linear-algebra#cross3d', label: 'cross product' },
-          { href: '/linear-algebra#dot3d', label: 'dot product' },
+          { href: '/linear-algebra#normalize3d', label: 'Review normalization' },
+          { href: '/linear-algebra#cross3d', label: 'the cross product' },
+          { href: '/linear-algebra#dot3d', label: 'the dot product in Part I' },
         ]}
       />
 
@@ -116,9 +116,9 @@ w_x&w_y&w_z&-\mathbf w\cdot\mathbf{eye}\\
             Reset
           </button>
           <div className="mono-block muted" aria-live="polite">
-            <div>u · right = ({fmt(u.x)}, {fmt(u.y)}, {fmt(u.z)})</div>
-            <div>v · up = ({fmt(v.x)}, {fmt(v.y)}, {fmt(v.z)})</div>
-            <div>w · back = ({fmt(w.x)}, {fmt(w.y)}, {fmt(w.z)})</div>
+            <div>u (right) = ({fmt(u.x)}, {fmt(u.y)}, {fmt(u.z)})</div>
+            <div>v (up) = ({fmt(v.x)}, {fmt(v.y)}, {fmt(v.z)})</div>
+            <div>w (backward) = ({fmt(w.x)}, {fmt(w.y)}, {fmt(w.z)})</div>
             <div>row translations = ({fmt(-dot3(u, eye))}, {fmt(-dot3(v, eye))}, {fmt(-dot3(w, eye))})</div>
           </div>
         </div>

@@ -2,7 +2,7 @@ const PARTS = [
   {
     part: 'Part I',
     title: 'Linear Algebra',
-    blurb: 'Vectors, matrices, and transforms - the math behind graphics, in 2D and 3D.',
+    blurb: 'Vectors, matrices, and transforms: the math behind graphics in 2D and 3D.',
     href: '/linear-algebra',
     ready: true,
   },

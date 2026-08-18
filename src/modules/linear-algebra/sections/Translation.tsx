@@ -45,7 +45,7 @@ export function Translation() {
         {`Translation shifts every point by a fixed offset: $\\mathbf{a}=\\begin{pmatrix}1\\\\2\\end{pmatrix}$ translated by $\\begin{pmatrix}1\\\\1\\end{pmatrix}$ lands at $\\begin{pmatrix}2\\\\3\\end{pmatrix}$.`}
       </MathParagraph>
       <MathParagraph>
-        {`Unlike rotation and scale, translation can't be written as a matrix multiplied by a 2D vector: there's no matrix M where $M\\begin{pmatrix}x\\\\y\\end{pmatrix}$ produces $\\begin{pmatrix}x+t_x\\\\y+t_y\\end{pmatrix}$ for every x, y. That's what homogeneous coordinates fix.`}
+        {`Unlike rotation and scaling, translation cannot be written as a matrix multiplied by a 2D vector: there is no matrix M for which $M\\begin{pmatrix}x\\\\y\\end{pmatrix}$ produces $\\begin{pmatrix}x+t_x\\\\y+t_y\\end{pmatrix}$ for every x and y. Homogeneous coordinates solve this problem.`}
       </MathParagraph>
       <Diagram>
         <svg viewBox="0 0 220 180" className="diagram-svg">
@@ -62,10 +62,10 @@ export function Translation() {
           <circle cx="60" cy="90" r="4" fill="#9b978a" />
           <circle cx="90" cy="60" r="4" fill="#0f6e63" />
           <text x="38" y="104" fontFamily="Instrument Serif, serif" fontSize="12" fill="#6b6b63" fontStyle="italic">
-            a = (1,2)
+            a = (1, 2)
           </text>
           <text x="94" y="54" fontFamily="Instrument Serif, serif" fontSize="12" fill="#0f6e63" fontStyle="italic">
-            a+t = (2,3)
+            a + t = (2, 3)
           </text>
           <text x="66" y="70" fontFamily="Space Mono, monospace" fontSize="11" fill="#6b6b63">
             t
