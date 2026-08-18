@@ -99,7 +99,7 @@ export function PuttingTogether() {
       </p>
       <Playground>
         <VectorCanvas draw={draw} width={380} height={300} interactive={false} />
-        <div className="controls-col wide">
+        <div className="controls-col wide transform-stack-controls">
           <SliderRow
             label="tx"
             value={tx}

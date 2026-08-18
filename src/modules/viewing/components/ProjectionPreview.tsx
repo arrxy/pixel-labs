@@ -17,6 +17,7 @@ type Props = {
   height?: number
   caption?: string
   showAnnotations?: boolean
+  showStatus?: boolean
 }
 
 export function ProjectionPreview({
@@ -30,6 +31,7 @@ export function ProjectionPreview({
   height = 220,
   caption = 'Camera output in NDC',
   showAnnotations = true,
+  showStatus = true,
 }: Props) {
   const pad = 28
   const inner = Math.min(width, height) - pad * 2
@@ -90,11 +92,16 @@ export function ProjectionPreview({
   const status = !matrix
     ? 'invalid bounds'
     : tracked
-      ? `P → NDC (${fmt(tracked.ndc.x)}, ${fmt(tracked.ndc.y)}, ${fmt(tracked.ndc.z)})${tracked.inside ? '' : ' · outside NDC'}`
-      : `${insideCount}/${vertices.length} vertices inside the NDC square`
+      ? `P → NDC (${fmt(tracked.ndc.x)}, ${fmt(tracked.ndc.y)}, ${fmt(tracked.ndc.z)})`
+      : `${insideCount}/${vertices.length} vertices inside the NDC box`
 
   return (
     <figure className="projection-preview">
+      {tracked && !tracked.inside ? (
+        <div className="projection-outside-status" role="status" aria-label="outside NDC">
+          <span className="visually-hidden">outside NDC</span>
+        </div>
+      ) : null}
       <svg
         className="projection-svg"
         viewBox={`0 0 ${width} ${height}`}
@@ -160,9 +167,11 @@ export function ProjectionPreview({
           </g>
         ))}
       </svg>
-      <figcaption className="mono-block muted" aria-live="polite">
-        {status}
-      </figcaption>
+      {showStatus ? (
+        <figcaption className="mono-block muted" aria-live="polite">
+          {status}
+        </figcaption>
+      ) : null}
     </figure>
   )
 }

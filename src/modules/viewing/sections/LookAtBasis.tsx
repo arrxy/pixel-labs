@@ -20,6 +20,15 @@ export function LookAtBasis() {
   const eye = { x: eyeX, y: eyeY, z: eyeZ }
   const { u, v, w } = lookAtBasis(eye, TARGET, UP)
   const Mview = lookAt(eye, TARGET, UP)
+  const basisRows = [
+    { label: 'u (right)', values: [u.x, u.y, u.z] },
+    { label: 'v (up)', values: [v.x, v.y, v.z] },
+    { label: 'w (backward)', values: [w.x, w.y, w.z] },
+    {
+      label: 'row translations',
+      values: [-dot3(u, eye), -dot3(v, eye), -dot3(w, eye)],
+    },
+  ]
 
   const reset = () => {
     setEyeX(2.4)
@@ -108,22 +117,33 @@ w_x&w_y&w_z&-\mathbf w\cdot\mathbf{eye}\\
 
       <Playground label="Playground: eye, target, and camera axes">
         <LookAtBasisScene eye={eye} target={TARGET} up={UP} />
-        <div className="controls-col wide">
+        <div className="controls-col wide look-at-controls">
           <SliderRow label="eye x" value={eyeX} min={-4} max={4} step={0.1} onChange={setEyeX} />
           <SliderRow label="eye y" value={eyeY} min={0.8} max={4} step={0.1} onChange={setEyeY} />
           <SliderRow label="eye z" value={eyeZ} min={1.5} max={7} step={0.1} onChange={setEyeZ} />
           <button type="button" className="mode-btn" onClick={reset}>
             Reset
           </button>
-          <div className="mono-block muted" aria-live="polite">
-            <div>u (right) = ({fmt(u.x)}, {fmt(u.y)}, {fmt(u.z)})</div>
-            <div>v (up) = ({fmt(v.x)}, {fmt(v.y)}, {fmt(v.z)})</div>
-            <div>w (backward) = ({fmt(w.x)}, {fmt(w.y)}, {fmt(w.z)})</div>
-            <div>row translations = ({fmt(-dot3(u, eye))}, {fmt(-dot3(v, eye))}, {fmt(-dot3(w, eye))})</div>
-          </div>
         </div>
       </Playground>
-      <MatrixReadout matrix={Mview} label={<>M<sub>view</sub> · world to camera</>} />
+      <div className="mono-block muted look-at-results" aria-live="polite">
+        {basisRows.map((row) => (
+          <div className="look-at-result-row" key={row.label}>
+            <span>{row.label}</span>
+            <span>=</span>
+            <span>(</span>
+            <span>{fmt(row.values[0])}</span>
+            <span>,</span>
+            <span>{fmt(row.values[1])}</span>
+            <span>,</span>
+            <span>{fmt(row.values[2])}</span>
+            <span>)</span>
+          </div>
+        ))}
+      </div>
+      <div className="look-at-matrix">
+        <MatrixReadout matrix={Mview} label={<>M<sub>view</sub> · world to camera</>} />
+      </div>
     </Section>
   )
 }
