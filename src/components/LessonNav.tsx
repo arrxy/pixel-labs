@@ -1,4 +1,4 @@
-import { useId, useState, type ReactNode } from 'react'
+import { useEffect, useId, useMemo, useState, type ReactNode } from 'react'
 
 export type LessonNavLink = { href: string; label: string }
 
@@ -43,9 +43,65 @@ type Props = {
 }
 
 export function LessonNav({ brand, ariaLabel, groups }: Props) {
+  const links = useMemo(() => groups.flatMap((group) => group.links), [groups])
   const [open, setOpen] = useState(true)
+  const [activeHref, setActiveHref] = useState(() => {
+    const hash = window.location.hash
+    return links.some((link) => link.href === hash) ? hash : (links[0]?.href ?? '')
+  })
   const navId = useId()
   const close = () => setOpen(false)
+
+  useEffect(() => {
+    let frame = 0
+
+    const updateActiveLink = () => {
+      window.cancelAnimationFrame(frame)
+      frame = window.requestAnimationFrame(() => {
+        const threshold = Math.min(180, window.innerHeight * 0.28)
+        let nextHref = links[0]?.href ?? ''
+
+        for (const link of links) {
+          const id = decodeURIComponent(link.href.replace(/^#/, ''))
+          const section = document.getElementById(id)
+          if (!section) continue
+          if (section.getBoundingClientRect().top <= threshold) nextHref = link.href
+          else break
+        }
+
+        const atPageEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2
+        if (atPageEnd && links.length > 0) nextHref = links[links.length - 1].href
+
+        setActiveHref((current) => (current === nextHref ? current : nextHref))
+      })
+    }
+
+    updateActiveLink()
+    window.addEventListener('scroll', updateActiveLink, { passive: true })
+    window.addEventListener('resize', updateActiveLink)
+    window.addEventListener('hashchange', updateActiveLink)
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', updateActiveLink)
+      window.removeEventListener('resize', updateActiveLink)
+      window.removeEventListener('hashchange', updateActiveLink)
+    }
+  }, [links])
+
+  useEffect(() => {
+    const nav = document.getElementById(navId)
+    const activeLink = nav?.querySelector<HTMLElement>('a[aria-current="location"]')
+    if (!nav || !activeLink) return
+
+    const navRect = nav.getBoundingClientRect()
+    const linkRect = activeLink.getBoundingClientRect()
+    const topBoundary = navRect.top + 72
+    const bottomBoundary = navRect.bottom - 32
+
+    if (linkRect.top < topBoundary) nav.scrollBy({ top: linkRect.top - topBoundary })
+    else if (linkRect.bottom > bottomBoundary) nav.scrollBy({ top: linkRect.bottom - bottomBoundary })
+  }, [activeHref, navId, open])
 
   return (
     <>
@@ -78,7 +134,13 @@ export function LessonNav({ brand, ariaLabel, groups }: Props) {
               <ul className="nav-list">
                 {group.links.map((l) => (
                   <li key={l.href}>
-                    <a href={l.href}>{l.label}</a>
+                    <a
+                      href={l.href}
+                      aria-current={activeHref === l.href ? 'location' : undefined}
+                      onClick={() => setActiveHref(l.href)}
+                    >
+                      {l.label}
+                    </a>
                   </li>
                 ))}
               </ul>

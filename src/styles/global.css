@@ -257,7 +257,17 @@ a.part-card:hover {
 }
 
 .nav-list a {
+  display: block;
+  margin-left: -12px;
+  padding-left: 10px;
+  border-left: 2px solid transparent;
   font-size: 14px;
+}
+
+.nav-list a[aria-current='location'] {
+  border-left-color: var(--accent);
+  color: var(--ink);
+  font-weight: 600;
 }
 
 .lesson-main {
