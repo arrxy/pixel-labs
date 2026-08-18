@@ -43,7 +43,7 @@ export function Addition() {
         {`Subtraction works the same way, with the second vector negated: $\\mathbf{a}-\\mathbf{b}=\\mathbf{a}+(-\\mathbf{b})$.`}
       </MathParagraph>
       <Diagram>
-        <svg viewBox="0 0 220 180" className="diagram-svg">
+        <svg viewBox="0 0 220 180" className="diagram-svg" role="img" aria-label="Head-to-tail addition of vectors a and b">
           <line x1="10" y1="150" x2="205" y2="150" stroke="#cfccc0" strokeWidth="1.5" />
           <line x1="30" y1="170" x2="30" y2="15" stroke="#cfccc0" strokeWidth="1.5" />
           <line x1="30" y1="150" x2="90" y2="130" stroke="#0f6e63" strokeWidth="2.5" markerEnd="url(#arrowA)" />

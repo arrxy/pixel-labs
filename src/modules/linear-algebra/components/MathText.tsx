@@ -10,10 +10,13 @@ type Props = {
 export function MathText({ tex, display = false, className }: Props) {
   const html = useMemo(() => {
     try {
-      return katex.renderToString(tex, {
+      const rendered = katex.renderToString(tex, {
         displayMode: display,
         throwOnError: false,
       })
+      // KaTeX already exposes semantic MathML. Its internal stretchable SVGs
+      // are visual implementation details and should not be announced twice.
+      return rendered.replaceAll('<svg ', '<svg aria-hidden="true" focusable="false" ')
     } catch {
       return tex
     }

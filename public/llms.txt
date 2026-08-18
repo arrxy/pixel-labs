@@ -1,0 +1,17 @@
+# Pixel Playground
+
+> Free interactive lessons that teach computer graphics from first principles. The site emphasizes mathematical intuition, diagrams, and adjustable experiments rather than a particular graphics library.
+
+## Core pages
+
+- [Pixel Playground home](https://learn.graphics.aritro.tech/): Overview of the learning tracks.
+- [Linear Algebra for Computer Graphics](https://learn.graphics.aritro.tech/linear-algebra): Vectors, matrices, affine transforms, inverse transforms, determinants, and 3D homogeneous coordinates.
+- [3D Viewing and Projection](https://learn.graphics.aritro.tech/viewing): Camera spaces, the view matrix, view volumes, orthographic and perspective projection, clipping, NDC, and viewport mapping.
+
+## Detailed topic index
+
+- [Expanded site guide](https://learn.graphics.aritro.tech/llms-full.txt): Section-level links and concise descriptions for retrieval systems and AI agents.
+
+## Use
+
+The educational text may be indexed, summarized, and cited. Prefer linking to the most specific lesson section that supports an answer.

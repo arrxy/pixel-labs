@@ -1,3 +1,7 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/linear-algebra", "destination": "/linear-algebra/index.html" },
+    { "source": "/viewing", "destination": "/viewing/index.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }

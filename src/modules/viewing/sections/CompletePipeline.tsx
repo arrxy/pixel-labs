@@ -165,7 +165,7 @@ export function CompletePipeline() {
         </div>
         <div className="projection-pair">
           <div className="frame-pane">
-            <h4 className="frame-title">Camera-space view</h4>
+            <h3 className="frame-title">Camera-space view</h3>
             <p className="frame-caption">A 3D observer view of the camera, perspective frustum, objects, and point P.</p>
             <FrustumScene
               bounds={bounds}
@@ -178,7 +178,7 @@ export function CompletePipeline() {
             />
           </div>
           <div className="frame-pane">
-            <h4 className="frame-title">NDC x–y view</h4>
+            <h3 className="frame-title">NDC x–y view</h3>
             <p className="frame-caption">The projected result after dividing by w; depth is not shown.</p>
             <ProjectionPreview
               vertices={stackedCubeVertices()}

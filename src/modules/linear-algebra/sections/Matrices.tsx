@@ -61,7 +61,7 @@ export function Matrices() {
         display
       />
       <Diagram>
-        <svg viewBox="0 0 220 180" className="diagram-svg">
+        <svg viewBox="0 0 220 180" className="diagram-svg" role="img" aria-label="Basis vectors transformed by a matrix">
           <rect x="30" y="100" width="40" height="30" fill="none" stroke="#c9c6ba" strokeWidth="2" strokeDasharray="4,3" />
           <polygon points="30,130 90,130 78,85 18,85" fill="none" stroke="#0f6e63" strokeWidth="2.5" />
           <text x="100" y="100" fontFamily="Space Mono, monospace" fontSize="11" fill="#6b6b63">

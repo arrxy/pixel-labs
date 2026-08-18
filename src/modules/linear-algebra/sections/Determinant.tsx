@@ -78,7 +78,7 @@ export function Determinant() {
         {`A positive value means orientation is preserved (a counterclockwise basis stays counterclockwise). A negative value means the shape is flipped by a reflection. The absolute value tells us how much the matrix scales area. Zero means the matrix collapses space onto a line.`}
       </MathParagraph>
       <Diagram>
-        <svg viewBox="0 0 220 180" className="diagram-svg">
+        <svg viewBox="0 0 220 180" className="diagram-svg" role="img" aria-label="Transformed unit square illustrating signed area">
           <polygon points="40,140 120,140 150,70 70,70" fill="rgba(15,110,99,0.12)" stroke="#0f6e63" strokeWidth="2" />
           <line x1="40" y1="140" x2="120" y2="140" stroke="#0f6e63" strokeWidth="2.5" markerEnd="url(#arrowA)" />
           <line x1="40" y1="140" x2="70" y2="70" stroke="#d9622b" strokeWidth="2.5" markerEnd="url(#arrowB)" />

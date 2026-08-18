@@ -38,7 +38,7 @@ export function Scale() {
         display
       />
       <Diagram>
-        <svg viewBox="0 0 220 180" className="diagram-svg">
+        <svg viewBox="0 0 220 180" className="diagram-svg" role="img" aria-label="Original and scaled rectangle on a coordinate grid">
           <rect x="30" y="110" width="40" height="40" fill="none" stroke="#c9c6ba" strokeWidth="2" strokeDasharray="4,3" />
           <rect x="30" y="130" width="120" height="20" fill="none" stroke="#0f6e63" strokeWidth="2.5" />
           <text x="36" y="104" fontFamily="Space Mono, monospace" fontSize="11" fill="#6b6b63">

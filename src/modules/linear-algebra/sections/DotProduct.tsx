@@ -56,7 +56,7 @@ export function DotProduct() {
         {`It also relates to the angle between the vectors, $\\mathbf{a}\\cdot\\mathbf{b}=|\\mathbf{a}||\\mathbf{b}|\\cos\\theta$, and to the signed length of the projection of a onto b, $d=\\dfrac{\\mathbf{a}\\cdot\\mathbf{b}}{|\\mathbf{b}|}$.`}
       </MathParagraph>
       <Diagram>
-        <svg viewBox="0 0 220 180" className="diagram-svg">
+        <svg viewBox="0 0 220 180" className="diagram-svg" role="img" aria-label="Vectors a and b with the angle between them">
           <line x1="10" y1="150" x2="205" y2="150" stroke="#cfccc0" strokeWidth="1.5" />
           <line x1="30" y1="170" x2="30" y2="15" stroke="#cfccc0" strokeWidth="1.5" />
           <line x1="30" y1="150" x2="96" y2="104" stroke="#9b978a" strokeWidth="2.5" markerEnd="url(#arrowInk)" />

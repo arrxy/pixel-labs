@@ -45,7 +45,7 @@ export function Normalize() {
         {`Unit vectors show up everywhere in graphics: surface normals, light directions, camera axes, and ray directions. The dashed circle below has radius 1; the solid arrow always lands on it.`}
       </MathParagraph>
       <Diagram>
-        <svg viewBox="0 0 220 180" className="diagram-svg">
+        <svg viewBox="0 0 220 180" className="diagram-svg" role="img" aria-label="Vector v and its normalized unit vector">
           <circle cx="110" cy="100" r="40" fill="none" stroke="#c9c6ba" strokeWidth="1.5" strokeDasharray="4,3" />
           <line
             x1="110"

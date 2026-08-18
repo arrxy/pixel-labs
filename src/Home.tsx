@@ -17,7 +17,7 @@ const PARTS = [
 
 export function Home() {
   return (
-    <div className="home">
+    <main id="main-content" className="home" tabIndex={-1}>
       <header className="home-header">
         <p className="home-brand">Pixel Playground</p>
         <h1>Graphics from first principles</h1>
@@ -43,6 +43,6 @@ export function Home() {
           </li>
         ))}
       </ul>
-    </div>
+    </main>
   )
 }
