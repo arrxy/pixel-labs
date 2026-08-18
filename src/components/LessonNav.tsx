@@ -120,7 +120,7 @@ export function LessonNav({ brand, ariaLabel, groups }: Props) {
             <button type="button" className="nav-icon-btn" aria-label="Close menu" onClick={close}>
               <CloseIcon />
             </button>
-            <a className="nav-icon-btn" href="/" aria-label="Back to Pixel Playground">
+            <a className="nav-icon-btn" href="/" aria-label="Back to Graphics Explained">
               <BackIcon />
             </a>
           </div>

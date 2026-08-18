@@ -1,6 +1,6 @@
-# Pixel Playground detailed guide
+# Graphics Explained detailed guide
 
-Pixel Playground teaches computer graphics concepts with interactive diagrams. It is framework-independent and focuses on the mathematics that graphics APIs implement.
+Graphics Explained teaches computer graphics concepts with interactive diagrams. It is framework-independent and focuses on the mathematics that graphics APIs implement.
 
 ## Linear Algebra for Computer Graphics
 

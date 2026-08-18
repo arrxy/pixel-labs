@@ -21,7 +21,7 @@ export function Home() {
   return (
     <main id="main-content" className="home" tabIndex={-1}>
       <header className="home-header">
-        <p className="home-brand">Pixel Playground</p>
+        <p className="home-brand">Graphics Explained</p>
         <h1>Graphics from first principles</h1>
         <p className="home-lead">Interactive lessons on the math and pipelines behind computer graphics.</p>
       </header>

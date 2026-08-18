@@ -1,25 +1,25 @@
 import { useEffect } from 'react'
 
 const SITE_URL = 'https://learn.graphics.aritro.tech'
-const SOCIAL_IMAGE_ALT = 'Pixel Playground, interactive computer graphics lessons'
+const SOCIAL_IMAGE_ALT = 'Graphics Explained, interactive computer graphics lessons'
 
 type PageKey = 'home' | 'linear-algebra' | 'viewing'
 
 const pages = {
   home: {
-    title: 'Pixel Playground | Interactive Computer Graphics Lessons',
+    title: 'Graphics Explained | Interactive Computer Graphics Lessons',
     description:
       'Learn computer graphics from first principles with interactive lessons on vectors, matrices, cameras, projections, NDC, and pixels.',
     path: '/',
   },
   'linear-algebra': {
-    title: 'Linear Algebra for Computer Graphics | Pixel Playground',
+    title: 'Linear Algebra for Computer Graphics | Graphics Explained',
     description:
       'Learn vectors, matrices, transforms, determinants, inverses, and 3D homogeneous coordinates through interactive computer graphics lessons.',
     path: '/linear-algebra',
   },
   viewing: {
-    title: '3D Viewing and Projection | Pixel Playground',
+    title: '3D Viewing and Projection | Graphics Explained',
     description:
       'Learn camera spaces, view matrices, orthographic and perspective projection, clipping, NDC, and viewport mapping interactively.',
     path: '/viewing',
@@ -46,7 +46,7 @@ export function PageMetadata({ page }: { page: PageKey }) {
     setMeta('meta[name="description"]', 'name', 'description', metadata.description)
     setMeta('meta[name="robots"]', 'name', 'robots', 'index, follow, max-image-preview:large')
     setMeta('meta[property="og:type"]', 'property', 'og:type', 'website')
-    setMeta('meta[property="og:site_name"]', 'property', 'og:site_name', 'Pixel Playground')
+    setMeta('meta[property="og:site_name"]', 'property', 'og:site_name', 'Graphics Explained')
     setMeta('meta[property="og:title"]', 'property', 'og:title', metadata.title)
     setMeta('meta[property="og:description"]', 'property', 'og:description', metadata.description)
     setMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl)
@@ -84,7 +84,7 @@ export function PageMetadata({ page }: { page: PageKey }) {
       url: canonicalUrl,
       isPartOf: {
         '@type': 'WebSite',
-        name: 'Pixel Playground',
+        name: 'Graphics Explained',
         url: SITE_URL,
       },
       ...(page === 'home'
@@ -109,7 +109,7 @@ export function PageMetadata({ page }: { page: PageKey }) {
                   {
                     '@type': 'ListItem',
                     position: 1,
-                    name: 'Pixel Playground',
+                    name: 'Graphics Explained',
                     item: `${SITE_URL}/`,
                   },
                   {
