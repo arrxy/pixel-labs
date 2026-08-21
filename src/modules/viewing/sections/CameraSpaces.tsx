@@ -84,6 +84,7 @@ export function CameraSpaces() {
   return (
     <Section id="camera-space" title="One point, three coordinate spaces">
       <p className="body-text">
+        Coordinate spaces, if dumbed down, means just <strong>point of view</strong>. You can see a bird sitting on a branch from the ground, or from a building across the street, your view changes and so does the bird's coordinates, but the bird itself is the same.
         A <strong>coordinate space</strong> is a choice of origin and axes used to describe a point. The physical
         point does not change when its coordinates are rewritten in another space.
       </p>
@@ -91,19 +92,19 @@ export function CameraSpaces() {
         <div className="label-caps">The three spaces</div>
         <ul className="legend-list">
           <li>
-            <strong>Model space</strong> belongs to one object. The cube’s own origin and axes are used.
+            <strong>Model space</strong> belongs to one object. The cube’s own origin and axes are used. This is the actual Asset as it exists and captured in a 3D model, waiting to be placed in the virtual world.
           </li>
           <li>
-            <strong>World space</strong> is the shared room containing every object and the camera.
+            <strong>World space</strong> is the shared room containing every object and the camera. This is the virtual world where the assets are placed, and they interact with each other and the camera, telling the story of the scene.
           </li>
           <li>
-            <strong>Camera space</strong>, also called <strong>view space</strong>, uses the camera as the origin. Its
+            <strong>Camera space</strong>, also called <strong>view space</strong>, uses the camera as the origin. This is the point of view of the camera. It's like you are sitting in the camera and looking out, seeing the world from that perspective. It's
             x-axis points right, its y-axis points up, and it looks along −z.
           </li>
         </ul>
       </div>
       <p className="body-text">
-        <strong>P</strong> is one physical point: the labeled orange corner of the cube. A 4×4 matrix rewrites P into
+        Let's try to understand it using the playground below. <strong>P</strong> is one physical point: the labeled orange corner of the cube. A 4×4 matrix rewrites P into
         the next space. <Mx sub="model" /> places the object in the world; <Mx sub="view" /> rewrites world coordinates
         relative to the camera.
       </p>
@@ -116,9 +117,8 @@ export function CameraSpaces() {
         World pane). If you used that pose as a matrix, it would plant the camera into the world.
       </p>
       <p className="body-text">
-        <Mx sub="view" /> does the opposite: it leaves the camera at the origin and moves the cube instead. That is
-        what “inverse” means here: it undoes the camera’s placement. In the World pane, the pin moves around a fixed
-        cube.
+        <Mx sub="view" /> does the opposite: it leaves the camera at the origin and moves the cube instead. In the World pane, the pin moves around a fixed
+        cube. That's because you are looking at the world from the camera's perspective, so the cube appears to be moving around the camera.
         In the Camera pane, the cube moves around a fixed pin.
       </p>
       <p className="hint-text">

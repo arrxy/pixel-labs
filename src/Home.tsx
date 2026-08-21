@@ -26,10 +26,9 @@ export function Home() {
         <p className="home-lead">Interactive lessons on the math and pipelines behind computer graphics.</p>
       </header>
       <section className="home-intro" aria-labelledby="home-intro-title">
-        <h2 id="home-intro-title">Learn how graphics systems turn geometry into pixels</h2>
+        <h2 id="home-intro-title">Learn how graphics systems work under the hood</h2>
         <p>
-          Build the mathematics from vectors and matrices through camera coordinates, projection, normalized device
-          coordinates, and screen pixels. Every lesson pairs a careful derivation with diagrams and controls you can
+          Build the mathematics from scratch, starting from vectors and matrices through camera coordinates to what is actually rendered on the screen. Every lesson pairs a careful derivation with diagrams and controls you can
           adjust, so each equation has a visible geometric meaning.
         </p>
       </section>

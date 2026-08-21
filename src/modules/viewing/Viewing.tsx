@@ -18,8 +18,7 @@ export function Viewing() {
           <header className="lesson-header">
             <h1>Viewing</h1>
             <p>
-              Follow one 3D point from model space to a screen pixel. We will build the camera, choose what it can see,
-              derive both projection matrices from their endpoint rules, and label every coordinate stage.
+              Follow one 3D point across various situations. You can think of it as the journey of an Asset from just being an Asset to how the 3D asset is represented on a 2D screen. Along the way we'll derive the linear algebra that works behind all these transformations.
             </p>
             <div className="legend-box">
               <div className="label-caps">What this lesson assumes from Part I</div>

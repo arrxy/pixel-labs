@@ -68,6 +68,7 @@ export function LookAtBasis() {
           display
         />
         <p className="body-text">
+          <strong>eye - target</strong> 
           eye − target points backward, from the target to the camera. Crossing the preferred up direction with w
           gives a right-pointing vector. Normalize it to make its length 1. A final cross product gives the corrected
           camera-up axis.
